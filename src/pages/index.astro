@@ -27,21 +27,20 @@ import Layout from '../layouts/Layout.astro';
 
     <!-- Stats Section -->
     <section class="stats-section">
-      <div class="container">
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-number">3,000,000</div>
-            <div class="stat-label">SF+</div>
-            <div class="stat-description">Under Management</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">$200M</div>
-            <div class="stat-label">Equity Deployed</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">15+</div>
-            <div class="stat-label">Years of Real Estate Expertise</div>
-          </div>
+      <div class="stats-container">
+        <div class="stat-card">
+          <div class="stat-number">3,000,000 <span class="additional">SF+</span></div>
+          <div class="stat-description">UNDER MANAGEMENT</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-card">
+          <div class="stat-number">$200<span class="additional">M</span></div>
+          <div class="stat-description">EQUITY DEPLOYED</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-card">
+          <div class="stat-number">15<span class="additional">+</span></div>
+          <div class="stat-description">YEARS OF REAL ESTATE EXPERTISE</div>
         </div>
       </div>
     </section>
@@ -201,7 +200,7 @@ import Layout from '../layouts/Layout.astro';
 
   /* Tagline Section */
   .tagline-section {
-    padding: 120px 80px 60px;
+padding: 15px 80px;
     background: #ffffff;
   }
 
@@ -212,13 +211,67 @@ import Layout from '../layouts/Layout.astro';
     line-height: 1.3;
     color: #1a1a1a;
     margin: 0;
-    text-align: center;
+    text-align: left;
   }
 
   /* Stats Section */
   .stats-section {
-    padding: 60px 80px 100px;
-    background: #f8f7f4;
+    padding: 0;
+    background: #d9d4c8;
+  }
+
+  .stats-container {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    max-width: 100%;
+  }
+
+  .stat-card {
+    flex: 1;
+    text-align: center;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stat-divider {
+    width: 1px;
+    background: #000000;
+  }
+
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    font-weight: 400;
+    color: #1a1a1a;
+    line-height: 1;
+    display: inline;
+  }
+
+  .stat-number .additional {
+	font-size: 40px;
+  }
+
+  .stat-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    font-weight: 400;
+    color: #1a1a1a;
+    display: inline;
+    margin-left: 4px;
+  }
+
+  .stat-description {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    margin-top: 16px;
   }
 
   .container {
@@ -230,44 +283,6 @@ import Layout from '../layouts/Layout.astro';
     max-width: 1600px;
     margin: 0 auto;
     padding: 0 80px;
-  }
-
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 60px;
-  }
-
-  .stat-card {
-    text-align: center;
-    padding: 60px 40px;
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-  }
-
-  .stat-number {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 64px;
-    font-weight: 400;
-    color: #1a1a1a;
-    margin-bottom: 8px;
-  }
-
-  .stat-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 20px;
-    font-weight: 400;
-    color: #1a1a1a;
-    margin-bottom: 16px;
-  }
-
-  .stat-description {
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-    letter-spacing: 0.5px;
-    color: #666;
-    text-transform: uppercase;
   }
 
   /* Portfolio Showcase */
@@ -431,7 +446,6 @@ import Layout from '../layouts/Layout.astro';
       font-size: 56px;
     }
 
-    .stats-grid,
     .value-props-grid {
       grid-template-columns: 1fr;
       gap: 40px;
@@ -459,8 +473,31 @@ import Layout from '../layouts/Layout.astro';
       font-size: 12px;
     }
 
-    .tagline-section,
-    .stats-section,
+    .tagline-section {
+      padding: 40px 24px 20px;
+    }
+
+    .tagline {
+      font-size: 32px;
+    }
+
+    .stats-container {
+      flex-direction: column;
+    }
+
+    .stat-divider {
+      width: 100%;
+      height: 1px;
+    }
+
+    .stat-card {
+      padding: 40px 24px;
+    }
+
+    .stat-number {
+      font-size: 48px;
+    }
+
     .portfolio-showcase,
     .value-props-section,
     .slideshow-section {
@@ -469,10 +506,6 @@ import Layout from '../layouts/Layout.astro';
 
     .container-wide {
       padding: 0 24px;
-    }
-
-    .tagline {
-      font-size: 32px;
     }
 
     .section-title {
