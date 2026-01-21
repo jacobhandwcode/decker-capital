@@ -51,13 +51,13 @@ import Layout from '../layouts/Layout.astro';
         <div class="portfolio-grid">
           <div class="portfolio-card">
             <div class="portfolio-image">
-              <img src="/property-1.jpg" alt="Property 1" />
+              <img src="/images/property1.png" alt="Property 1" />
             </div>
             <div class="portfolio-label">Property 1</div>
           </div>
           <div class="portfolio-card">
             <div class="portfolio-image">
-              <img src="/property-2.jpg" alt="Property 2" />
+              <img src="/images/property2.png" alt="Property 2" />
             </div>
             <div class="portfolio-label">Property 2</div>
           </div>
@@ -287,19 +287,20 @@ padding: 15px 80px;
 
   /* Portfolio Showcase */
   .portfolio-showcase {
-    padding: 100px 80px;
+    padding: 15px;
     background: #ffffff;
   }
 
   .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
+    gap: 10px;
   }
 
   .portfolio-card {
     position: relative;
     overflow: hidden;
+	cursor: pointer;
   }
 
   .portfolio-image {
@@ -325,7 +326,7 @@ padding: 15px 80px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     color: #1a1a1a;
-    margin-top: 24px;
+    margin-top: 10px;
   }
 
   /* Investment Section */
