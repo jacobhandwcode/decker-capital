@@ -1,22 +1,55 @@
+---
+// Layout.astro
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Decker Capital - Industrial Real Estate Investment</title>
+		<link rel="stylesheet" href="/src/styles/styles.css" />
 	</head>
 	<body>
-		<slot />
+		<div class="layout">
+			<Header />
+			<main class="main-content">
+				<slot />
+			</main>
+			<Footer />
+		</div>
 	</body>
 </html>
 
 <style>
-	html,
+	.layout {
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.main-content {
+		flex: 1;
+	}
+</style>
+
+<style is:global>
 	body {
 		margin: 0;
-		width: 100%;
-		height: 100%;
+		padding: 0;
+		font-family: "Inter", sans-serif;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	::selection {
+		background: #1a1a1a;
+		color: #ffffff;
 	}
 </style>

@@ -1,0 +1,241 @@
+---
+// Header.astro
+---
+
+<header class="header" id="main-header">
+  <div class="header-container">
+    <div class="logo">
+      <img src="/images/logo.svg" alt="Decker Capital" />
+    </div>
+
+    <nav class="nav">
+      <a href="#about" class="nav-link">About</a>
+      <a href="#team" class="nav-link">Team</a>
+      <a href="#portfolio" class="nav-link">Portfolio</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="tel:+13059000000" class="phone">+1 305.900.0000</a>
+      <button class="submit-deal-btn">Submit A Deal</button>
+    </div>
+  </div>
+</header>
+
+<script>
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+  const header = document.getElementById('main-header');
+  const heroSection = document.querySelector('.hero');
+  
+  function updateHeader() {
+    const currentScrollY = window.scrollY;
+    const heroHeight = heroSection ? heroSection.offsetHeight : 0;
+    
+    // If we're in the hero section
+    if (currentScrollY < heroHeight) {
+      header?.classList.remove('header--scrolled');
+      header?.classList.remove('header--hidden');
+    } 
+    // If we've scrolled past the hero
+    else {
+      header?.classList.add('header--scrolled');
+      
+      // Show/hide based on scroll direction
+      if (currentScrollY > lastScrollY) {
+        // Scrolling down
+        header?.classList.add('header--hidden');
+      } else {
+        // Scrolling up
+        header?.classList.remove('header--hidden');
+      }
+    }
+    
+    lastScrollY = currentScrollY;
+    ticking = false;
+  }
+  
+  function requestTick() {
+    if (!ticking) {
+      window.requestAnimationFrame(updateHeader);
+      ticking = true;
+    }
+  }
+  
+  window.addEventListener('scroll', requestTick);
+  
+  // Initial check
+  updateHeader();
+</script>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: transparent;
+    backdrop-filter: none;
+    z-index: 1000;
+    border-bottom: none;
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+    transform: translateY(0);
+  }
+
+  .header--scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .header--hidden {
+    transform: translateY(-100%);
+  }
+
+  .header-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 24px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .logo img {
+    height: 70px;
+    width: auto;
+  }
+
+  .nav {
+    display: flex;
+    gap: 48px;
+  }
+
+  .nav-link {
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    position: relative;
+  }
+
+  .header--scrolled .nav-link {
+    color: #1a1a1a;
+  }
+
+  .nav-link:hover {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .header--scrolled .nav-link:hover {
+    color: #666;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #ffffff;
+    transition: width 0.3s ease;
+  }
+
+  .header--scrolled .nav-link::after {
+    background: #1a1a1a;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .phone {
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .header--scrolled .phone {
+    color: #1a1a1a;
+  }
+
+  .phone:hover {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .header--scrolled .phone:hover {
+    color: #666;
+  }
+
+  .submit-deal-btn {
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    padding: 12px 28px;
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+  }
+
+  .header--scrolled .submit-deal-btn {
+    background: #1a1a1a;
+    border: 1px solid #1a1a1a;
+  }
+
+  .submit-deal-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .header--scrolled .submit-deal-btn:hover {
+    background: #333;
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 1024px) {
+    .header-container {
+      padding: 20px 40px;
+    }
+
+    .nav {
+      gap: 32px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .header-container {
+      padding: 16px 24px;
+    }
+
+    .nav {
+      display: none;
+    }
+
+    .phone {
+      display: none;
+    }
+  }
+</style>
