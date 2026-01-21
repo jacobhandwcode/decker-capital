@@ -14,12 +14,20 @@ import Layout from "../layouts/Layout.astro";
 				<h1 class="hero-title">
 					The Nation's Leading Buyer of Industrial Real Estate
 				</h1>
-				<p class="hero-subtitle">Invest. Elevate. Repeat.</p>
+				<div class="invest-arrow">
+					<p class="hero-subtitle">Invest. Elevate. Repeat.</p>
+					<button
+						class="scroll-arrow"
+						aria-label="Scroll to next section"
+					>
+						<img src="/images/down-arrow.svg" alt="down arrow" />
+					</button>
+				</div>
 			</div>
 		</section>
 
 		<!-- Tagline Section -->
-		<section class="tagline-section">
+		<section class="tagline-section" id="next-section">
 			<div class="container">
 				<h2 class="tagline">Small Bay Buyers Doing Big Things</h2>
 			</div>
@@ -146,6 +154,23 @@ import Layout from "../layouts/Layout.astro";
 	</div>
 </Layout>
 
+<script>
+	// Smooth scroll functionality for arrow
+	document.addEventListener("DOMContentLoaded", () => {
+		const scrollArrow = document.querySelector(".scroll-arrow");
+		const nextSection = document.getElementById("next-section");
+
+		if (scrollArrow && nextSection) {
+			scrollArrow.addEventListener("click", () => {
+				nextSection.scrollIntoView({
+					behavior: "smooth",
+					block: "start",
+				});
+			});
+		}
+	});
+</script>
+
 <style>
 	.page {
 		background: #ffffff;
@@ -198,6 +223,9 @@ import Layout from "../layouts/Layout.astro";
 		max-width: 1200px;
 		text-align: center;
 		padding: 0 80px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 
 	.hero-title {
@@ -206,9 +234,13 @@ import Layout from "../layouts/Layout.astro";
 		font-weight: 400;
 		line-height: 1.2;
 		color: #ffffff;
-		margin: 0 0 24px 0;
 		letter-spacing: -0.5px;
 		text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+	}
+
+	.invest-arrow {
+		    top: 175px;
+    position: relative;
 	}
 
 	.hero-subtitle {
@@ -218,8 +250,29 @@ import Layout from "../layouts/Layout.astro";
 		letter-spacing: 3px;
 		text-transform: uppercase;
 		color: #ffffff;
-		margin: 0;
+		margin: 48px 0 0 0;
 		text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+	}
+
+	.scroll-arrow {
+		background: none;
+		border: none;
+		color: #ffffff;
+		cursor: pointer;
+		padding: 20px;
+		transition: all 0.3s ease-in-out;
+	}
+
+	.scroll-arrow:hover {
+		transform: translateY(4px);
+		opacity: 0.8;
+	}
+
+	.scroll-arrow svg {
+		display: block;
+		width: 32px;
+		height: 32px;
+		filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.3));
 	}
 
 	/* Tagline Section */
@@ -496,6 +549,17 @@ import Layout from "../layouts/Layout.astro";
 
 		.hero-subtitle {
 			font-size: 12px;
+			margin-top: 32px;
+		}
+
+		.scroll-arrow {
+			margin-top: 40px;
+			padding: 15px;
+		}
+
+		.scroll-arrow svg {
+			width: 24px;
+			height: 24px;
 		}
 
 		.tagline-section {
