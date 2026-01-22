@@ -1,0 +1,415 @@
+---
+// portfolio.astro
+import Layout from "../layouts/Layout.astro";
+
+const properties = [
+    {
+        name: "Westfield Industrial Park",
+        address: "4521 Commerce Way",
+        buildings: 5,
+        squareFeet: "125,000",
+        image: "/images/property1.png",
+    },
+    {
+        name: "Metro Distribution Center",
+        address: "8900 Logistics Blvd",
+        buildings: 3,
+        squareFeet: "89,000",
+        image: "/images/property2.png",
+    },
+    {
+        name: "Summit Business Complex",
+        address: "2100 Enterprise Dr",
+        buildings: 8,
+        squareFeet: "210,000",
+        image: "/images/hero.png",
+    },
+    {
+        name: "Gateway Industrial",
+        address: "750 Gateway Parkway",
+        buildings: 4,
+        squareFeet: "156,000",
+        image: "/images/property1.png",
+    },
+    {
+        name: "Crossroads Flex Center",
+        address: "3300 Crossroads Ave",
+        buildings: 6,
+        squareFeet: "98,000",
+        image: "/images/property2.png",
+    },
+    {
+        name: "Riverside Commerce Park",
+        address: "1200 River Road",
+        buildings: 7,
+        squareFeet: "175,000",
+        image: "/images/hero.png",
+    },
+];
+---
+
+<Layout>
+    <div class="page">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-image">
+                <img src="/images/hero.png" alt="Industrial Property" />
+            </div>
+            <div class="hero-content">
+                <h1 class="hero-title">Our Portfolio</h1>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section class="portfolio-section">
+            <div class="portfolio-container">
+                <!-- Search Bar -->
+                <div class="search-wrapper">
+                    <input
+                        type="text"
+                        class="search-input"
+                        placeholder="Search properties..."
+                        id="propertySearch"
+                    />
+                    <button class="search-btn" aria-label="Search">
+                        <svg
+                            width="22"
+                            height="22"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                        >
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="M21 21l-4.35-4.35"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Property Grid -->
+                <div class="property-grid" id="propertyGrid">
+                    {
+                        properties.map((property) => (
+                            <article
+                                class="property-card"
+                                data-name={property.name.toLowerCase()}
+                                data-address={property.address.toLowerCase()}
+                            >
+                                <div class="property-image">
+                                    <img
+                                        src={property.image}
+                                        alt={property.name}
+                                    />
+                                </div>
+                                <div class="property-info">
+                                    <h3 class="property-name">
+                                        {property.name}
+                                    </h3>
+                                    <div class="property-details">
+                                        <p>{property.address}</p>
+                                        <p>{property.buildings} Buildings</p>
+                                        <p>{property.squareFeet} SF</p>
+                                    </div>
+                                </div>
+                            </article>
+                        ))
+                    }
+                </div>
+
+                <!-- No Results Message -->
+                <div class="no-results" id="noResults">
+                    <p>No properties found matching your search.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</Layout>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const searchInput = document.getElementById(
+            "propertySearch",
+        ) as HTMLInputElement;
+        const propertyGrid = document.getElementById("propertyGrid");
+        const propertyCards = document.querySelectorAll(".property-card");
+        const noResults = document.getElementById("noResults");
+
+        if (searchInput && propertyGrid && noResults) {
+            searchInput.addEventListener("input", () => {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                let visibleCount = 0;
+
+                propertyCards.forEach((card) => {
+                    const name = card.getAttribute("data-name") || "";
+                    const address = card.getAttribute("data-address") || "";
+
+                    if (
+                        name.includes(searchTerm) ||
+                        address.includes(searchTerm)
+                    ) {
+                        (card as HTMLElement).style.display = "block";
+                        visibleCount++;
+                    } else {
+                        (card as HTMLElement).style.display = "none";
+                    }
+                });
+
+                if (visibleCount === 0) {
+                    noResults.style.display = "block";
+                } else {
+                    noResults.style.display = "none";
+                }
+            });
+        }
+    });
+</script>
+
+<style>
+    .page {
+        background: #ffffff;
+    }
+
+    /* Hero Section */
+    .hero {
+        position: relative;
+        width: 100%;
+        height: 50vh;
+        min-height: 400px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    .hero-image::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.65) 0%,
+            rgba(0, 0, 0, 0.45) 40%,
+            rgba(0, 0, 0, 0.65) 100%
+        );
+        z-index: 2;
+    }
+
+    .hero-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 3;
+        text-align: center;
+        padding: 0 80px;
+    }
+
+    .hero-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 72px;
+        font-weight: 400;
+        line-height: 1.2;
+        color: #ffffff;
+        letter-spacing: -0.5px;
+        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        margin: 0;
+    }
+
+    /* Portfolio Section */
+    .portfolio-section {
+        padding: 80px;
+        background: #ffffff;
+    }
+
+    .portfolio-container {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    /* Search Bar */
+    .search-wrapper {
+        display: flex;
+        align-items: center;
+        border: 1px solid #1a1a1a;
+        margin-bottom: 60px;
+        background: #ffffff;
+    }
+
+    .search-input {
+        flex: 1;
+        font-family: "Inter", sans-serif;
+        font-size: 16px;
+        padding: 20px 24px;
+        border: none;
+        background: transparent;
+        color: #1a1a1a;
+        outline: none;
+    }
+
+    .search-input::placeholder {
+        color: #888;
+    }
+
+    .search-btn {
+        padding: 20px 24px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        color: #1a1a1a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.3s ease;
+    }
+
+    .search-btn:hover {
+        opacity: 0.6;
+    }
+
+    /* Property Grid */
+    .property-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+    }
+
+    .property-card {
+        border: 1px solid #1a1a1a;
+        background: #ffffff;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .property-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .property-image {
+        aspect-ratio: 16/10;
+        overflow: hidden;
+        border-bottom: 1px solid #1a1a1a;
+    }
+
+    .property-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease-in-out;
+    }
+
+    .property-card:hover .property-image img {
+        transform: scale(1.05);
+    }
+
+    .property-info {
+        padding: 24px;
+    }
+
+    .property-name {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 22px;
+        font-weight: 500;
+        color: #1a1a1a;
+        margin: 0 0 16px 0;
+    }
+
+    .property-details {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .property-details p {
+        font-family: "Inter", sans-serif;
+        font-size: 14px;
+        color: #555;
+        margin: 0;
+        line-height: 1.5;
+    }
+
+    /* No Results */
+    .no-results {
+        display: none;
+        text-align: center;
+        padding: 60px 20px;
+    }
+
+    .no-results p {
+        font-family: "Inter", sans-serif;
+        font-size: 16px;
+        color: #666;
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+        .property-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .hero {
+            height: 40vh;
+            min-height: 300px;
+        }
+
+        .hero-content {
+            padding: 0 24px;
+        }
+
+        .hero-title {
+            font-size: 42px;
+        }
+
+        .portfolio-section {
+            padding: 40px 24px;
+        }
+
+        .search-wrapper {
+            margin-bottom: 40px;
+        }
+
+        .search-input {
+            padding: 16px 20px;
+            font-size: 15px;
+        }
+
+        .search-btn {
+            padding: 16px 20px;
+        }
+
+        .property-grid {
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        .property-info {
+            padding: 20px;
+        }
+
+        .property-name {
+            font-size: 20px;
+        }
+    }
+</style>
+
+<style is:global>
+    ::selection {
+        background: #1a1a1a;
+        color: #ffffff;
+    }
+</style>
