@@ -99,6 +99,16 @@ const teamMembers = [
 </Layout>
 
 <style>
+	/* ===== CSS Variables for Consistent Spacing ===== */
+	:root {
+		--padding-desktop: 60px;
+		--padding-tablet: 40px;
+		--padding-mobile: 24px;
+		--section-padding-y: 80px;
+		--section-padding-y-mobile: 60px;
+		--max-width: 1400px;
+	}
+
 	.page {
 		background: #ffffff;
 	}
@@ -148,7 +158,7 @@ const teamMembers = [
 		position: relative;
 		z-index: 3;
 		text-align: center;
-		padding: 0 80px;
+		padding: 0 var(--padding-desktop);
 	}
 
 	.hero-title {
@@ -164,12 +174,12 @@ const teamMembers = [
 
 	/* Team Section */
 	.team-section {
-		padding: 80px;
+		padding: var(--section-padding-y) var(--padding-desktop);
 		background: #ffffff;
 	}
 
 	.team-container {
-		max-width: 1400px;
+		max-width: var(--max-width);
 		margin: 0 auto;
 	}
 
@@ -180,7 +190,7 @@ const teamMembers = [
 		font-style: italic;
 		color: #1a1a1a;
 		text-align: center;
-		margin: 0 0 60px 0;
+		margin: 0 0 50px 0;
 		letter-spacing: -0.5px;
 	}
 
@@ -286,11 +296,11 @@ const teamMembers = [
 		opacity: 1;
 	}
 
-	/* Responsive */
+	/* ===== Tablet Responsive ===== */
 	@media (max-width: 1200px) {
 		.team-grid {
 			grid-template-columns: repeat(2, 1fr);
-			gap: 30px;
+			gap: 24px;
 		}
 
 		.section-title {
@@ -298,6 +308,13 @@ const teamMembers = [
 		}
 	}
 
+	@media (max-width: 1024px) {
+		.team-section {
+			padding: 60px var(--padding-tablet);
+		}
+	}
+
+	/* ===== Mobile Responsive ===== */
 	@media (max-width: 768px) {
 		.hero {
 			height: 40vh;
@@ -305,15 +322,15 @@ const teamMembers = [
 		}
 
 		.hero-content {
-			padding: 0 24px;
+			padding: 0 var(--padding-mobile);
 		}
 
 		.hero-title {
-			font-size: 42px;
+			font-size: 36px;
 		}
 
 		.team-section {
-			padding: 40px 24px;
+			padding: var(--section-padding-y-mobile) var(--padding-mobile);
 		}
 
 		.section-title {
@@ -323,13 +340,18 @@ const teamMembers = [
 
 		.team-grid {
 			grid-template-columns: 1fr;
-			gap: 24px;
+			gap: 20px;
+		}
+
+		.member-info {
+			padding: 20px;
 		}
 
 		.member-header {
 			flex-direction: column;
 			align-items: flex-start;
 			gap: 4px;
+			margin-bottom: 12px;
 		}
 
 		.member-name {
@@ -338,6 +360,11 @@ const teamMembers = [
 
 		.member-title {
 			font-size: 12px;
+		}
+
+		.member-bio {
+			font-size: 14px;
+			margin-bottom: 16px;
 		}
 	}
 </style>

@@ -165,6 +165,16 @@ const properties = [
 </script>
 
 <style>
+    /* ===== CSS Variables for Consistent Spacing ===== */
+    :root {
+        --padding-desktop: 60px;
+        --padding-tablet: 40px;
+        --padding-mobile: 24px;
+        --section-padding-y: 80px;
+        --section-padding-y-mobile: 60px;
+        --max-width: 1400px;
+    }
+
     .page {
         background: #ffffff;
     }
@@ -214,7 +224,7 @@ const properties = [
         position: relative;
         z-index: 3;
         text-align: center;
-        padding: 0 80px;
+        padding: 0 var(--padding-desktop);
     }
 
     .hero-title {
@@ -230,12 +240,12 @@ const properties = [
 
     /* Portfolio Section */
     .portfolio-section {
-        padding: 80px;
+        padding: var(--section-padding-y) var(--padding-desktop);
         background: #ffffff;
     }
 
     .portfolio-container {
-        max-width: 1400px;
+        max-width: var(--max-width);
         margin: 0 auto;
     }
 
@@ -244,7 +254,7 @@ const properties = [
         display: flex;
         align-items: center;
         border: 1px solid #1a1a1a;
-        margin-bottom: 60px;
+        margin-bottom: 50px;
         background: #ffffff;
     }
 
@@ -252,7 +262,7 @@ const properties = [
         flex: 1;
         font-family: "Inter", sans-serif;
         font-size: 16px;
-        padding: 20px 24px;
+        padding: 18px 24px;
         border: none;
         background: transparent;
         color: #1a1a1a;
@@ -264,7 +274,7 @@ const properties = [
     }
 
     .search-btn {
-        padding: 20px 24px;
+        padding: 18px 24px;
         background: transparent;
         border: none;
         cursor: pointer;
@@ -283,7 +293,7 @@ const properties = [
     .property-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 40px;
+        gap: 30px;
     }
 
     .property-card {
@@ -353,14 +363,25 @@ const properties = [
         color: #666;
     }
 
-    /* Responsive */
+    /* ===== Tablet Responsive ===== */
     @media (max-width: 1200px) {
         .property-grid {
             grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
+            gap: 24px;
         }
     }
 
+    @media (max-width: 1024px) {
+        .portfolio-section {
+            padding: 60px var(--padding-tablet);
+        }
+
+        .search-wrapper {
+            margin-bottom: 40px;
+        }
+    }
+
+    /* ===== Mobile Responsive ===== */
     @media (max-width: 768px) {
         .hero {
             height: 40vh;
@@ -368,19 +389,19 @@ const properties = [
         }
 
         .hero-content {
-            padding: 0 24px;
+            padding: 0 var(--padding-mobile);
         }
 
         .hero-title {
-            font-size: 42px;
+            font-size: 36px;
         }
 
         .portfolio-section {
-            padding: 40px 24px;
+            padding: var(--section-padding-y-mobile) var(--padding-mobile);
         }
 
         .search-wrapper {
-            margin-bottom: 40px;
+            margin-bottom: 32px;
         }
 
         .search-input {
@@ -394,7 +415,7 @@ const properties = [
 
         .property-grid {
             grid-template-columns: 1fr;
-            gap: 24px;
+            gap: 20px;
         }
 
         .property-info {
@@ -403,6 +424,15 @@ const properties = [
 
         .property-name {
             font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .property-details p {
+            font-size: 13px;
+        }
+
+        .no-results {
+            padding: 40px var(--padding-mobile);
         }
     }
 </style>
