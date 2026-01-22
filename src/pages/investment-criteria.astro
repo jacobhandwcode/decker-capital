@@ -1,0 +1,289 @@
+---
+// investment-criteria.astro
+import Layout from "../layouts/Layout.astro";
+
+const demandDrivers = [
+    {
+        title: "E-Commerce Growth",
+        stat: "20%",
+        statLabel: "of industrial demand by 2025",
+        description: "The rapid expansion of online shopping has resulted in an increased need for last-mile distribution centers, typically smaller in size and closer to urban centers.",
+        source: "CBRE"
+    },
+    {
+        title: "Supply Scarcity",
+        stat: "100K+",
+        statLabel: "SF focus of new construction",
+        description: "New industrial construction is primarily focused on larger buildings, leaving the market for smaller units significantly underbuilt across most regions.",
+        source: "JLL"
+    },
+    {
+        title: "Higher Yields",
+        stat: "2-3%",
+        statLabel: "premium over large industrial",
+        description: "Small-bay properties typically offer higher returns on investment, especially in markets where demand is strong and supply remains limited.",
+        source: "Marcus & Millichap"
+    },
+];
+
+const criteria = [
+    { label: "Unit Size", value: "1,000 - 20,000 SF" },
+    { label: "Property Type", value: "Multi-Tenant Industrial" },
+    { label: "Geography", value: "Southeast US" },
+    { label: "Deal Size", value: "$5M - $50M" },
+    { label: "Asset Class", value: "Value-Add & Core Plus" },
+    { label: "Occupancy", value: "70%+ Preferred" },
+];
+
+const tenantTypes = [
+    "E-Commerce & Fulfillment",
+    "Contractors & Tradespeople", 
+    "Light Manufacturing",
+    "Service-Based Businesses",
+    "Wholesale Distribution",
+    "Last-Mile Logistics"
+];
+---
+
+<Layout>
+    <div class="page">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-image">
+                <img src="/images/hero.png" alt="Industrial Property" />
+            </div>
+            <div class="hero-content">
+                <div class="hero-eyebrow">
+                    <span class="eyebrow-line"></span>
+                    <span>Investment Criteria</span>
+                    <span class="eyebrow-line"></span>
+                </div>
+                <h1 class="hero-title">Why Small Bay?</h1>
+                <p class="hero-subtitle">The Decker Advantage</p>
+            </div>
+        </section>
+
+        <!-- Intro Section -->
+        <section class="intro-section">
+            <div class="intro-container">
+                <div class="intro-content">
+                    <span class="section-eyebrow">The Opportunity</span>
+                    <h2 class="intro-headline">Small-Bay Industrial: A Compelling Investment</h2>
+                </div>
+                <div class="intro-text">
+                    <p>
+                        Small-bay industrial real estate refers to properties typically ranging from 1,000 to 50,000 square feet. <strong>Decker Capital specializes in the 1,000 to 20,000 SF range</strong>—units designed for light manufacturing, warehousing, and distribution that accommodate a diverse range of businesses.
+                    </p>
+                    <p>
+                        The demand for small-bay industrial properties has surged in recent years, driven by fundamental shifts in the economy and real estate market that show no signs of slowing.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Demand Drivers -->
+        <section class="drivers-section">
+            <div class="drivers-container">
+                <div class="drivers-header">
+                    <span class="section-eyebrow">Market Dynamics</span>
+                    <h2 class="section-headline">Why Small-Bay Is In High Demand</h2>
+                </div>
+                <div class="drivers-grid">
+                    {demandDrivers.map((driver, index) => (
+                        <div class="driver-card">
+                            <span class="driver-number">0{index + 1}</span>
+                            <div class="driver-stat">
+                                <span class="driver-stat-number">{driver.stat}</span>
+                                <span class="driver-stat-label">{driver.statLabel}</span>
+                            </div>
+                            <h3 class="driver-title">{driver.title}</h3>
+                            <p class="driver-description">{driver.description}</p>
+                            <span class="driver-source">Source: {driver.source}</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- Investment Benefits -->
+        <section class="benefits-section">
+            <div class="benefits-container">
+                <div class="benefits-content">
+                    <span class="section-eyebrow light">Investment Thesis</span>
+                    <h2 class="benefits-headline">A Solid Investment Opportunity</h2>
+                    <div class="benefits-text">
+                        <p>
+                            Small-bay industrial properties offer several distinct advantages. Their flexibility allows them to cater to a diverse range of tenants—from small businesses to larger tenants seeking flexible leases or smaller footprints.
+                        </p>
+                        <p>
+                            Unlike large logistics hubs that rely on capital-intensive tenants, small-bay spaces serve businesses that are more diverse and often more stable. This provides a <strong>diversified tenant base</strong> that reduces investment risk.
+                        </p>
+                    </div>
+                </div>
+                <div class="benefits-visual">
+                    <div class="tenant-types">
+                        <h3 class="tenant-types-title">Our Tenant Base</h3>
+                        <div class="tenant-grid">
+                            {tenantTypes.map((tenant) => (
+                                <div class="tenant-item">
+                                    <span class="tenant-check">✓</span>
+                                    <span>{tenant}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Criteria Section -->
+        <section class="criteria-section">
+            <div class="criteria-container">
+                <div class="criteria-header">
+                    <span class="section-eyebrow">What We Target</span>
+                    <h2 class="section-headline">Investment Criteria</h2>
+                    <p class="criteria-subtitle">We focus on specific parameters that align with our expertise and deliver consistent returns.</p>
+                </div>
+                <div class="criteria-grid">
+                    {criteria.map((item) => (
+                        <div class="criteria-card">
+                            <span class="criteria-label">{item.label}</span>
+                            <span class="criteria-value">{item.value}</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2 class="cta-headline">Have a Property That Fits?</h2>
+                <p class="cta-description">We're actively acquiring small-bay industrial properties across the Southeast. Let's discuss your opportunity.</p>
+                <a href="/contact" class="cta-button">
+                    <span>Send Us A Deal</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </section>
+    </div>
+</Layout>
+
+<style>
+    :root {
+        --padding-xl: 120px;
+        --padding-lg: 80px;
+        --padding-md: 60px;
+        --max-width: 1440px;
+        --color-primary: #1a1a1a;
+        --color-secondary: #8a7f6e;
+        --color-cream: #f5f2ed;
+        --color-warm: #dbd3c6;
+        --font-display: "Cormorant Garamond", serif;
+        --font-body: "Inter", sans-serif;
+        --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .page { background: #fff; overflow-x: hidden; }
+
+    /* Hero */
+    .hero { position: relative; width: 100%; height: 60vh; min-height: 500px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .hero-image { position: absolute; inset: 0; z-index: 1; }
+    .hero-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.6) 100%); z-index: 2; }
+    .hero-image img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.05); animation: heroZoom 20s ease-in-out infinite alternate; }
+    @keyframes heroZoom { from { transform: scale(1.05); } to { transform: scale(1.15); } }
+
+    .hero-content { position: relative; z-index: 3; text-align: center; padding: 0 var(--padding-md); display: flex; flex-direction: column; align-items: center; }
+    .hero-eyebrow { display: flex; align-items: center; gap: 20px; font-family: var(--font-body); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,1); margin-bottom: 24px; }
+    .eyebrow-line { width: 60px; height: 1px; background: rgba(255,255,255,1); }
+    .hero-title { font-family: var(--font-display); font-size: clamp(42px, 6vw, 80px); font-weight: 400; line-height: 1.1; color: #fff; letter-spacing: -1px; margin: 0 0 20px 0; }
+    .hero-subtitle { font-family: var(--font-body); font-size: 14px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.7); margin: 0; }
+
+    .section-eyebrow { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--color-secondary); display: block; margin-bottom: 16px; }
+    .section-eyebrow.light { color: rgba(255,255,255,0.6); }
+    .section-headline { font-family: var(--font-display); font-size: clamp(36px, 4vw, 52px); font-weight: 400; color: var(--color-primary); margin: 0; }
+
+    /* Intro */
+    .intro-section { padding: var(--padding-xl) var(--padding-md); background: #fff; }
+    .intro-container { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; max-width: var(--max-width); margin: 0 auto; align-items: start; }
+    .intro-headline { font-family: var(--font-display); font-size: clamp(32px, 3.5vw, 44px); font-weight: 400; line-height: 1.2; color: var(--color-primary); margin: 0; }
+    .intro-text { padding-top: 20px; }
+    .intro-text p { font-family: var(--font-body); font-size: 16px; line-height: 1.9; color: #555; margin: 0 0 24px 0; }
+    .intro-text p:last-child { margin-bottom: 0; }
+    .intro-text strong { color: var(--color-primary); font-weight: 500; }
+
+    /* Drivers */
+    .drivers-section { padding: var(--padding-xl) var(--padding-md); background: var(--color-cream); }
+    .drivers-container { max-width: var(--max-width); margin: 0 auto; }
+    .drivers-header { text-align: center; margin-bottom: 60px; }
+    .drivers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+
+    .driver-card { background: #fff; padding: 40px; position: relative; transition: all 0.4s var(--ease); }
+    .driver-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
+    .driver-number { font-family: var(--font-display); font-size: 14px; color: var(--color-secondary); display: block; margin-bottom: 24px; letter-spacing: 2px; opacity: 0.6; }
+    .driver-stat { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid rgba(0,0,0,0.08); }
+    .driver-stat-number { font-family: var(--font-display); font-size: 48px; font-weight: 300; color: var(--color-primary); line-height: 1; display: block; }
+    .driver-stat-label { font-family: var(--font-body); font-size: 12px; color: var(--color-secondary); letter-spacing: 0.5px; margin-top: 8px; display: block; }
+    .driver-title { font-family: var(--font-display); font-size: 26px; font-weight: 400; color: var(--color-primary); margin: 0 0 16px 0; }
+    .driver-description { font-family: var(--font-body); font-size: 14px; line-height: 1.7; color: #555; margin: 0 0 20px 0; }
+    .driver-source { font-family: var(--font-body); font-size: 11px; color: #999; letter-spacing: 0.5px; }
+
+    /* Benefits */
+    .benefits-section { padding: var(--padding-xl) var(--padding-md); background: var(--color-primary); }
+    .benefits-container { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; max-width: var(--max-width); margin: 0 auto; align-items: center; }
+    .benefits-headline { font-family: var(--font-display); font-size: clamp(32px, 3.5vw, 44px); font-weight: 400; line-height: 1.2; color: #fff; margin: 0 0 32px 0; }
+    .benefits-text p { font-family: var(--font-body); font-size: 16px; line-height: 1.9; color: rgba(255,255,255,0.75); margin: 0 0 20px 0; }
+    .benefits-text strong { color: #fff; font-weight: 500; }
+
+    .tenant-types { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 40px; }
+    .tenant-types-title { font-family: var(--font-display); font-size: 24px; font-weight: 400; color: #fff; margin: 0 0 24px 0; }
+    .tenant-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .tenant-item { display: flex; align-items: center; gap: 12px; font-family: var(--font-body); font-size: 14px; color: rgba(255,255,255,0.8); }
+    .tenant-check { color: var(--color-secondary); font-weight: 600; }
+
+    /* Criteria */
+    .criteria-section { padding: var(--padding-xl) var(--padding-md); background: #fff; }
+    .criteria-container { max-width: var(--max-width); margin: 0 auto; }
+    .criteria-header { text-align: center; margin-bottom: 60px; }
+    .criteria-subtitle { font-family: var(--font-body); font-size: 16px; color: #666; margin: 20px auto 0; max-width: 500px; line-height: 1.7; }
+
+    .criteria-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .criteria-card { background: var(--color-cream); padding: 32px; text-align: center; transition: all 0.4s var(--ease); }
+    .criteria-card:hover { background: var(--color-warm); }
+    .criteria-label { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--color-secondary); display: block; margin-bottom: 12px; }
+    .criteria-value { font-family: var(--font-display); font-size: 24px; font-weight: 400; color: var(--color-primary); }
+
+    /* CTA */
+    .cta-section { padding: var(--padding-xl) var(--padding-md); background: var(--color-warm); text-align: center; }
+    .cta-content { max-width: 600px; margin: 0 auto; }
+    .cta-headline { font-family: var(--font-display); font-size: clamp(36px, 4vw, 52px); font-weight: 400; color: var(--color-primary); margin: 0 0 20px 0; }
+    .cta-description { font-family: var(--font-body); font-size: 16px; line-height: 1.7; color: #555; margin: 0 0 40px 0; }
+    .cta-button { display: inline-flex; align-items: center; gap: 12px; font-family: var(--font-body); font-size: 13px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: #fff; background: var(--color-primary); text-decoration: none; padding: 20px 40px; transition: all 0.4s var(--ease); }
+    .cta-button:hover { background: #333; gap: 18px; }
+
+    @media (max-width: 1024px) {
+        .intro-container { grid-template-columns: 1fr; gap: 40px; }
+        .drivers-grid { grid-template-columns: 1fr; gap: 24px; }
+        .benefits-container { grid-template-columns: 1fr; gap: 60px; }
+        .criteria-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+        :root { --padding-xl: 80px; --padding-lg: 60px; --padding-md: 24px; }
+        .hero { height: 50vh; min-height: 400px; }
+        .hero-eyebrow { font-size: 10px; gap: 16px; }
+        .eyebrow-line { width: 40px; }
+        .driver-card { padding: 30px; }
+        .driver-stat-number { font-size: 40px; }
+        .tenant-grid { grid-template-columns: 1fr; }
+        .criteria-grid { grid-template-columns: 1fr; }
+        .cta-button { width: 100%; justify-content: center; }
+    }
+</style>
+
+<style is:global>
+    ::selection { background: #1a1a1a; color: #fff; }
+    html { scroll-behavior: smooth; }
+</style>

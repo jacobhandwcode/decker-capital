@@ -1,0 +1,356 @@
+---
+// about.astro (Our Approach)
+import Layout from "../layouts/Layout.astro";
+
+const repositioningSteps = [
+    {
+        title: "Property Assessment",
+        description: "Comprehensive evaluation of current condition, market positioning, and value-add opportunities."
+    },
+    {
+        title: "Capital Planning",
+        description: "Strategic budget allocation for improvements that deliver maximum ROI and tenant appeal."
+    },
+    {
+        title: "Execution",
+        description: "Vertically integrated implementation ensuring cost efficiency, quality control, and speed."
+    },
+    {
+        title: "Stabilization",
+        description: "Lease-up strategy and ongoing management to maximize occupancy and rental rates."
+    },
+];
+
+const improvements = [
+    "Exterior façade upgrades",
+    "Modern signage & wayfinding",
+    "LED lighting retrofits",
+    "Parking lot resurfacing",
+    "Landscaping enhancements",
+    "HVAC modernization",
+    "Roll-up door replacements",
+    "Office finish upgrades"
+];
+
+const brandPillars = [
+    {
+        title: "Uniform Identity",
+        description: "Consistent signage, color schemes, and property aesthetics across the entire portfolio."
+    },
+    {
+        title: "Tenant Experience",
+        description: "Professional management, responsive maintenance, and clear communication standards."
+    },
+    {
+        title: "Market Presence",
+        description: "Recognizable brand that instills trust in tenants, brokers, and investment partners."
+    },
+];
+---
+
+<Layout>
+    <div class="page">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-image">
+                <img src="/images/hero.png" alt="Industrial Property" />
+            </div>
+            <div class="hero-content">
+                <div class="hero-eyebrow">
+                    <span class="eyebrow-line"></span>
+                    <span>About</span>
+                    <span class="eyebrow-line"></span>
+                </div>
+                <h1 class="hero-title">Our Approach</h1>
+                <p class="hero-subtitle">Value creation through operational excellence</p>
+            </div>
+        </section>
+
+        <!-- Mission Statement -->
+        <section class="mission-section">
+            <div class="mission-container">
+                <div class="mission-content">
+                    <span class="section-eyebrow">Our Mission</span>
+                    <blockquote class="mission-quote">
+                        "To be the premier operator of small-bay industrial real estate in the Southeast, delivering exceptional returns through disciplined acquisition, transformational repositioning, and institutional-quality management."
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- Repositioning Strategy -->
+        <section class="strategy-section">
+            <div class="strategy-container">
+                <div class="strategy-header">
+                    <span class="section-eyebrow">Value Creation</span>
+                    <h2 class="section-headline">Transformational Repositioning Strategy</h2>
+                    <p class="strategy-subtitle">
+                        Decker Capital implements comprehensive capital improvement and repositioning plans to modernize and elevate properties to best-in-class small-bay product.
+                    </p>
+                </div>
+
+                <div class="strategy-content">
+                    <div class="process-steps">
+                        {repositioningSteps.map((step, index) => (
+                            <div class="process-step">
+                                <div class="step-number">
+                                    <span>0{index + 1}</span>
+                                </div>
+                                <div class="step-content">
+                                    <h3 class="step-title">{step.title}</h3>
+                                    <p class="step-description">{step.description}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div class="improvements-panel">
+                        <div class="improvements-card">
+                            <h3 class="improvements-title">Capital Improvements</h3>
+                            <p class="improvements-intro">Our enhancements significantly improve curb appeal, tenant experience, and long-term asset value:</p>
+                            <div class="improvements-grid">
+                                {improvements.map((item) => (
+                                    <div class="improvement-item">
+                                        <span class="improvement-check">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                        </span>
+                                        <span>{item}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vertical Integration -->
+        <section class="integration-section">
+            <div class="integration-container">
+                <div class="integration-content">
+                    <span class="section-eyebrow light">Competitive Advantage</span>
+                    <h2 class="integration-headline">Vertically Integrated Platform</h2>
+                    <p class="integration-description">
+                        Our in-house capabilities across acquisition, construction, property management, and leasing allow us to control quality, reduce costs, and accelerate timelines. This integrated approach ensures we can rapidly unlock value through targeted, high-impact enhancements.
+                    </p>
+                    <div class="integration-stats">
+                        <div class="integration-stat">
+                            <span class="stat-number">30%</span>
+                            <span class="stat-label">Lower Renovation Costs</span>
+                        </div>
+                        <div class="integration-stat">
+                            <span class="stat-number">2x</span>
+                            <span class="stat-label">Faster Execution</span>
+                        </div>
+                        <div class="integration-stat">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Quality Control</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="integration-visual">
+                    <div class="visual-card">
+                        <div class="visual-image">
+                            <img src="/images/property1.png" alt="Before Repositioning" />
+                            <span class="visual-label">Before</span>
+                        </div>
+                    </div>
+                    <div class="visual-card">
+                        <div class="visual-image">
+                            <img src="/images/property2.png" alt="After Repositioning" />
+                            <span class="visual-label">After</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Brand Equity -->
+        <section class="brand-section">
+            <div class="brand-container">
+                <div class="brand-header">
+                    <span class="section-eyebrow">Differentiation</span>
+                    <h2 class="section-headline">Building Brand Equity</h2>
+                    <p class="brand-subtitle">
+                        Decker Capital is strategically focused on creating a consistent, recognizable identity rooted in professionalism, reliability, and performance.
+                    </p>
+                </div>
+
+                <div class="brand-grid">
+                    {brandPillars.map((pillar, index) => (
+                        <div class="brand-card">
+                            <span class="brand-number">0{index + 1}</span>
+                            <h3 class="brand-title">{pillar.title}</h3>
+                            <p class="brand-description">{pillar.description}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <div class="brand-statement">
+                    <p>
+                        By aligning marketing, property design, and tenant communication under one strong visual and strategic brand, Decker Capital differentiates itself from competitors, instills trust in stakeholders, and drives long-term value across all assets.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2 class="cta-headline">Partner With Us</h2>
+                <p class="cta-description">Learn how our approach can work for your investment goals or property.</p>
+                <div class="cta-buttons">
+                    <a href="/contact" class="cta-button primary">
+                        <span>Send Us A Deal</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="/portfolio" class="cta-button secondary">
+                        <span>View Portfolio</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+</Layout>
+
+<style>
+    :root {
+        --padding-xl: 120px;
+        --padding-lg: 80px;
+        --padding-md: 60px;
+        --max-width: 1440px;
+        --color-primary: #1a1a1a;
+        --color-secondary: #8a7f6e;
+        --color-cream: #f5f2ed;
+        --color-warm: #dbd3c6;
+        --font-display: "Cormorant Garamond", serif;
+        --font-body: "Inter", sans-serif;
+        --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .page { background: #fff; overflow-x: hidden; }
+
+    /* Hero */
+    .hero { position: relative; width: 100%; height: 60vh; min-height: 500px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .hero-image { position: absolute; inset: 0; z-index: 1; }
+    .hero-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.6) 100%); z-index: 2; }
+    .hero-image img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.05); animation: heroZoom 20s ease-in-out infinite alternate; }
+    @keyframes heroZoom { from { transform: scale(1.05); } to { transform: scale(1.15); } }
+
+    .hero-content { position: relative; z-index: 3; text-align: center; padding: 0 var(--padding-md); display: flex; flex-direction: column; align-items: center; }
+    .hero-eyebrow { display: flex; align-items: center; gap: 20px; font-family: var(--font-body); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,1); margin-bottom: 24px; }
+    .eyebrow-line { width: 60px; height: 1px; background: rgba(255,255,255,1); }
+    .hero-title { font-family: var(--font-display); font-size: clamp(42px, 6vw, 80px); font-weight: 400; line-height: 1.1; color: #fff; letter-spacing: -1px; margin: 0 0 20px 0; }
+    .hero-subtitle { font-family: var(--font-body); font-size: 14px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.7); margin: 0; }
+
+    .section-eyebrow { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--color-secondary); display: block; margin-bottom: 16px; }
+    .section-eyebrow.light { color: rgba(255,255,255,0.6); }
+    .section-headline { font-family: var(--font-display); font-size: clamp(36px, 4vw, 52px); font-weight: 400; color: var(--color-primary); margin: 0; }
+
+    /* Mission */
+    .mission-section { padding: var(--padding-xl) var(--padding-md); background: var(--color-primary); }
+    .mission-container { max-width: 900px; margin: 0 auto; text-align: center; }
+    .mission-content .section-eyebrow { color: rgba(255,255,255,0.5); }
+    .mission-quote { font-family: var(--font-display); font-size: clamp(24px, 3vw, 36px); font-weight: 400; font-style: italic; line-height: 1.5; color: #fff; margin: 0; padding: 0; border: none; }
+
+    /* Strategy */
+    .strategy-section { padding: var(--padding-xl) var(--padding-md); background: #fff; }
+    .strategy-container { max-width: var(--max-width); margin: 0 auto; }
+    .strategy-header { text-align: center; margin-bottom: 60px; }
+    .strategy-subtitle { font-family: var(--font-body); font-size: 16px; color: #666; margin: 20px auto 0; max-width: 700px; line-height: 1.7; }
+
+    .strategy-content { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+
+    .process-steps { display: flex; flex-direction: column; gap: 0; }
+    .process-step { display: flex; gap: 24px; padding: 32px 0; border-bottom: 1px solid rgba(0,0,0,0.08); }
+    .process-step:last-child { border-bottom: none; }
+    .step-number { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: var(--color-cream); flex-shrink: 0; }
+    .step-number span { font-family: var(--font-display); font-size: 18px; color: var(--color-secondary); }
+    .step-content { flex: 1; }
+    .step-title { font-family: var(--font-display); font-size: 24px; font-weight: 400; color: var(--color-primary); margin: 0 0 8px 0; }
+    .step-description { font-family: var(--font-body); font-size: 14px; line-height: 1.7; color: #666; margin: 0; }
+
+    .improvements-card { background: var(--color-cream); padding: 40px; }
+    .improvements-title { font-family: var(--font-display); font-size: 28px; font-weight: 400; color: var(--color-primary); margin: 0 0 12px 0; }
+    .improvements-intro { font-family: var(--font-body); font-size: 14px; color: #666; margin: 0 0 24px 0; line-height: 1.6; }
+    .improvements-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .improvement-item { display: flex; align-items: center; gap: 12px; font-family: var(--font-body); font-size: 14px; color: var(--color-primary); }
+    .improvement-check { color: var(--color-secondary); display: flex; }
+
+    /* Integration */
+    .integration-section { padding: var(--padding-xl) var(--padding-md); background: var(--color-primary); }
+    .integration-container { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; max-width: var(--max-width); margin: 0 auto; align-items: center; }
+    .integration-headline { font-family: var(--font-display); font-size: clamp(32px, 3.5vw, 44px); font-weight: 400; line-height: 1.2; color: #fff; margin: 0 0 24px 0; }
+    .integration-description { font-family: var(--font-body); font-size: 16px; line-height: 1.9; color: rgba(255,255,255,0.75); margin: 0 0 40px 0; }
+
+    .integration-stats { display: flex; gap: 40px; }
+    .integration-stat { display: flex; flex-direction: column; gap: 4px; }
+    .stat-number { font-family: var(--font-display); font-size: 36px; font-weight: 300; color: #fff; line-height: 1; }
+    .stat-label { font-family: var(--font-body); font-size: 12px; color: rgba(255,255,255,0.6); letter-spacing: 0.5px; }
+
+    .integration-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .visual-card { position: relative; }
+    .visual-image { position: relative; aspect-ratio: 4/3; overflow: hidden; }
+    .visual-image img { width: 100%; height: 100%; object-fit: cover; }
+    .visual-label { position: absolute; bottom: 16px; left: 16px; font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: #fff; background: rgba(0,0,0,0.6); padding: 8px 16px; }
+
+    /* Brand */
+    .brand-section { padding: var(--padding-xl) var(--padding-md); background: var(--color-cream); }
+    .brand-container { max-width: var(--max-width); margin: 0 auto; }
+    .brand-header { text-align: center; margin-bottom: 60px; }
+    .brand-subtitle { font-family: var(--font-body); font-size: 16px; color: #666; margin: 20px auto 0; max-width: 600px; line-height: 1.7; }
+
+    .brand-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 60px; }
+    .brand-card { background: #fff; padding: 40px; transition: all 0.4s var(--ease); }
+    .brand-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
+    .brand-number { font-family: var(--font-display); font-size: 14px; color: var(--color-secondary); display: block; margin-bottom: 20px; letter-spacing: 2px; opacity: 0.6; }
+    .brand-title { font-family: var(--font-display); font-size: 26px; font-weight: 400; color: var(--color-primary); margin: 0 0 16px 0; }
+    .brand-description { font-family: var(--font-body); font-size: 14px; line-height: 1.7; color: #555; margin: 0; }
+
+    .brand-statement { max-width: 800px; margin: 0 auto; text-align: center; padding-top: 40px; border-top: 1px solid rgba(0,0,0,0.1); }
+    .brand-statement p { font-family: var(--font-body); font-size: 16px; line-height: 1.8; color: #555; margin: 0; font-style: italic; }
+
+    /* CTA */
+    .cta-section { padding: var(--padding-xl) var(--padding-md); background: var(--color-warm); text-align: center; }
+    .cta-content { max-width: 600px; margin: 0 auto; }
+    .cta-headline { font-family: var(--font-display); font-size: clamp(36px, 4vw, 52px); font-weight: 400; color: var(--color-primary); margin: 0 0 20px 0; }
+    .cta-description { font-family: var(--font-body); font-size: 16px; line-height: 1.7; color: #555; margin: 0 0 40px 0; }
+
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .cta-button { display: inline-flex; align-items: center; gap: 12px; font-family: var(--font-body); font-size: 13px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; padding: 20px 40px; transition: all 0.4s var(--ease); }
+    .cta-button.primary { color: #fff; background: var(--color-primary); }
+    .cta-button.primary:hover { background: #333; gap: 18px; }
+    .cta-button.secondary { color: var(--color-primary); background: transparent; border: 1px solid var(--color-primary); }
+    .cta-button.secondary:hover { background: var(--color-primary); color: #fff; gap: 18px; }
+
+    @media (max-width: 1024px) {
+        .strategy-content { grid-template-columns: 1fr; gap: 40px; }
+        .integration-container { grid-template-columns: 1fr; gap: 60px; }
+        .integration-visual { order: -1; }
+        .brand-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+
+    @media (max-width: 768px) {
+        :root { --padding-xl: 80px; --padding-lg: 60px; --padding-md: 24px; }
+        .hero { height: 50vh; min-height: 400px; }
+        .hero-eyebrow { font-size: 10px; gap: 16px; }
+        .eyebrow-line { width: 40px; }
+        .improvements-grid { grid-template-columns: 1fr; }
+        .integration-stats { flex-direction: column; gap: 24px; }
+        .integration-visual { grid-template-columns: 1fr; }
+        .cta-buttons { flex-direction: column; }
+        .cta-button { width: 100%; justify-content: center; }
+    }
+</style>
+
+<style is:global>
+    ::selection { background: #1a1a1a; color: #fff; }
+    html { scroll-behavior: smooth; }
+</style>
