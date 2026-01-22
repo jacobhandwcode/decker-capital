@@ -5,46 +5,65 @@ import Layout from "../layouts/Layout.astro";
 const properties = [
     {
         name: "Westfield Industrial Park",
+        location: "Phoenix, AZ",
         address: "4521 Commerce Way",
         buildings: 5,
         squareFeet: "125,000",
         image: "/images/property1.png",
+        type: "Multi-Tenant Industrial"
     },
     {
         name: "Metro Distribution Center",
+        location: "Dallas, TX",
         address: "8900 Logistics Blvd",
         buildings: 3,
         squareFeet: "89,000",
         image: "/images/property2.png",
+        type: "Distribution"
     },
     {
         name: "Summit Business Complex",
+        location: "Atlanta, GA",
         address: "2100 Enterprise Dr",
         buildings: 8,
         squareFeet: "210,000",
         image: "/images/hero.png",
+        type: "Flex Space"
     },
     {
         name: "Gateway Industrial",
+        location: "Tampa, FL",
         address: "750 Gateway Parkway",
         buildings: 4,
         squareFeet: "156,000",
         image: "/images/property1.png",
+        type: "Warehouse"
     },
     {
         name: "Crossroads Flex Center",
+        location: "Charlotte, NC",
         address: "3300 Crossroads Ave",
         buildings: 6,
         squareFeet: "98,000",
         image: "/images/property2.png",
+        type: "Flex Space"
     },
     {
         name: "Riverside Commerce Park",
+        location: "Nashville, TN",
         address: "1200 River Road",
         buildings: 7,
         squareFeet: "175,000",
         image: "/images/hero.png",
+        type: "Multi-Tenant Industrial"
     },
+];
+
+const stats = [
+    { number: "6", label: "Properties" },
+    { number: "853,000", label: "Total SF" },
+    { number: "33", label: "Buildings" },
+    { number: "6", label: "Markets" },
 ];
 ---
 
@@ -56,70 +75,102 @@ const properties = [
                 <img src="/images/hero.png" alt="Industrial Property" />
             </div>
             <div class="hero-content">
+                <div class="hero-eyebrow">
+                    <span class="eyebrow-line"></span>
+                    <span>Properties</span>
+                    <span class="eyebrow-line"></span>
+                </div>
                 <h1 class="hero-title">Our Portfolio</h1>
+                <p class="hero-subtitle">Strategic acquisitions across the Southeast</p>
+            </div>
+        </section>
+
+        <!-- Stats Bar -->
+        <section class="stats-bar">
+            <div class="stats-container">
+                {stats.map((stat, index) => (
+                    <>
+                        <div class="stat-item">
+                            <span class="stat-number">{stat.number}</span>
+                            <span class="stat-label">{stat.label}</span>
+                        </div>
+                        {index < stats.length - 1 && <div class="stat-divider"></div>}
+                    </>
+                ))}
             </div>
         </section>
 
         <!-- Portfolio Section -->
         <section class="portfolio-section">
             <div class="portfolio-container">
-                <!-- Search Bar -->
-                <div class="search-wrapper">
-                    <input
-                        type="text"
-                        class="search-input"
-                        placeholder="Search properties..."
-                        id="propertySearch"
-                    />
-                    <button class="search-btn" aria-label="Search">
-                        <svg
-                            width="22"
-                            height="22"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.5"
-                        >
+                <div class="portfolio-header">
+                    <div class="portfolio-header-left">
+                        <span class="section-eyebrow">Portfolio</span>
+                        <h2 class="section-headline">Current Holdings</h2>
+                    </div>
+                    <div class="search-wrapper">
+                        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <circle cx="11" cy="11" r="8"></circle>
                             <path d="M21 21l-4.35-4.35"></path>
                         </svg>
-                    </button>
+                        <input type="text" class="search-input" placeholder="Search properties..." id="propertySearch" />
+                    </div>
                 </div>
 
-                <!-- Property Grid -->
                 <div class="property-grid" id="propertyGrid">
-                    {
-                        properties.map((property) => (
-                            <article
-                                class="property-card"
-                                data-name={property.name.toLowerCase()}
-                                data-address={property.address.toLowerCase()}
-                            >
-                                <div class="property-image">
-                                    <img
-                                        src={property.image}
-                                        alt={property.name}
-                                    />
+                    {properties.map((property, index) => (
+                        <article class="property-card" data-name={property.name.toLowerCase()} data-address={property.address.toLowerCase()} data-location={property.location.toLowerCase()} style={`animation-delay: ${index * 0.1}s`}>
+                            <div class="property-image">
+                                <img src={property.image} alt={property.name} />
+                                <div class="property-overlay">
+                                    <span class="property-type">{property.type}</span>
+                                    <span class="property-cta">View Details</span>
                                 </div>
-                                <div class="property-info">
-                                    <h3 class="property-name">
-                                        {property.name}
-                                    </h3>
-                                    <div class="property-details">
-                                        <p>{property.address}</p>
-                                        <p>{property.buildings} Buildings</p>
-                                        <p>{property.squareFeet} SF</p>
+                            </div>
+                            <div class="property-info">
+                                <span class="property-location">{property.location}</span>
+                                <h3 class="property-name">{property.name}</h3>
+                                <div class="property-meta">
+                                    <div class="meta-item">
+                                        <span class="meta-value">{property.squareFeet}</span>
+                                        <span class="meta-label">SF</span>
+                                    </div>
+                                    <div class="meta-divider"></div>
+                                    <div class="meta-item">
+                                        <span class="meta-value">{property.buildings}</span>
+                                        <span class="meta-label">Buildings</span>
                                     </div>
                                 </div>
-                            </article>
-                        ))
-                    }
+                            </div>
+                        </article>
+                    ))}
                 </div>
 
-                <!-- No Results Message -->
                 <div class="no-results" id="noResults">
-                    <p>No properties found matching your search.</p>
+                    <div class="no-results-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="M21 21l-4.35-4.35"></path>
+                        </svg>
+                    </div>
+                    <h3>No Properties Found</h3>
+                    <p>Try adjusting your search terms</p>
                 </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <span class="section-eyebrow light">Acquisitions</span>
+                <h2 class="cta-headline">Have a Property That Fits?</h2>
+                <p class="cta-description">We're actively seeking small-bay industrial properties in the Southeast.</p>
+                <a href="/contact" class="cta-button">
+                    <span>Send Us A Deal</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
             </div>
         </section>
     </div>
@@ -127,315 +178,148 @@ const properties = [
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const searchInput = document.getElementById(
-            "propertySearch",
-        ) as HTMLInputElement;
-        const propertyGrid = document.getElementById("propertyGrid");
+        const searchInput = document.getElementById("propertySearch") as HTMLInputElement;
         const propertyCards = document.querySelectorAll(".property-card");
         const noResults = document.getElementById("noResults");
 
-        if (searchInput && propertyGrid && noResults) {
+        if (searchInput && noResults) {
             searchInput.addEventListener("input", () => {
                 const searchTerm = searchInput.value.toLowerCase().trim();
                 let visibleCount = 0;
-
                 propertyCards.forEach((card) => {
                     const name = card.getAttribute("data-name") || "";
                     const address = card.getAttribute("data-address") || "";
-
-                    if (
-                        name.includes(searchTerm) ||
-                        address.includes(searchTerm)
-                    ) {
+                    const location = card.getAttribute("data-location") || "";
+                    if (name.includes(searchTerm) || address.includes(searchTerm) || location.includes(searchTerm)) {
                         (card as HTMLElement).style.display = "block";
                         visibleCount++;
                     } else {
                         (card as HTMLElement).style.display = "none";
                     }
                 });
-
-                if (visibleCount === 0) {
-                    noResults.style.display = "block";
-                } else {
-                    noResults.style.display = "none";
-                }
+                noResults.style.display = visibleCount === 0 ? "flex" : "none";
             });
         }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        propertyCards.forEach(card => observer.observe(card));
     });
 </script>
 
 <style>
-    /* ===== CSS Variables for Consistent Spacing ===== */
     :root {
-        --padding-desktop: 60px;
-        --padding-tablet: 40px;
-        --padding-mobile: 24px;
-        --section-padding-y: 80px;
-        --section-padding-y-mobile: 60px;
-        --max-width: 1400px;
+        --padding-xl: 120px;
+        --padding-lg: 80px;
+        --padding-md: 60px;
+        --max-width: 1440px;
+        --color-primary: #1a1a1a;
+        --color-secondary: #8a7f6e;
+        --color-cream: #f5f2ed;
+        --color-warm: #dbd3c6;
+        --font-display: "Cormorant Garamond", serif;
+        --font-body: "Inter", sans-serif;
+        --ease: cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .page {
-        background: #ffffff;
-    }
+    .page { background: #fff; overflow-x: hidden; }
 
-    /* Hero Section */
-    .hero {
-        position: relative;
-        width: 100%;
-        height: 50vh;
-        min-height: 400px;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+    .hero { position: relative; width: 100%; height: 60vh; min-height: 500px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .hero-image { position: absolute; inset: 0; z-index: 1; }
+    .hero-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.6) 100%); z-index: 2; }
+    .hero-image img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.05); animation: heroZoom 20s ease-in-out infinite alternate; }
+    @keyframes heroZoom { from { transform: scale(1.05); } to { transform: scale(1.15); } }
 
-    .hero-image {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-    }
+    .hero-content { position: relative; z-index: 3; text-align: center; padding: 0 var(--padding-md); display: flex; flex-direction: column; align-items: center; }
+    .hero-eyebrow { display: flex; align-items: center; gap: 20px; font-family: var(--font-body); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 24px; }
+    .eyebrow-line { width: 60px; height: 1px; background: rgba(255,255,255,0.3); }
+    .hero-title { font-family: var(--font-display); font-size: clamp(42px, 6vw, 80px); font-weight: 400; line-height: 1.1; color: #fff; letter-spacing: -1px; margin: 0 0 20px 0; }
+    .hero-subtitle { font-family: var(--font-body); font-size: 14px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.7); margin: 0; }
 
-    .hero-image::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.65) 0%,
-            rgba(0, 0, 0, 0.45) 40%,
-            rgba(0, 0, 0, 0.65) 100%
-        );
-        z-index: 2;
-    }
+    .stats-bar { background: var(--color-primary); }
+    .stats-container { display: flex; align-items: center; justify-content: center; max-width: var(--max-width); margin: 0 auto; }
+    .stat-item { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; gap: 8px; }
+    .stat-number { font-family: var(--font-display); font-size: clamp(32px, 4vw, 48px); font-weight: 300; color: #fff; line-height: 1; }
+    .stat-label { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+    .stat-divider { width: 1px; height: 60px; background: rgba(255,255,255,0.2); }
 
-    .hero-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-    }
+    .section-eyebrow { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--color-secondary); display: block; margin-bottom: 16px; }
+    .section-eyebrow.light { color: rgba(255,255,255,0.6); }
+    .section-headline { font-family: var(--font-display); font-size: clamp(36px, 4vw, 52px); font-weight: 400; color: var(--color-primary); margin: 0; }
 
-    .hero-content {
-        position: relative;
-        z-index: 3;
-        text-align: center;
-        padding: 0 var(--padding-desktop);
-    }
+    .portfolio-section { padding: var(--padding-xl) var(--padding-md); background: #fff; }
+    .portfolio-container { max-width: var(--max-width); margin: 0 auto; }
+    .portfolio-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 60px; gap: 40px; }
 
-    .hero-title {
-        font-family: "Cormorant Garamond", serif;
-        font-size: 72px;
-        font-weight: 400;
-        line-height: 1.2;
-        color: #ffffff;
-        letter-spacing: -0.5px;
-        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-        margin: 0;
-    }
+    .search-wrapper { display: flex; align-items: center; gap: 12px; padding: 16px 24px; background: var(--color-cream); min-width: 300px; transition: all 0.3s var(--ease); }
+    .search-wrapper:focus-within { background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    .search-icon { color: var(--color-secondary); flex-shrink: 0; }
+    .search-input { flex: 1; font-family: var(--font-body); font-size: 14px; border: none; background: transparent; color: var(--color-primary); outline: none; }
+    .search-input::placeholder { color: #999; }
 
-    /* Portfolio Section */
-    .portfolio-section {
-        padding: var(--section-padding-y) var(--padding-desktop);
-        background: #ffffff;
-    }
+    .property-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+    .property-card { background: #fff; opacity: 0; transform: translateY(30px); transition: all 0.6s var(--ease); }
+    .property-card.visible { opacity: 1; transform: translateY(0); }
+    .property-card:hover { transform: translateY(-8px); }
 
-    .portfolio-container {
-        max-width: var(--max-width);
-        margin: 0 auto;
-    }
+    .property-image { position: relative; aspect-ratio: 16/11; overflow: hidden; background: var(--color-cream); }
+    .property-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s var(--ease); }
+    .property-card:hover .property-image img { transform: scale(1.08); }
 
-    /* Search Bar */
-    .search-wrapper {
-        display: flex;
-        align-items: center;
-        border: 1px solid #1a1a1a;
-        margin-bottom: 50px;
-        background: #ffffff;
-    }
+    .property-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 24px; opacity: 0; transition: opacity 0.4s var(--ease); }
+    .property-card:hover .property-overlay { opacity: 1; }
+    .property-type { font-family: var(--font-body); font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 8px; }
+    .property-cta { font-family: var(--font-body); font-size: 13px; font-weight: 500; letter-spacing: 1px; color: #fff; transform: translateY(10px); opacity: 0; transition: all 0.4s var(--ease) 0.1s; }
+    .property-card:hover .property-cta { transform: translateY(0); opacity: 1; }
 
-    .search-input {
-        flex: 1;
-        font-family: "Inter", sans-serif;
-        font-size: 16px;
-        padding: 18px 24px;
-        border: none;
-        background: transparent;
-        color: #1a1a1a;
-        outline: none;
-    }
+    .property-info { padding: 28px 0 0 0; }
+    .property-location { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--color-secondary); display: block; margin-bottom: 8px; }
+    .property-name { font-family: var(--font-display); font-size: 26px; font-weight: 400; color: var(--color-primary); margin: 0 0 16px 0; line-height: 1.2; }
+    .property-meta { display: flex; align-items: center; gap: 20px; padding-top: 16px; border-top: 1px solid rgba(0,0,0,0.08); }
+    .meta-item { display: flex; align-items: baseline; gap: 6px; }
+    .meta-value { font-family: var(--font-display); font-size: 20px; font-weight: 400; color: var(--color-primary); }
+    .meta-label { font-family: var(--font-body); font-size: 12px; color: #888; }
+    .meta-divider { width: 4px; height: 4px; background: var(--color-secondary); border-radius: 50%; }
 
-    .search-input::placeholder {
-        color: #888;
-    }
+    .no-results { display: none; flex-direction: column; align-items: center; justify-content: center; padding: 80px 20px; text-align: center; }
+    .no-results-icon { color: var(--color-secondary); margin-bottom: 24px; opacity: 0.5; }
+    .no-results h3 { font-family: var(--font-display); font-size: 28px; font-weight: 400; color: var(--color-primary); margin: 0 0 8px 0; }
+    .no-results p { font-family: var(--font-body); font-size: 14px; color: #888; margin: 0; }
 
-    .search-btn {
-        padding: 18px 24px;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        color: #1a1a1a;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: opacity 0.3s ease;
-    }
-
-    .search-btn:hover {
-        opacity: 0.6;
-    }
-
-    /* Property Grid */
-    .property-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-    }
-
-    .property-card {
-        border: 1px solid #1a1a1a;
-        background: #ffffff;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .property-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-    }
-
-    .property-image {
-        aspect-ratio: 16/10;
-    }
-
-    .property-image img {
-        width: 95%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.6s ease-in-out;
-        margin: 10px auto 0 auto;
-        border-radius: 20px;
-    }
-
-    .property-info {
-        padding: 24px;
-    }
-
-    .property-name {
-        font-family: "Cormorant Garamond", serif;
-        font-size: 22px;
-        font-weight: 900;
-        color: #1a1a1a;
-        margin: 0 0 16px 0;
-    }
-
-    .property-details {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-    }
-
-    .property-details p {
-        font-family: "Inter", sans-serif;
-        font-size: 14px;
-        color: #555;
-        margin: 0;
-        line-height: 1.5;
-    }
-
-    /* No Results */
-    .no-results {
-        display: none;
-        text-align: center;
-        padding: 60px 20px;
-    }
-
-    .no-results p {
-        font-family: "Inter", sans-serif;
-        font-size: 16px;
-        color: #666;
-    }
-
-    /* ===== Tablet Responsive ===== */
-    @media (max-width: 1200px) {
-        .property-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-        }
-    }
+    .cta-section { padding: var(--padding-xl) var(--padding-md); background: var(--color-primary); text-align: center; }
+    .cta-content { max-width: 600px; margin: 0 auto; }
+    .cta-headline { font-family: var(--font-display); font-size: clamp(36px, 4vw, 52px); font-weight: 400; color: #fff; margin: 0 0 20px 0; }
+    .cta-description { font-family: var(--font-body); font-size: 16px; line-height: 1.7; color: rgba(255,255,255,0.7); margin: 0 0 40px 0; }
+    .cta-button { display: inline-flex; align-items: center; gap: 12px; font-family: var(--font-body); font-size: 13px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--color-primary); background: #fff; text-decoration: none; padding: 20px 40px; transition: all 0.4s var(--ease); }
+    .cta-button:hover { background: var(--color-cream); gap: 18px; }
 
     @media (max-width: 1024px) {
-        .portfolio-section {
-            padding: 60px var(--padding-tablet);
-        }
-
-        .search-wrapper {
-            margin-bottom: 40px;
-        }
+        .portfolio-header { flex-direction: column; align-items: flex-start; gap: 30px; }
+        .search-wrapper { width: 100%; min-width: auto; }
+        .property-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        .stat-item { padding: 30px 15px; }
     }
 
-    /* ===== Mobile Responsive ===== */
     @media (max-width: 768px) {
-        .hero {
-            height: 40vh;
-            min-height: 300px;
-        }
-
-        .hero-content {
-            padding: 0 var(--padding-mobile);
-        }
-
-        .hero-title {
-            font-size: 36px;
-        }
-
-        .portfolio-section {
-            padding: var(--section-padding-y-mobile) var(--padding-mobile);
-        }
-
-        .search-wrapper {
-            margin-bottom: 32px;
-        }
-
-        .search-input {
-            padding: 16px 20px;
-            font-size: 15px;
-        }
-
-        .search-btn {
-            padding: 16px 20px;
-        }
-
-        .property-grid {
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-        .property-info {
-            padding: 20px;
-        }
-
-        .property-name {
-            font-size: 20px;
-            margin-bottom: 12px;
-        }
-
-        .property-details p {
-            font-size: 13px;
-        }
-
-        .no-results {
-            padding: 40px var(--padding-mobile);
-        }
+        :root { --padding-xl: 80px; --padding-lg: 60px; --padding-md: 24px; }
+        .hero { height: 50vh; min-height: 400px; }
+        .hero-eyebrow { font-size: 10px; gap: 16px; }
+        .eyebrow-line { width: 40px; }
+        .stats-container { flex-wrap: wrap; }
+        .stat-item { flex: 1 1 50%; padding: 24px 16px; }
+        .stat-divider { display: none; }
+        .portfolio-section { padding: var(--padding-lg) var(--padding-md); }
+        .portfolio-header { margin-bottom: 40px; }
+        .property-grid { grid-template-columns: 1fr; gap: 32px; }
+        .property-name { font-size: 24px; }
+        .cta-button { width: 100%; justify-content: center; }
     }
 </style>
 
 <style is:global>
-    ::selection {
-        background: #1a1a1a;
-        color: #ffffff;
-    }
+    ::selection { background: #1a1a1a; color: #fff; }
+    html { scroll-behavior: smooth; }
 </style>

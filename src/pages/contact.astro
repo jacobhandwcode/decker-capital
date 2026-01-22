@@ -11,83 +11,174 @@ import Layout from "../layouts/Layout.astro";
 				<img src="/images/hero.png" alt="Industrial Property" />
 			</div>
 			<div class="hero-content">
+				<div class="hero-eyebrow">
+					<span class="eyebrow-line"></span>
+					<span>Contact</span>
+					<span class="eyebrow-line"></span>
+				</div>
 				<h1 class="hero-title">Send Us A Deal</h1>
+				<p class="hero-subtitle">We respond within 24 hours</p>
 			</div>
 		</section>
 
 		<!-- Contact Section -->
 		<section class="contact-section">
 			<div class="contact-container">
-				<div class="contact-intro">
-					<span class="contact-eyebrow">Get In Touch</span>
-					<h2 class="contact-headline">Let's Discuss Your Property</h2>
-					<p class="contact-description">
-						Whether you're looking to sell, partner, or explore opportunities, 
-						we'd love to hear from you. Our team responds within 24 hours.
-					</p>
+				<div class="contact-grid">
+					<!-- Left Column - Info -->
+					<div class="contact-info">
+						<span class="section-eyebrow">Get In Touch</span>
+						<h2 class="contact-headline">Let's Discuss Your Property</h2>
+						<p class="contact-description">
+							Whether you're looking to sell, partner, or explore opportunities, 
+							we'd love to hear from you. Our acquisitions team is ready to evaluate your property.
+						</p>
+
+						<div class="contact-details">
+							<div class="contact-item">
+								<div class="contact-icon">
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+										<path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+									</svg>
+								</div>
+								<div class="contact-item-content">
+									<span class="contact-item-label">Email</span>
+									<a href="mailto:deals@deckercapital.com" class="contact-item-value">deals@deckercapital.com</a>
+								</div>
+							</div>
+
+							<div class="contact-item">
+								<div class="contact-icon">
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+										<path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+									</svg>
+								</div>
+								<div class="contact-item-content">
+									<span class="contact-item-label">Phone</span>
+									<a href="tel:+13055550100" class="contact-item-value">(305) 555-0100</a>
+								</div>
+							</div>
+
+							<div class="contact-item">
+								<div class="contact-icon">
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+										<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+										<circle cx="12" cy="10" r="3"/>
+									</svg>
+								</div>
+								<div class="contact-item-content">
+									<span class="contact-item-label">Office</span>
+									<span class="contact-item-value">Miami, FL</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="contact-criteria">
+							<h3 class="criteria-title">What We're Looking For</h3>
+							<ul class="criteria-list">
+								<li>
+									<span class="criteria-check">✓</span>
+									<span>Small-bay industrial (1,000 - 25,000 SF)</span>
+								</li>
+								<li>
+									<span class="criteria-check">✓</span>
+									<span>Southeast US markets preferred</span>
+								</li>
+								<li>
+									<span class="criteria-check">✓</span>
+									<span>Value-add opportunities</span>
+								</li>
+								<li>
+									<span class="criteria-check">✓</span>
+									<span>Multi-tenant flex properties</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					<!-- Right Column - Form -->
+					<div class="contact-form-wrapper">
+						<form class="contact-form" id="contactForm">
+							<div class="form-row">
+								<div class="form-group">
+									<label for="firstName">First Name <span class="required">*</span></label>
+									<input type="text" id="firstName" name="firstName" required />
+								</div>
+								<div class="form-group">
+									<label for="lastName">Last Name <span class="required">*</span></label>
+									<input type="text" id="lastName" name="lastName" required />
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="form-group">
+									<label for="email">Email Address <span class="required">*</span></label>
+									<input type="email" id="email" name="email" required />
+								</div>
+								<div class="form-group">
+									<label for="phone">Phone Number</label>
+									<input type="tel" id="phone" name="phone" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="propertyType">Property Type</label>
+								<select id="propertyType" name="propertyType">
+									<option value="" disabled selected>Select property type</option>
+									<option value="warehouse">Warehouse</option>
+									<option value="distribution">Distribution Center</option>
+									<option value="manufacturing">Manufacturing Facility</option>
+									<option value="flex">Flex Space</option>
+									<option value="multi-tenant">Multi-Tenant Industrial</option>
+									<option value="other">Other</option>
+								</select>
+							</div>
+
+							<div class="form-row">
+								<div class="form-group">
+									<label for="squareFootage">Square Footage</label>
+									<input type="text" id="squareFootage" name="squareFootage" placeholder="e.g., 15,000 SF" />
+								</div>
+								<div class="form-group">
+									<label for="location">Property Location</label>
+									<input type="text" id="location" name="location" placeholder="City, State" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="message">Tell Us About Your Property</label>
+								<textarea id="message" name="message" rows="5" placeholder="Property details, asking price, timeline, or any other relevant information..."></textarea>
+							</div>
+
+							<button type="submit" class="submit-btn">
+								<span class="btn-text">Submit Inquiry</span>
+								<span class="btn-arrow">
+									<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+										<path d="M5 12h14M12 5l7 7-7 7"/>
+									</svg>
+								</span>
+							</button>
+
+							<p class="form-disclaimer">
+								By submitting this form, you agree to our privacy policy. We'll never share your information with third parties.
+							</p>
+						</form>
+					</div>
 				</div>
+			</div>
+		</section>
 
-				<form class="contact-form" id="contactForm">
-					<div class="form-row">
-						<div class="form-group">
-							<label for="firstName">First Name</label>
-							<input type="text" id="firstName" name="firstName" required />
-						</div>
-						<div class="form-group">
-							<label for="lastName">Last Name</label>
-							<input type="text" id="lastName" name="lastName" required />
-						</div>
-					</div>
-
-					<div class="form-row">
-						<div class="form-group">
-							<label for="email">Email Address</label>
-							<input type="email" id="email" name="email" required />
-						</div>
-						<div class="form-group">
-							<label for="phone">Phone Number</label>
-							<input type="tel" id="phone" name="phone" />
-						</div>
-					</div>
-
-					<div class="form-group full-width">
-						<label for="propertyType">Property Type</label>
-						<select id="propertyType" name="propertyType">
-							<option value="" disabled selected>Select property type</option>
-							<option value="warehouse">Warehouse</option>
-							<option value="distribution">Distribution Center</option>
-							<option value="manufacturing">Manufacturing Facility</option>
-							<option value="flex">Flex Space</option>
-							<option value="multi-tenant">Multi-Tenant Industrial</option>
-							<option value="other">Other</option>
-						</select>
-					</div>
-
-					<div class="form-row">
-						<div class="form-group">
-							<label for="squareFootage">Square Footage</label>
-							<input type="text" id="squareFootage" name="squareFootage" placeholder="e.g., 15,000 SF" />
-						</div>
-						<div class="form-group">
-							<label for="location">Property Location</label>
-							<input type="text" id="location" name="location" placeholder="City, State" />
-						</div>
-					</div>
-
-					<div class="form-group full-width">
-						<label for="message">Tell Us About Your Property</label>
-						<textarea id="message" name="message" rows="5" placeholder="Property details, asking price, timeline, or any other relevant information..."></textarea>
-					</div>
-
-					<button type="submit" class="submit-btn">
-						<span class="btn-text">Submit Inquiry</span>
-						<span class="btn-arrow">
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-								<path d="M5 12h14M12 5l7 7-7 7"/>
-							</svg>
-						</span>
-					</button>
-				</form>
+		<!-- Map Section -->
+		<section class="map-section">
+			<div class="map-overlay">
+				<div class="map-card">
+					<h3 class="map-card-title">Decker Capital</h3>
+					<p class="map-card-address">Miami, Florida</p>
+					<a href="mailto:deals@deckercapital.com" class="map-card-link">deals@deckercapital.com</a>
+				</div>
+			</div>
+			<div class="map-placeholder">
+				<img src="/images/hero.png" alt="Miami Office Location" />
 			</div>
 		</section>
 	</div>
@@ -98,63 +189,78 @@ import Layout from "../layouts/Layout.astro";
 		const form = document.getElementById('contactForm') as HTMLFormElement;
 		
 		if (form) {
+			const inputs = form.querySelectorAll('input, select, textarea');
+			inputs.forEach(input => {
+				input.addEventListener('focus', () => {
+					input.parentElement?.classList.add('focused');
+				});
+				input.addEventListener('blur', () => {
+					input.parentElement?.classList.remove('focused');
+				});
+			});
+
 			form.addEventListener('submit', (e) => {
 				e.preventDefault();
-				// Handle form submission
 				const formData = new FormData(form);
 				console.log('Form submitted:', Object.fromEntries(formData));
 				
-				// Show success state
 				const btn = form.querySelector('.submit-btn') as HTMLButtonElement;
 				const btnText = btn.querySelector('.btn-text') as HTMLSpanElement;
 				const originalText = btnText.textContent;
 				
-				btnText.textContent = 'Sent Successfully';
-				btn.classList.add('success');
+				btn.classList.add('loading');
+				btnText.textContent = 'Sending...';
 				
 				setTimeout(() => {
-					btnText.textContent = originalText;
-					btn.classList.remove('success');
-					form.reset();
-				}, 3000);
+					btn.classList.remove('loading');
+					btn.classList.add('success');
+					btnText.textContent = 'Sent Successfully';
+					
+					setTimeout(() => {
+						btnText.textContent = originalText;
+						btn.classList.remove('success');
+						form.reset();
+					}, 3000);
+				}, 1500);
 			});
 		}
 	});
 </script>
 
 <style>
-	/* ===== CSS Variables for Consistent Spacing ===== */
 	:root {
-		--padding-desktop: 60px;
-		--padding-tablet: 40px;
-		--padding-mobile: 24px;
-		--section-padding-y: 80px;
-		--section-padding-y-mobile: 60px;
-		--max-width: 1400px;
+		--padding-xl: 120px;
+		--padding-lg: 80px;
+		--padding-md: 60px;
+		--padding-sm: 40px;
+		--padding-xs: 24px;
+		--max-width: 1440px;
+		--color-primary: #1a1a1a;
+		--color-secondary: #8a7f6e;
+		--color-cream: #f5f2ed;
+		--color-warm: #dbd3c6;
+		--font-display: "Cormorant Garamond", serif;
+		--font-body: "Inter", sans-serif;
+		--ease: cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
-	.page {
-		background: #ffffff;
-	}
+	.page { background: #fff; overflow-x: hidden; }
 
-	/* Hero Section */
+	/* Hero */
 	.hero {
 		position: relative;
 		width: 100%;
-		height: 50vh;
-		min-height: 400px;
-		overflow: hidden;
+		height: 60vh;
+		min-height: 500px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		overflow: hidden;
 	}
 
 	.hero-image {
 		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
+		inset: 0;
 		z-index: 1;
 	}
 
@@ -162,12 +268,7 @@ import Layout from "../layouts/Layout.astro";
 		content: "";
 		position: absolute;
 		inset: 0;
-		background: linear-gradient(
-			to bottom,
-			rgba(0, 0, 0, 0.65) 0%,
-			rgba(0, 0, 0, 0.45) 40%,
-			rgba(0, 0, 0, 0.65) 100%
-		);
+		background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.6) 100%);
 		z-index: 2;
 	}
 
@@ -175,117 +276,263 @@ import Layout from "../layouts/Layout.astro";
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		object-position: center;
+		transform: scale(1.05);
+		animation: heroZoom 20s ease-in-out infinite alternate;
 	}
+
+	@keyframes heroZoom { from { transform: scale(1.05); } to { transform: scale(1.15); } }
 
 	.hero-content {
 		position: relative;
 		z-index: 3;
 		text-align: center;
-		padding: 0 var(--padding-desktop);
+		padding: 0 var(--padding-md);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 
+	.hero-eyebrow {
+		display: flex;
+		align-items: center;
+		gap: 20px;
+		font-family: var(--font-body);
+		font-size: 12px;
+		letter-spacing: 4px;
+		text-transform: uppercase;
+		color: rgba(255,255,255,0.7);
+		margin-bottom: 24px;
+	}
+
+	.eyebrow-line { width: 60px; height: 1px; background: rgba(255,255,255,0.3); }
+
 	.hero-title {
-		font-family: "Cormorant Garamond", serif;
-		font-size: 72px;
+		font-family: var(--font-display);
+		font-size: clamp(42px, 6vw, 80px);
 		font-weight: 400;
-		line-height: 1.2;
-		color: #ffffff;
-		letter-spacing: -0.5px;
-		text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+		line-height: 1.1;
+		color: #fff;
+		letter-spacing: -1px;
+		margin: 0 0 20px 0;
+	}
+
+	.hero-subtitle {
+		font-family: var(--font-body);
+		font-size: 14px;
+		letter-spacing: 3px;
+		text-transform: uppercase;
+		color: rgba(255,255,255,0.7);
 		margin: 0;
 	}
 
-	/* Contact Section */
-	.contact-section {
-		padding: var(--section-padding-y) var(--padding-desktop);
-		background: #ffffff;
-	}
-
-	.contact-container {
-		max-width: 900px;
-		margin: 0 auto;
-	}
-
-	.contact-intro {
-		text-align: center;
-		margin-bottom: 50px;
-	}
-
-	.contact-eyebrow {
-		font-family: 'Inter', sans-serif;
+	.section-eyebrow {
+		font-family: var(--font-body);
 		font-size: 11px;
 		font-weight: 500;
 		letter-spacing: 3px;
 		text-transform: uppercase;
-		color: #8a7f6e;
+		color: var(--color-secondary);
 		display: block;
 		margin-bottom: 16px;
 	}
 
-	.contact-headline {
-		font-family: 'Cormorant Garamond', serif;
-		font-size: 48px;
-		font-weight: 400;
-		color: #1a1a1a;
-		margin: 0 0 20px 0;
-		letter-spacing: -0.5px;
+	/* Contact Section */
+	.contact-section {
+		padding: var(--padding-xl) var(--padding-md);
+		background: #fff;
 	}
 
-	.contact-description {
-		font-family: 'Inter', sans-serif;
-		font-size: 16px;
-		font-weight: 400;
-		line-height: 1.7;
-		color: #666;
-		max-width: 500px;
+	.contact-container {
+		max-width: var(--max-width);
 		margin: 0 auto;
 	}
 
-	/* Form Styles */
-	.contact-form {
-		background: #f9f7f4;
+	.contact-grid {
+		display: grid;
+		grid-template-columns: 1fr 1.2fr;
+		gap: 80px;
+		align-items: start;
+	}
+
+	.contact-info {
+		position: sticky;
+		top: 120px;
+	}
+
+	.contact-headline {
+		font-family: var(--font-display);
+		font-size: clamp(32px, 3.5vw, 48px);
+		font-weight: 400;
+		line-height: 1.2;
+		color: var(--color-primary);
+		margin: 0 0 24px 0;
+	}
+
+	.contact-description {
+		font-family: var(--font-body);
+		font-size: 16px;
+		line-height: 1.8;
+		color: #555;
+		margin: 0 0 40px 0;
+	}
+
+	.contact-details {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+		margin-bottom: 50px;
+		padding-bottom: 50px;
+		border-bottom: 1px solid rgba(0,0,0,0.1);
+	}
+
+	.contact-item {
+		display: flex;
+		align-items: flex-start;
+		gap: 16px;
+	}
+
+	.contact-icon {
+		width: 48px;
+		height: 48px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: var(--color-cream);
+		color: var(--color-primary);
+		flex-shrink: 0;
+		transition: all 0.3s var(--ease);
+	}
+
+	.contact-item:hover .contact-icon {
+		background: var(--color-primary);
+		color: #fff;
+	}
+
+	.contact-item-content {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	.contact-item-label {
+		font-family: var(--font-body);
+		font-size: 11px;
+		font-weight: 500;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+		color: var(--color-secondary);
+	}
+
+	.contact-item-value {
+		font-family: var(--font-body);
+		font-size: 16px;
+		color: var(--color-primary);
+		text-decoration: none;
+		transition: color 0.3s var(--ease);
+	}
+
+	a.contact-item-value:hover { color: var(--color-secondary); }
+
+	.contact-criteria {
+		background: var(--color-cream);
+		padding: 32px;
+	}
+
+	.criteria-title {
+		font-family: var(--font-display);
+		font-size: 24px;
+		font-weight: 400;
+		color: var(--color-primary);
+		margin: 0 0 20px 0;
+	}
+
+	.criteria-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.criteria-list li {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		font-family: var(--font-body);
+		font-size: 14px;
+		color: #555;
+	}
+
+	.criteria-check {
+		color: var(--color-secondary);
+		font-weight: 600;
+	}
+
+	.contact-form-wrapper {
+		background: var(--color-cream);
 		padding: 50px;
-		border: 1px solid rgba(0, 0, 0, 0.06);
+		position: relative;
+	}
+
+	.contact-form-wrapper::before {
+		content: '';
+		position: absolute;
+		top: -15px;
+		right: -15px;
+		width: 100%;
+		height: 100%;
+		border: 1px solid var(--color-secondary);
+		z-index: -1;
+	}
+
+	.contact-form {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
 	}
 
 	.form-row {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 24px;
-		margin-bottom: 24px;
 	}
 
 	.form-group {
 		display: flex;
 		flex-direction: column;
+		transition: transform 0.3s var(--ease);
 	}
 
-	.form-group.full-width {
-		grid-column: 1 / -1;
-		margin-bottom: 24px;
+	.form-group.focused {
+		transform: translateY(-2px);
 	}
 
 	.form-group label {
-		font-family: 'Inter', sans-serif;
-		font-size: 12px;
+		font-family: var(--font-body);
+		font-size: 11px;
 		font-weight: 500;
-		letter-spacing: 1px;
+		letter-spacing: 1.5px;
 		text-transform: uppercase;
-		color: #1a1a1a;
+		color: var(--color-primary);
 		margin-bottom: 10px;
+		display: flex;
+		align-items: center;
+		gap: 4px;
 	}
+
+	.required { color: var(--color-secondary); }
 
 	.form-group input,
 	.form-group select,
 	.form-group textarea {
-		font-family: 'Inter', sans-serif;
+		font-family: var(--font-body);
 		font-size: 15px;
-		padding: 16px 20px;
-		border: 1px solid rgba(0, 0, 0, 0.12);
-		background: #ffffff;
-		color: #1a1a1a;
-		transition: all 0.3s ease;
+		padding: 18px 20px;
+		border: 1px solid rgba(0,0,0,0.1);
+		background: #fff;
+		color: var(--color-primary);
+		transition: all 0.3s var(--ease);
 		outline: none;
 	}
 
@@ -297,8 +544,8 @@ import Layout from "../layouts/Layout.astro";
 	.form-group input:focus,
 	.form-group select:focus,
 	.form-group textarea:focus {
-		border-color: #1a1a1a;
-		box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.05);
+		border-color: var(--color-primary);
+		box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 	}
 
 	.form-group select {
@@ -318,118 +565,150 @@ import Layout from "../layouts/Layout.astro";
 	.submit-btn {
 		display: inline-flex;
 		align-items: center;
+		justify-content: center;
 		gap: 12px;
-		font-family: 'Inter', sans-serif;
+		font-family: var(--font-body);
 		font-size: 13px;
 		font-weight: 500;
-		letter-spacing: 1.5px;
+		letter-spacing: 2px;
 		text-transform: uppercase;
-		color: #ffffff;
-		background: #1a1a1a;
+		color: #fff;
+		background: var(--color-primary);
 		border: none;
-		padding: 20px 40px;
+		padding: 22px 40px;
 		cursor: pointer;
-		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		transition: all 0.4s var(--ease);
 		margin-top: 10px;
+		position: relative;
+		overflow: hidden;
 	}
 
-	.submit-btn:hover {
-		background: #333;
-		transform: translateY(-2px);
-		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+	.submit-btn::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+		transition: left 0.5s var(--ease);
 	}
 
-	.submit-btn.success {
-		background: #2d5a3d;
-	}
+	.submit-btn:hover::before { left: 100%; }
+	.submit-btn:hover { background: #333; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+	.submit-btn.loading { pointer-events: none; opacity: 0.8; }
+	.submit-btn.success { background: #2d5a3d; }
 
 	.btn-arrow {
 		display: flex;
-		transition: transform 0.3s ease;
+		transition: transform 0.3s var(--ease);
+	}
+	.submit-btn:hover .btn-arrow { transform: translateX(4px); }
+
+	.form-disclaimer {
+		font-family: var(--font-body);
+		font-size: 12px;
+		color: #888;
+		line-height: 1.6;
+		margin: 0;
 	}
 
-	.submit-btn:hover .btn-arrow {
-		transform: translateX(4px);
+	/* Map Section */
+	.map-section {
+		position: relative;
+		height: 500px;
+		background: var(--color-warm);
 	}
 
-	/* ===== Tablet Responsive ===== */
+	.map-placeholder {
+		position: absolute;
+		inset: 0;
+	}
+
+	.map-placeholder img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		filter: grayscale(100%);
+		opacity: 0.5;
+	}
+
+	.map-overlay {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 2;
+	}
+
+	.map-card {
+		background: #fff;
+		padding: 40px 50px;
+		text-align: center;
+		box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+	}
+
+	.map-card-title {
+		font-family: var(--font-display);
+		font-size: 28px;
+		font-weight: 400;
+		color: var(--color-primary);
+		margin: 0 0 8px 0;
+	}
+
+	.map-card-address {
+		font-family: var(--font-body);
+		font-size: 14px;
+		color: #666;
+		margin: 0 0 16px 0;
+	}
+
+	.map-card-link {
+		font-family: var(--font-body);
+		font-size: 13px;
+		font-weight: 500;
+		letter-spacing: 1px;
+		color: var(--color-secondary);
+		text-decoration: none;
+		transition: color 0.3s var(--ease);
+	}
+	.map-card-link:hover { color: var(--color-primary); }
+
+	/* Tablet */
 	@media (max-width: 1024px) {
-		.contact-section {
-			padding: 60px var(--padding-tablet);
+		.contact-grid {
+			grid-template-columns: 1fr;
+			gap: 60px;
 		}
-
-		.contact-form {
-			padding: 40px;
-		}
-
-		.contact-headline {
-			font-size: 40px;
-		}
+		.contact-info { position: static; }
+		.contact-form-wrapper::before { display: none; }
 	}
 
-	/* ===== Mobile Responsive ===== */
+	/* Mobile */
 	@media (max-width: 768px) {
-		.hero {
-			height: 40vh;
-			min-height: 300px;
+		:root {
+			--padding-xl: 80px;
+			--padding-lg: 60px;
+			--padding-md: 24px;
 		}
-
-		.hero-content {
-			padding: 0 var(--padding-mobile);
-		}
-
-		.hero-title {
-			font-size: 36px;
-		}
-
-		.contact-section {
-			padding: var(--section-padding-y-mobile) var(--padding-mobile);
-		}
-
-		.contact-intro {
-			margin-bottom: 40px;
-		}
-
-		.contact-headline {
-			font-size: 32px;
-		}
-
-		.contact-description {
-			font-size: 15px;
-		}
-
-		.contact-form {
-			padding: 32px var(--padding-mobile);
-		}
-
-		.form-row {
-			grid-template-columns: 1fr;
-			gap: 16px;
-			margin-bottom: 16px;
-		}
-
-		.form-group.full-width {
-			margin-bottom: 16px;
-		}
-
+		.hero { height: 50vh; min-height: 400px; }
+		.hero-eyebrow { font-size: 10px; gap: 16px; }
+		.eyebrow-line { width: 40px; }
+		.contact-section { padding: var(--padding-lg) var(--padding-md); }
+		.contact-form-wrapper { padding: 32px 24px; }
+		.form-row { grid-template-columns: 1fr; gap: 20px; }
 		.form-group input,
 		.form-group select,
-		.form-group textarea {
-			padding: 14px 16px;
-			font-size: 14px;
-		}
-
-		.submit-btn {
-			width: 100%;
-			justify-content: center;
-			padding: 18px 32px;
-		}
+		.form-group textarea { padding: 16px; font-size: 16px; }
+		.submit-btn { width: 100%; padding: 20px; }
+		.contact-criteria { padding: 24px; }
+		.map-section { height: 400px; }
+		.map-card { padding: 30px; margin: 0 24px; }
 	}
 </style>
 
 <style is:global>
-	::selection {
-		background: #1a1a1a;
-		color: #ffffff;
-	}
+	::selection { background: #1a1a1a; color: #fff; }
+	html { scroll-behavior: smooth; }
 </style>
