@@ -1,0 +1,745 @@
+---
+// [slug].astro - Dynamic portfolio item page
+import Layout from "../../layouts/Layout.astro";
+
+export function getStaticPaths() {
+    const properties = [
+        {
+            slug: "westfield-industrial-park",
+            name: "Westfield Industrial Park",
+            location: "Phoenix, AZ",
+            address: "4521 Commerce Way",
+            buildings: 5,
+            squareFeet: "125,000",
+            units: 24,
+            yearBuilt: 2008,
+            acquired: 2022,
+            image: "/images/property1.png",
+            type: "Multi-Tenant Industrial",
+            description: "Westfield Industrial Park is a premier multi-tenant industrial complex strategically located in Phoenix's thriving logistics corridor. The property features modern small-bay units ideal for light manufacturing, distribution, and flex space users.",
+            highlights: [
+                "Prime location with excellent highway access",
+                "Recently renovated common areas and facades",
+                "Flexible unit configurations from 2,500 to 15,000 SF",
+                "Ample parking and truck court areas",
+                "24/7 security monitoring"
+            ]
+        },
+        {
+            slug: "metro-distribution-center",
+            name: "Metro Distribution Center",
+            location: "Dallas, TX",
+            address: "8900 Logistics Blvd",
+            buildings: 3,
+            squareFeet: "89,000",
+            units: 18,
+            yearBuilt: 2012,
+            acquired: 2023,
+            image: "/images/property2.png",
+            type: "Distribution",
+            description: "Metro Distribution Center offers best-in-class distribution space in the heart of Dallas-Fort Worth's industrial market. The property serves a diverse tenant base ranging from e-commerce fulfillment to regional distribution operations.",
+            highlights: [
+                "Strategic DFW location with interstate access",
+                "30' clear heights throughout",
+                "Cross-dock capable facilities",
+                "Modern LED lighting and HVAC systems",
+                "Fully fenced and secured property"
+            ]
+        },
+        {
+            slug: "summit-business-complex",
+            name: "Summit Business Complex",
+            location: "Atlanta, GA",
+            address: "2100 Enterprise Dr",
+            buildings: 8,
+            squareFeet: "210,000",
+            units: 42,
+            yearBuilt: 2005,
+            acquired: 2021,
+            image: "/images/hero.png",
+            type: "Flex Space",
+            description: "Summit Business Complex is a flagship flex property in Atlanta's premier business district. The campus-style development offers versatile spaces that accommodate office, showroom, and light industrial uses.",
+            highlights: [
+                "Campus-style setting with landscaped grounds",
+                "Flexible office/warehouse configurations",
+                "Convenient access to I-285 and I-85",
+                "On-site property management",
+                "Abundant surface parking"
+            ]
+        },
+        {
+            slug: "gateway-industrial",
+            name: "Gateway Industrial",
+            location: "Tampa, FL",
+            address: "750 Gateway Parkway",
+            buildings: 4,
+            squareFeet: "156,000",
+            units: 32,
+            yearBuilt: 2010,
+            acquired: 2023,
+            image: "/images/property1.png",
+            type: "Warehouse",
+            description: "Gateway Industrial is a modern warehouse facility serving Tampa Bay's growing logistics sector. The property features efficient clear-span buildings with excellent loading capabilities and proximity to major transportation routes.",
+            highlights: [
+                "Direct access to I-4 and I-75 corridors",
+                "Grade-level and dock-high loading",
+                "Climate-controlled units available",
+                "Recently upgraded electrical systems",
+                "Strong tenant mix with long-term leases"
+            ]
+        },
+        {
+            slug: "crossroads-flex-center",
+            name: "Crossroads Flex Center",
+            location: "Charlotte, NC",
+            address: "3300 Crossroads Ave",
+            buildings: 6,
+            squareFeet: "98,000",
+            units: 28,
+            yearBuilt: 2015,
+            acquired: 2024,
+            image: "/images/property2.png",
+            type: "Flex Space",
+            description: "Crossroads Flex Center is a modern flex development in Charlotte's rapidly expanding industrial submarket. The property caters to small businesses seeking quality space with professional finishes and excellent visibility.",
+            highlights: [
+                "Highly visible location on major thoroughfare",
+                "Modern architectural design",
+                "Units from 1,500 to 8,000 SF",
+                "Generous office finish allowances",
+                "Strong population and job growth area"
+            ]
+        },
+        {
+            slug: "riverside-commerce-park",
+            name: "Riverside Commerce Park",
+            location: "Nashville, TN",
+            address: "1200 River Road",
+            buildings: 7,
+            squareFeet: "175,000",
+            units: 36,
+            yearBuilt: 2007,
+            acquired: 2022,
+            image: "/images/hero.png",
+            type: "Multi-Tenant Industrial",
+            description: "Riverside Commerce Park is a well-established multi-tenant industrial park in Nashville's thriving industrial corridor. The property benefits from strong market fundamentals and diverse tenant demand.",
+            highlights: [
+                "Excellent Nashville submarket location",
+                "Mix of warehouse and flex configurations",
+                "Recent capital improvements completed",
+                "Strong tenant retention history",
+                "Below-market rents with upside potential"
+            ]
+        },
+    ];
+
+    return properties.map((property) => ({
+        params: { slug: property.slug },
+        props: { property },
+    }));
+}
+
+const { property } = Astro.props;
+---
+
+<Layout>
+    <div class="page">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-image">
+                <img src={property.image} alt={property.name} />
+            </div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <a href="/portfolio" class="back-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    <span>Back to Portfolio</span>
+                </a>
+                <div class="hero-text">
+                    <span class="property-type">{property.type}</span>
+                    <h1 class="property-name">{property.name}</h1>
+                    <p class="property-location">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        {property.address}, {property.location}
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Bar -->
+        <section class="stats-bar">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <span class="stat-value">{property.squareFeet}</span>
+                    <span class="stat-label">Square Feet</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-value">{property.buildings}</span>
+                    <span class="stat-label">Buildings</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-value">{property.units}</span>
+                    <span class="stat-label">Units</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-value">{property.yearBuilt}</span>
+                    <span class="stat-label">Year Built</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-value">{property.acquired}</span>
+                    <span class="stat-label">Acquired</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="content-section">
+            <div class="content-container">
+                <div class="content-main">
+                    <div class="description-block">
+                        <span class="section-eyebrow">Overview</span>
+                        <h2 class="section-title">About This Property</h2>
+                        <p class="description">{property.description}</p>
+                    </div>
+
+                    <div class="highlights-block">
+                        <span class="section-eyebrow">Features</span>
+                        <h3 class="highlights-title">Property Highlights</h3>
+                        <ul class="highlights-list">
+                            {property.highlights.map((highlight) => (
+                                <li>
+                                    <span class="highlight-check">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                    </span>
+                                    <span>{highlight}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="content-sidebar">
+                    <div class="info-card">
+                        <h3 class="info-card-title">Property Details</h3>
+                        <div class="info-list">
+                            <div class="info-item">
+                                <span class="info-label">Property Type</span>
+                                <span class="info-value">{property.type}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Location</span>
+                                <span class="info-value">{property.location}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Address</span>
+                                <span class="info-value">{property.address}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Total SF</span>
+                                <span class="info-value">{property.squareFeet} SF</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Buildings</span>
+                                <span class="info-value">{property.buildings}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Units</span>
+                                <span class="info-value">{property.units}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Year Built</span>
+                                <span class="info-value">{property.yearBuilt}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Acquired</span>
+                                <span class="info-value">{property.acquired}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cta-card">
+                        <h3 class="cta-card-title">Interested in Leasing?</h3>
+                        <p class="cta-card-text">Contact our team for availability and leasing information.</p>
+                        <a href="/contact" class="cta-button">
+                            <span>Get In Touch</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="bottom-cta">
+            <div class="bottom-cta-content">
+                <h2 class="bottom-cta-headline">Have a Similar Property?</h2>
+                <p class="bottom-cta-text">We're always looking to expand our portfolio with quality small-bay industrial assets.</p>
+                <a href="/contact" class="bottom-cta-button">
+                    <span>Send Us A Deal</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </section>
+    </div>
+</Layout>
+
+<style>
+    :root {
+        --padding-xl: 70px;
+        --padding-lg: 56px;
+        --padding-md: 48px;
+        --padding-sm: 32px;
+        --padding-xs: 20px;
+        --max-width: 1440px;
+        --color-primary: #1a1a1a;
+        --color-secondary: #8a7f6e;
+        --color-cream: #f5f2ed;
+        --color-warm: #dbd3c6;
+        --font-display: "Cormorant Garamond", serif;
+        --font-body: "Inter", sans-serif;
+        --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .page { background: #fff; overflow-x: hidden; }
+
+    /* Hero */
+    .hero {
+        position: relative;
+        width: 100%;
+        height: 60vh;
+        min-height: 450px;
+        display: flex;
+        align-items: flex-end;
+        overflow: hidden;
+    }
+
+    .hero-image {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+    }
+
+    .hero-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%);
+        z-index: 2;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: var(--padding-md);
+        padding-bottom: var(--padding-lg);
+    }
+
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--font-body);
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.8);
+        text-decoration: none;
+        margin-bottom: 24px;
+        transition: all 0.3s var(--ease);
+    }
+
+    .back-link:hover {
+        color: #fff;
+        gap: 12px;
+    }
+
+    .property-type {
+        display: inline-block;
+        font-family: var(--font-body);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--color-secondary);
+        background: #fff;
+        padding: 8px 16px;
+        margin-bottom: 16px;
+    }
+
+    .property-name {
+        font-family: var(--font-display);
+        font-size: clamp(36px, 5vw, 56px);
+        font-weight: 400;
+        line-height: 1.1;
+        color: #fff;
+        margin: 0 0 16px 0;
+    }
+
+    .property-location {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--font-body);
+        font-size: 15px;
+        color: rgba(255,255,255,0.9);
+        margin: 0;
+    }
+
+    /* Stats Bar */
+    .stats-bar {
+        background: var(--color-primary);
+    }
+
+    .stats-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 var(--padding-md);
+    }
+
+    .stat-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 28px 16px;
+        gap: 4px;
+    }
+
+    .stat-value {
+        font-family: var(--font-display);
+        font-size: clamp(24px, 3vw, 36px);
+        font-weight: 300;
+        color: #fff;
+        line-height: 1;
+    }
+
+    .stat-label {
+        font-family: var(--font-body);
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.6);
+    }
+
+    .stat-divider {
+        width: 1px;
+        height: 40px;
+        background: rgba(255,255,255,0.2);
+    }
+
+    /* Content Section */
+    .content-section {
+        padding: var(--padding-xl) var(--padding-md);
+        background: #fff;
+    }
+
+    .content-container {
+        display: grid;
+        grid-template-columns: 1fr 380px;
+        gap: 48px;
+        max-width: var(--max-width);
+        margin: 0 auto;
+    }
+
+    .section-eyebrow {
+        font-family: var(--font-body);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--color-secondary);
+        display: block;
+        margin-bottom: 12px;
+    }
+
+    .section-title {
+        font-family: var(--font-display);
+        font-size: clamp(28px, 3vw, 36px);
+        font-weight: 400;
+        color: var(--color-primary);
+        margin: 0 0 20px 0;
+    }
+
+    .description {
+        font-family: var(--font-body);
+        font-size: 16px;
+        line-height: 1.8;
+        color: #555;
+        margin: 0;
+    }
+
+    .description-block {
+        margin-bottom: 48px;
+    }
+
+    .highlights-title {
+        font-family: var(--font-display);
+        font-size: 24px;
+        font-weight: 400;
+        color: var(--color-primary);
+        margin: 0 0 20px 0;
+    }
+
+    .highlights-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .highlights-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        font-family: var(--font-body);
+        font-size: 15px;
+        color: #555;
+        line-height: 1.5;
+    }
+
+    .highlight-check {
+        color: var(--color-secondary);
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    /* Sidebar */
+    .content-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .info-card {
+        background: var(--color-cream);
+        padding: 28px;
+    }
+
+    .info-card-title {
+        font-family: var(--font-display);
+        font-size: 22px;
+        font-weight: 400;
+        color: var(--color-primary);
+        margin: 0 0 20px 0;
+        padding-bottom: 16px;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .info-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .info-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .info-label {
+        font-family: var(--font-body);
+        font-size: 13px;
+        color: #888;
+    }
+
+    .info-value {
+        font-family: var(--font-body);
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--color-primary);
+    }
+
+    .cta-card {
+        background: var(--color-primary);
+        padding: 28px;
+    }
+
+    .cta-card-title {
+        font-family: var(--font-display);
+        font-size: 22px;
+        font-weight: 400;
+        color: #fff;
+        margin: 0 0 10px 0;
+    }
+
+    .cta-card-text {
+        font-family: var(--font-body);
+        font-size: 14px;
+        line-height: 1.6;
+        color: rgba(255,255,255,0.7);
+        margin: 0 0 20px 0;
+    }
+
+    .cta-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--font-body);
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--color-primary);
+        background: #fff;
+        text-decoration: none;
+        padding: 14px 24px;
+        transition: all 0.4s var(--ease);
+    }
+
+    .cta-button:hover {
+        background: var(--color-cream);
+        gap: 14px;
+    }
+
+    /* Bottom CTA */
+    .bottom-cta {
+        padding: var(--padding-xl) var(--padding-md);
+        background: var(--color-warm);
+        text-align: center;
+    }
+
+    .bottom-cta-content {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .bottom-cta-headline {
+        font-family: var(--font-display);
+        font-size: clamp(28px, 3vw, 40px);
+        font-weight: 400;
+        color: var(--color-primary);
+        margin: 0 0 12px 0;
+    }
+
+    .bottom-cta-text {
+        font-family: var(--font-body);
+        font-size: 15px;
+        line-height: 1.7;
+        color: #555;
+        margin: 0 0 28px 0;
+    }
+
+    .bottom-cta-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--font-body);
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #fff;
+        background: var(--color-primary);
+        text-decoration: none;
+        padding: 16px 32px;
+        border-radius: 30px;
+        transition: all 0.4s var(--ease);
+    }
+
+    .bottom-cta-button:hover {
+        background: #333;
+        gap: 16px;
+    }
+
+    /* Tablet */
+    @media (max-width: 1024px) {
+        .content-container {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .content-sidebar {
+            flex-direction: row;
+            gap: 20px;
+        }
+
+        .info-card,
+        .cta-card {
+            flex: 1;
+        }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+        :root {
+            --padding-xl: 56px;
+            --padding-lg: 40px;
+            --padding-md: 20px;
+        }
+
+        .hero {
+            height: 50vh;
+            min-height: 380px;
+        }
+
+        .hero-content {
+            padding-bottom: var(--padding-md);
+        }
+
+        .property-name {
+            font-size: clamp(28px, 8vw, 40px);
+        }
+
+        .stats-container {
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            flex: 1 1 33.33%;
+            padding: 20px 12px;
+        }
+
+        .stat-divider {
+            display: none;
+        }
+
+        .content-sidebar {
+            flex-direction: column;
+        }
+
+        .info-card,
+        .cta-card {
+            flex: none;
+        }
+
+        .bottom-cta-button {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+
+<style is:global>
+    ::selection { background: #1a1a1a; color: #fff; }
+    html { scroll-behavior: smooth; }
+</style>

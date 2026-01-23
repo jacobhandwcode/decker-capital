@@ -50,28 +50,38 @@ import Layout from "../layouts/Layout.astro";
     <section class="stats-section">
       <div class="stats-container">
         <div class="stat-card">
-          <div class="stat-number-wrapper">
-            <span class="stat-number" data-count="3000000">0</span>
-            <span class="stat-suffix">SF+</span>
+          <div class="stat-frame">
+            <div class="stat-inner">
+              <div class="stat-number-wrapper">
+                <span class="stat-number" data-count="3000000">0</span>
+                <span class="stat-suffix">SF+</span>
+              </div>
+              <div class="stat-label">Under Management</div>
+            </div>
           </div>
-          <div class="stat-label">Under Management</div>
         </div>
-        <div class="stat-divider"></div>
         <div class="stat-card">
-          <div class="stat-number-wrapper">
-            <span class="stat-prefix">$</span>
-            <span class="stat-number" data-count="200">0</span>
-            <span class="stat-suffix">M</span>
+          <div class="stat-frame">
+            <div class="stat-inner">
+              <div class="stat-number-wrapper">
+                <span class="stat-prefix">$</span>
+                <span class="stat-number" data-count="200">0</span>
+                <span class="stat-suffix">M</span>
+              </div>
+              <div class="stat-label">Equity Deployed</div>
+            </div>
           </div>
-          <div class="stat-label">Equity Deployed</div>
         </div>
-        <div class="stat-divider"></div>
         <div class="stat-card">
-          <div class="stat-number-wrapper">
-            <span class="stat-number" data-count="15">0</span>
-            <span class="stat-suffix">+</span>
+          <div class="stat-frame">
+            <div class="stat-inner">
+              <div class="stat-number-wrapper">
+                <span class="stat-number" data-count="15">0</span>
+                <span class="stat-suffix">+</span>
+              </div>
+              <div class="stat-label">Years of Expertise</div>
+            </div>
           </div>
-          <div class="stat-label">Years of Expertise</div>
         </div>
       </div>
     </section>
@@ -469,18 +479,19 @@ import Layout from "../layouts/Layout.astro";
 </script>
 
 <style>
+	@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
   :root {
-    --padding-xl: 120px;
-    --padding-lg: 80px;
-    --padding-md: 60px;
-    --padding-sm: 40px;
-    --padding-xs: 24px;
+    --padding-xl: 70px;
+    --padding-lg: 56px;
+    --padding-md: 48px;
+    --padding-sm: 32px;
+    --padding-xs: 20px;
     --max-width: 1440px;
     --color-primary: #1a1a1a;
     --color-secondary: #8a7f6e;
     --color-cream: #f5f2ed;
     --color-warm: #dbd3c6;
-    --font-display: "Cormorant Garamond", serif;
+    --font-display: "Poppins", sans-serif;
     --font-body: "Inter", sans-serif;
     --ease: cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -526,7 +537,7 @@ import Layout from "../layouts/Layout.astro";
     text-transform: uppercase;
     color: var(--color-secondary);
     display: block;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
   }
 
   /* Hero */
@@ -587,7 +598,7 @@ import Layout from "../layouts/Layout.astro";
     letter-spacing: 4px;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 1);
-    margin-bottom: 32px;
+    margin-bottom: 24px;
   }
 
   .eyebrow-line {
@@ -603,12 +614,12 @@ import Layout from "../layouts/Layout.astro";
     line-height: 1.1;
     color: #fff;
     letter-spacing: -1px;
-    margin: 0 0 32px 0;
+    margin: 0 0 24px 0;
   }
 
   .subtitle-arrow {
     position: relative;
-    top: 120px;
+    top: 80px;
   }
 
   .hero-subtitle {
@@ -696,45 +707,87 @@ import Layout from "../layouts/Layout.astro";
     transform: translateY(-2px);
   }
 
-  /* Stats */
+  /* Stats - Half-Box Design */
   .stats-section {
     background: var(--color-warm);
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    padding: var(--padding-lg) var(--padding-md);
   }
 
   .stats-container {
-    display: flex;
-    align-items: stretch;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
     max-width: var(--max-width);
     margin: 0 auto;
   }
 
   .stat-card {
-    flex: 1;
-    text-align: center;
-    padding: var(--padding-lg) var(--padding-sm);
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
   }
 
-  .stat-divider {
-    width: 1px;
-    background: rgba(0, 0, 0, 0.15);
+  .stat-frame {
+    position: relative;
+    padding: 32px 40px 40px 40px;
+  }
+
+  /* Top border - partial width */
+  .stat-frame::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70%;
+    height: 2px;
+    background: var(--color-primary);
+  }
+
+  /* Left + Bottom + Right partial borders */
+  .stat-frame::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-left: 2px solid var(--color-primary);
+    border-bottom: 2px solid var(--color-primary);
+    border-right: 2px solid var(--color-primary);
+    pointer-events: none;
+  }
+
+  /* Right side top cutoff overlay */
+  .stat-inner {
+    position: relative;
+  }
+
+  .stat-inner::before {
+    content: "";
+    position: absolute;
+    top: -32px;
+    right: -40px;
+    width: 2px;
+    height: 40%;
+    background: #dbd3c6;
+    z-index: 1;
   }
 
   .stat-number-wrapper {
     display: flex;
     align-items: baseline;
-    gap: 4px;
+    gap: 2px;
   }
   .stat-prefix,
   .stat-suffix {
     font-family: var(--font-display);
-    font-size: 32px;
+    font-size: 28px;
+    font-weight: 300;
     color: var(--color-primary);
+  }
+  .stat-prefix {
+    position: relative;
+    top: -12px;
+    font-size: 22px;
   }
   .stat-number {
     font-family: var(--font-display);
@@ -742,13 +795,14 @@ import Layout from "../layouts/Layout.astro";
     font-weight: 300;
     color: var(--color-primary);
     line-height: 1;
+    letter-spacing: -2px;
   }
   .stat-label {
     font-family: var(--font-body);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 500;
     letter-spacing: 2px;
-    color: var(--color-secondary);
+    color: var(--color-primary);
     text-transform: uppercase;
     margin-top: 16px;
   }
@@ -760,7 +814,7 @@ import Layout from "../layouts/Layout.astro";
   }
   .featured-header {
     max-width: var(--max-width);
-    margin: 0 auto 60px;
+    margin: 0 auto 40px;
   }
   .section-headline {
     font-family: var(--font-display);
@@ -773,7 +827,7 @@ import Layout from "../layouts/Layout.astro";
   .featured-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
+    gap: 24px;
     max-width: var(--max-width);
     margin: 0 auto;
   }
@@ -829,7 +883,7 @@ import Layout from "../layouts/Layout.astro";
   }
 
   .featured-info {
-    padding: 24px 0;
+    padding: 20px 0;
   }
   .featured-location {
     font-family: var(--font-body);
@@ -839,14 +893,14 @@ import Layout from "../layouts/Layout.astro";
     text-transform: uppercase;
     color: var(--color-secondary);
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
   .featured-name {
     font-family: var(--font-display);
     font-size: 28px;
     font-weight: 400;
     color: var(--color-primary);
-    margin: 0 0 12px 0;
+    margin: 0 0 10px 0;
   }
   .featured-meta {
     display: flex;
@@ -871,7 +925,7 @@ import Layout from "../layouts/Layout.astro";
   .investment-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    gap: 56px;
     max-width: var(--max-width);
     margin: 0 auto;
     align-items: center;
@@ -885,14 +939,14 @@ import Layout from "../layouts/Layout.astro";
     font-weight: 400;
     line-height: 1.2;
     color: var(--color-primary);
-    margin: 0 0 32px 0;
+    margin: 0 0 24px 0;
   }
   .investment-description {
     font-family: var(--font-body);
     font-size: 16px;
-    line-height: 1.8;
+    line-height: 1.7;
     color: #555;
-    margin: 0 0 20px 0;
+    margin: 0 0 16px 0;
   }
 
   .investment-link {
@@ -906,7 +960,7 @@ import Layout from "../layouts/Layout.astro";
     text-transform: uppercase;
     color: var(--color-primary);
     text-decoration: none;
-    margin-top: 20px;
+    margin-top: 16px;
     transition: gap 0.3s var(--ease);
   }
   .investment-link:hover {
@@ -937,8 +991,8 @@ import Layout from "../layouts/Layout.astro";
   }
   .investment-accent {
     position: absolute;
-    top: -20px;
-    right: -20px;
+    top: -16px;
+    right: -16px;
     width: 100%;
     height: 100%;
     border: 1px solid var(--color-secondary);
@@ -952,7 +1006,7 @@ import Layout from "../layouts/Layout.astro";
   .value-props-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.2rem;
+    gap: 2px;
   }
 
   .value-prop-card {
@@ -1004,7 +1058,7 @@ import Layout from "../layouts/Layout.astro";
   .value-prop-content {
     position: relative;
     z-index: 3;
-    padding: 50px 40px;
+    padding: 40px 32px;
     width: 100%;
   }
   .value-prop-number {
@@ -1012,7 +1066,7 @@ import Layout from "../layouts/Layout.astro";
     font-size: 14px;
     color: rgba(255, 255, 255, 0.5);
     display: block;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     letter-spacing: 2px;
   }
   .value-prop-title {
@@ -1021,14 +1075,14 @@ import Layout from "../layouts/Layout.astro";
     font-weight: 400;
     line-height: 1.2;
     color: #fff;
-    margin: 0 0 12px 0;
+    margin: 0 0 10px 0;
   }
   .value-prop-text {
     font-family: var(--font-body);
     font-size: 14px;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.7);
-    margin: 0 0 24px 0;
+    margin: 0 0 20px 0;
     opacity: 0;
     transform: translateY(10px);
     transition: all 0.4s var(--ease);
@@ -1068,7 +1122,7 @@ import Layout from "../layouts/Layout.astro";
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    margin-bottom: 50px;
+    margin-bottom: 36px;
   }
 
   .slideshow-title {
@@ -1157,7 +1211,7 @@ import Layout from "../layouts/Layout.astro";
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 50px;
+    padding: 40px;
     z-index: 10;
   }
 
@@ -1165,8 +1219,8 @@ import Layout from "../layouts/Layout.astro";
     opacity: 0;
     transform: translateY(20px);
     position: absolute;
-    bottom: 50px;
-    left: 50px;
+    bottom: 40px;
+    left: 40px;
     transition:
       opacity 0.6s var(--ease),
       transform 0.6s var(--ease);
@@ -1183,7 +1237,7 @@ import Layout from "../layouts/Layout.astro";
     font-weight: 500;
     color: rgba(255, 255, 255, 0.6);
     display: block;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     letter-spacing: 2px;
   }
 
@@ -1192,7 +1246,7 @@ import Layout from "../layouts/Layout.astro";
     font-size: clamp(28px, 3vw, 42px);
     font-weight: 400;
     color: #fff;
-    margin: 0 0 8px 0;
+    margin: 0 0 6px 0;
   }
 
   .slide-details {
@@ -1205,16 +1259,16 @@ import Layout from "../layouts/Layout.astro";
 
   .slide-nav {
     position: absolute;
-    bottom: 50px;
-    right: 50px;
+    bottom: 40px;
+    right: 40px;
     display: flex;
     gap: 8px;
     z-index: 10;
   }
 
   .nav-btn {
-    width: 56px;
-    height: 56px;
+    width: 52px;
+    height: 52px;
     border: 1px solid rgba(255, 255, 255, 0.3);
     background: transparent;
     cursor: pointer;
@@ -1234,7 +1288,7 @@ import Layout from "../layouts/Layout.astro";
     display: flex;
     justify-content: center;
     gap: 12px;
-    margin-top: 30px;
+    margin-top: 24px;
   }
 
   .progress-indicator {
@@ -1287,14 +1341,14 @@ import Layout from "../layouts/Layout.astro";
     font-size: clamp(36px, 4vw, 52px);
     font-weight: 400;
     color: #fff;
-    margin: 0 0 20px 0;
+    margin: 0 0 16px 0;
   }
   .cta-description {
     font-family: var(--font-body);
     font-size: 16px;
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.7);
-    margin: 0 0 40px 0;
+    margin: 0 0 32px 0;
   }
 
   .cta-button {
@@ -1309,8 +1363,9 @@ import Layout from "../layouts/Layout.astro";
     color: var(--color-primary);
     background: #fff;
     text-decoration: none;
-    padding: 20px 40px;
+    padding: 18px 36px;
     transition: all 0.4s var(--ease);
+	border-radius: 30px;
   }
   .cta-button:hover {
     background: var(--color-cream);
@@ -1328,13 +1383,21 @@ import Layout from "../layouts/Layout.astro";
     .hero-scroll-indicator {
       display: none;
     }
+    .stats-container {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .stat-frame {
+      padding: 32px 36px;
+      min-width: auto;
+    }
     .featured-grid {
       grid-template-columns: 1fr;
-      gap: 40px;
+      gap: 32px;
     }
     .investment-content {
       grid-template-columns: 1fr;
-      gap: 60px;
+      gap: 48px;
     }
     .investment-text {
       max-width: 100%;
@@ -1354,17 +1417,17 @@ import Layout from "../layouts/Layout.astro";
     .slideshow-header {
       flex-direction: column;
       align-items: flex-start;
-      gap: 20px;
+      gap: 16px;
     }
   }
 
   /* Responsive - Mobile */
   @media (max-width: 768px) {
     :root {
-      --padding-xl: 80px;
-      --padding-lg: 60px;
-      --padding-md: 24px;
-      --padding-sm: 24px;
+      --padding-xl: 56px;
+      --padding-lg: 40px;
+      --padding-md: 20px;
+      --padding-sm: 20px;
     }
     .hero {
       min-height: 600px;
@@ -1384,14 +1447,18 @@ import Layout from "../layouts/Layout.astro";
       gap: 0 12px;
     }
     .stats-container {
-      flex-direction: column;
+      grid-template-columns: 1fr;
+      gap: 20px;
     }
-    .stat-divider {
-      width: 60%;
-      height: 1px;
+    .stat-frame {
+      padding: 28px 32px;
+      min-width: auto;
+    }
+    .stat-inner::before {
+      right: -32px;
     }
     .stat-card {
-      padding: var(--padding-md);
+      justify-content: flex-start;
     }
     .featured-name {
       font-size: 24px;
@@ -1400,22 +1467,22 @@ import Layout from "../layouts/Layout.astro";
       aspect-ratio: 4/3;
     }
     .value-prop-content {
-      padding: 30px 24px;
+      padding: 28px 20px;
     }
     .slide-info {
-      padding: 30px;
+      padding: 24px;
     }
     .slide-content {
-      bottom: 30px;
-      left: 30px;
+      bottom: 24px;
+      left: 24px;
     }
     .slide-nav {
-      bottom: 30px;
-      right: 30px;
+      bottom: 24px;
+      right: 24px;
     }
     .nav-btn {
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
     }
     .progress-indicator {
       width: 50px;

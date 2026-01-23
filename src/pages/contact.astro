@@ -43,7 +43,7 @@ import Layout from "../layouts/Layout.astro";
 								</div>
 								<div class="contact-item-content">
 									<span class="contact-item-label">Email</span>
-									<a href="mailto:Shane@DeckerCap.com" class="contact-item-value">Shane@DeckerCap.com</a>
+									<a href="mailto:deal@deckercap.com" class="contact-item-value">deal@deckercap.com</a>
 								</div>
 							</div>
 
@@ -174,7 +174,7 @@ import Layout from "../layouts/Layout.astro";
 				<div class="map-card">
 					<h3 class="map-card-title">Decker Capital</h3>
 					<p class="map-card-address">Miami, Florida</p>
-					<a href="mailto:Shane@DeckerCap.com" class="map-card-link">Shane@DeckerCap.com</a>
+					<a href="mailto:deal@deckercap.com" class="map-card-link">deal@deckercap.com</a>
 				</div>
 			</div>
 			<div class="map-placeholder">
@@ -229,11 +229,11 @@ import Layout from "../layouts/Layout.astro";
 
 <style>
 	:root {
-		--padding-xl: 120px;
-		--padding-lg: 80px;
-		--padding-md: 60px;
-		--padding-sm: 40px;
-		--padding-xs: 24px;
+		--padding-xl: 70px;
+		--padding-lg: 56px;
+		--padding-md: 48px;
+		--padding-sm: 32px;
+		--padding-xs: 20px;
 		--max-width: 1440px;
 		--color-primary: #1a1a1a;
 		--color-secondary: #8a7f6e;
@@ -250,8 +250,8 @@ import Layout from "../layouts/Layout.astro";
 	.hero {
 		position: relative;
 		width: 100%;
-		height: 60vh;
-		min-height: 500px;
+		height: 50vh;
+		min-height: 400px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -301,24 +301,24 @@ import Layout from "../layouts/Layout.astro";
 		letter-spacing: 4px;
 		text-transform: uppercase;
 		color: rgba(255,255,255,1);
-		margin-bottom: 24px;
+		margin-bottom: 20px;
 	}
 
 	.eyebrow-line { width: 60px; height: 1px; background: rgba(255,255,255,1); }
 
 	.hero-title {
 		font-family: var(--font-display);
-		font-size: clamp(42px, 6vw, 80px);
+		font-size: clamp(36px, 5vw, 64px);
 		font-weight: 400;
 		line-height: 1.1;
 		color: #fff;
 		letter-spacing: -1px;
-		margin: 0 0 20px 0;
+		margin: 0 0 16px 0;
 	}
 
 	.hero-subtitle {
 		font-family: var(--font-body);
-		font-size: 14px;
+		font-size: 13px;
 		letter-spacing: 3px;
 		text-transform: uppercase;
 		color: rgba(255,255,255,0.7);
@@ -333,7 +333,7 @@ import Layout from "../layouts/Layout.astro";
 		text-transform: uppercase;
 		color: var(--color-secondary);
 		display: block;
-		margin-bottom: 16px;
+		margin-bottom: 12px;
 	}
 
 	/* Contact Section */
@@ -350,50 +350,50 @@ import Layout from "../layouts/Layout.astro";
 	.contact-grid {
 		display: grid;
 		grid-template-columns: 1fr 1.2fr;
-		gap: 80px;
+		gap: 60px;
 		align-items: start;
 	}
 
 	.contact-info {
 		position: sticky;
-		top: 120px;
+		top: 100px;
 	}
 
 	.contact-headline {
 		font-family: var(--font-display);
-		font-size: clamp(32px, 3.5vw, 48px);
+		font-size: clamp(28px, 3vw, 40px);
 		font-weight: 400;
 		line-height: 1.2;
 		color: var(--color-primary);
-		margin: 0 0 24px 0;
+		margin: 0 0 20px 0;
 	}
 
 	.contact-description {
 		font-family: var(--font-body);
-		font-size: 16px;
-		line-height: 1.8;
+		font-size: 15px;
+		line-height: 1.7;
 		color: #555;
-		margin: 0 0 40px 0;
+		margin: 0 0 32px 0;
 	}
 
 	.contact-details {
 		display: flex;
 		flex-direction: column;
-		gap: 24px;
-		margin-bottom: 50px;
-		padding-bottom: 50px;
+		gap: 20px;
+		margin-bottom: 40px;
+		padding-bottom: 40px;
 		border-bottom: 1px solid rgba(0,0,0,0.1);
 	}
 
 	.contact-item {
 		display: flex;
 		align-items: flex-start;
-		gap: 16px;
+		gap: 14px;
 	}
 
 	.contact-icon {
-		width: 48px;
-		height: 48px;
+		width: 44px;
+		height: 44px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -411,12 +411,12 @@ import Layout from "../layouts/Layout.astro";
 	.contact-item-content {
 		display: flex;
 		flex-direction: column;
-		gap: 4px;
+		gap: 3px;
 	}
 
 	.contact-item-label {
 		font-family: var(--font-body);
-		font-size: 11px;
+		font-size: 10px;
 		font-weight: 500;
 		letter-spacing: 2px;
 		text-transform: uppercase;
@@ -425,7 +425,7 @@ import Layout from "../layouts/Layout.astro";
 
 	.contact-item-value {
 		font-family: var(--font-body);
-		font-size: 16px;
+		font-size: 15px;
 		color: var(--color-primary);
 		text-decoration: none;
 		transition: color 0.3s var(--ease);
@@ -435,15 +435,15 @@ import Layout from "../layouts/Layout.astro";
 
 	.contact-criteria {
 		background: var(--color-cream);
-		padding: 32px;
+		padding: 28px;
 	}
 
 	.criteria-title {
 		font-family: var(--font-display);
-		font-size: 24px;
+		font-size: 22px;
 		font-weight: 400;
 		color: var(--color-primary);
-		margin: 0 0 20px 0;
+		margin: 0 0 16px 0;
 	}
 
 	.criteria-list {
@@ -452,15 +452,15 @@ import Layout from "../layouts/Layout.astro";
 		margin: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 12px;
+		gap: 10px;
 	}
 
 	.criteria-list li {
 		display: flex;
 		align-items: center;
-		gap: 12px;
+		gap: 10px;
 		font-family: var(--font-body);
-		font-size: 14px;
+		font-size: 13px;
 		color: #555;
 	}
 
@@ -471,15 +471,15 @@ import Layout from "../layouts/Layout.astro";
 
 	.contact-form-wrapper {
 		background: var(--color-cream);
-		padding: 50px;
+		padding: 40px;
 		position: relative;
 	}
 
 	.contact-form-wrapper::before {
 		content: '';
 		position: absolute;
-		top: -15px;
-		right: -15px;
+		top: -12px;
+		right: -12px;
 		width: 100%;
 		height: 100%;
 		border: 1px solid var(--color-secondary);
@@ -489,13 +489,13 @@ import Layout from "../layouts/Layout.astro";
 	.contact-form {
 		display: flex;
 		flex-direction: column;
-		gap: 24px;
+		gap: 20px;
 	}
 
 	.form-row {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		gap: 24px;
+		gap: 20px;
 	}
 
 	.form-group {
@@ -510,12 +510,12 @@ import Layout from "../layouts/Layout.astro";
 
 	.form-group label {
 		font-family: var(--font-body);
-		font-size: 11px;
+		font-size: 10px;
 		font-weight: 500;
 		letter-spacing: 1.5px;
 		text-transform: uppercase;
 		color: var(--color-primary);
-		margin-bottom: 10px;
+		margin-bottom: 8px;
 		display: flex;
 		align-items: center;
 		gap: 4px;
@@ -527,8 +527,8 @@ import Layout from "../layouts/Layout.astro";
 	.form-group select,
 	.form-group textarea {
 		font-family: var(--font-body);
-		font-size: 15px;
-		padding: 18px 20px;
+		font-size: 14px;
+		padding: 14px 16px;
 		border: 1px solid rgba(0,0,0,0.1);
 		background: #fff;
 		color: var(--color-primary);
@@ -553,32 +553,32 @@ import Layout from "../layouts/Layout.astro";
 		appearance: none;
 		background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%231a1a1a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 		background-repeat: no-repeat;
-		background-position: right 20px center;
-		padding-right: 50px;
+		background-position: right 16px center;
+		padding-right: 44px;
 	}
 
 	.form-group textarea {
 		resize: vertical;
-		min-height: 140px;
+		min-height: 120px;
 	}
 
 	.submit-btn {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		gap: 12px;
+		gap: 10px;
 		font-family: var(--font-body);
-		font-size: 13px;
+		font-size: 12px;
 		font-weight: 500;
 		letter-spacing: 2px;
 		text-transform: uppercase;
 		color: #fff;
 		background: var(--color-primary);
 		border: none;
-		padding: 22px 40px;
+		padding: 18px 32px;
 		cursor: pointer;
 		transition: all 0.4s var(--ease);
-		margin-top: 10px;
+		margin-top: 8px;
 		position: relative;
 		overflow: hidden;
 	}
@@ -607,7 +607,7 @@ import Layout from "../layouts/Layout.astro";
 
 	.form-disclaimer {
 		font-family: var(--font-body);
-		font-size: 12px;
+		font-size: 11px;
 		color: #888;
 		line-height: 1.6;
 		margin: 0;
@@ -616,7 +616,7 @@ import Layout from "../layouts/Layout.astro";
 	/* Map Section */
 	.map-section {
 		position: relative;
-		height: 500px;
+		height: 400px;
 		background: var(--color-warm);
 	}
 
@@ -644,29 +644,29 @@ import Layout from "../layouts/Layout.astro";
 
 	.map-card {
 		background: #fff;
-		padding: 40px 50px;
+		padding: 32px 40px;
 		text-align: center;
 		box-shadow: 0 20px 60px rgba(0,0,0,0.15);
 	}
 
 	.map-card-title {
 		font-family: var(--font-display);
-		font-size: 28px;
+		font-size: 24px;
 		font-weight: 400;
 		color: var(--color-primary);
-		margin: 0 0 8px 0;
+		margin: 0 0 6px 0;
 	}
 
 	.map-card-address {
 		font-family: var(--font-body);
-		font-size: 14px;
+		font-size: 13px;
 		color: #666;
-		margin: 0 0 16px 0;
+		margin: 0 0 12px 0;
 	}
 
 	.map-card-link {
 		font-family: var(--font-body);
-		font-size: 13px;
+		font-size: 12px;
 		font-weight: 500;
 		letter-spacing: 1px;
 		color: var(--color-secondary);
@@ -679,7 +679,7 @@ import Layout from "../layouts/Layout.astro";
 	@media (max-width: 1024px) {
 		.contact-grid {
 			grid-template-columns: 1fr;
-			gap: 60px;
+			gap: 48px;
 		}
 		.contact-info { position: static; }
 		.contact-form-wrapper::before { display: none; }
@@ -688,23 +688,23 @@ import Layout from "../layouts/Layout.astro";
 	/* Mobile */
 	@media (max-width: 768px) {
 		:root {
-			--padding-xl: 80px;
-			--padding-lg: 60px;
-			--padding-md: 24px;
+			--padding-xl: 56px;
+			--padding-lg: 40px;
+			--padding-md: 20px;
 		}
-		.hero { height: 50vh; min-height: 400px; }
+		.hero { height: 45vh; min-height: 350px; }
 		.hero-eyebrow { font-size: 10px; gap: 16px; }
 		.eyebrow-line { width: 40px; }
 		.contact-section { padding: var(--padding-lg) var(--padding-md); }
-		.contact-form-wrapper { padding: 32px 24px; }
-		.form-row { grid-template-columns: 1fr; gap: 20px; }
+		.contact-form-wrapper { padding: 28px 20px; }
+		.form-row { grid-template-columns: 1fr; gap: 16px; }
 		.form-group input,
 		.form-group select,
-		.form-group textarea { padding: 16px; font-size: 16px; }
-		.submit-btn { width: 100%; padding: 20px; }
-		.contact-criteria { padding: 24px; }
-		.map-section { height: 400px; }
-		.map-card { padding: 30px; margin: 0 24px; }
+		.form-group textarea { padding: 14px; font-size: 16px; }
+		.submit-btn { width: 100%; padding: 16px; }
+		.contact-criteria { padding: 20px; }
+		.map-section { height: 350px; }
+		.map-card { padding: 24px; margin: 0 20px; }
 	}
 </style>
 

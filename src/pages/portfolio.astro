@@ -5,6 +5,7 @@ import Layout from "../layouts/Layout.astro";
 const properties = [
     {
         name: "Westfield Industrial Park",
+        slug: "westfield-industrial-park",
         location: "Phoenix, AZ",
         address: "4521 Commerce Way",
         buildings: 5,
@@ -14,6 +15,7 @@ const properties = [
     },
     {
         name: "Metro Distribution Center",
+        slug: "metro-distribution-center",
         location: "Dallas, TX",
         address: "8900 Logistics Blvd",
         buildings: 3,
@@ -23,6 +25,7 @@ const properties = [
     },
     {
         name: "Summit Business Complex",
+        slug: "summit-business-complex",
         location: "Atlanta, GA",
         address: "2100 Enterprise Dr",
         buildings: 8,
@@ -32,6 +35,7 @@ const properties = [
     },
     {
         name: "Gateway Industrial",
+        slug: "gateway-industrial",
         location: "Tampa, FL",
         address: "750 Gateway Parkway",
         buildings: 4,
@@ -41,6 +45,7 @@ const properties = [
     },
     {
         name: "Crossroads Flex Center",
+        slug: "crossroads-flex-center",
         location: "Charlotte, NC",
         address: "3300 Crossroads Ave",
         buildings: 6,
@@ -50,6 +55,7 @@ const properties = [
     },
     {
         name: "Riverside Commerce Park",
+        slug: "riverside-commerce-park",
         location: "Nashville, TN",
         address: "1200 River Road",
         buildings: 7,
@@ -119,7 +125,7 @@ const stats = [
 
                 <div class="property-grid" id="propertyGrid">
                     {properties.map((property, index) => (
-                        <article class="property-card" data-name={property.name.toLowerCase()} data-address={property.address.toLowerCase()} data-location={property.location.toLowerCase()} style={`animation-delay: ${index * 0.1}s`}>
+                        <a href={`/portfolio/${property.slug}`} class="property-card" data-name={property.name.toLowerCase()} data-address={property.address.toLowerCase()} data-location={property.location.toLowerCase()} style={`animation-delay: ${index * 0.1}s`}>
                             <div class="property-image">
                                 <img src={property.image} alt={property.name} />
                                 <div class="property-overlay">
@@ -142,7 +148,7 @@ const stats = [
                                     </div>
                                 </div>
                             </div>
-                        </article>
+                        </a>
                     ))}
                 </div>
 
@@ -212,9 +218,11 @@ const stats = [
 
 <style>
     :root {
-        --padding-xl: 120px;
-        --padding-lg: 80px;
-        --padding-md: 60px;
+        --padding-xl: 70px;
+        --padding-lg: 56px;
+        --padding-md: 48px;
+        --padding-sm: 32px;
+        --padding-xs: 20px;
         --max-width: 1440px;
         --color-primary: #1a1a1a;
         --color-secondary: #8a7f6e;
@@ -227,94 +235,94 @@ const stats = [
 
     .page { background: #fff; overflow-x: hidden; }
 
-    .hero { position: relative; width: 100%; height: 60vh; min-height: 500px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .hero { position: relative; width: 100%; height: 50vh; min-height: 400px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
     .hero-image { position: absolute; inset: 0; z-index: 1; }
     .hero-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.6) 100%); z-index: 2; }
     .hero-image img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.05); animation: heroZoom 20s ease-in-out infinite alternate; }
     @keyframes heroZoom { from { transform: scale(1.05); } to { transform: scale(1.15); } }
 
     .hero-content { position: relative; z-index: 3; text-align: center; padding: 0 var(--padding-md); display: flex; flex-direction: column; align-items: center; }
-    .hero-eyebrow { display: flex; align-items: center; gap: 20px; font-family: var(--font-body); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,1); margin-bottom: 24px; }
+    .hero-eyebrow { display: flex; align-items: center; gap: 20px; font-family: var(--font-body); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,1); margin-bottom: 20px; }
     .eyebrow-line { width: 60px; height: 1px; background: rgba(255,255,255,1); }
-    .hero-title { font-family: var(--font-display); font-size: clamp(42px, 6vw, 80px); font-weight: 400; line-height: 1.1; color: #fff; letter-spacing: -1px; margin: 0 0 20px 0; }
-    .hero-subtitle { font-family: var(--font-body); font-size: 14px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.7); margin: 0; }
+    .hero-title { font-family: var(--font-display); font-size: clamp(36px, 5vw, 64px); font-weight: 400; line-height: 1.1; color: #fff; letter-spacing: -1px; margin: 0 0 16px 0; }
+    .hero-subtitle { font-family: var(--font-body); font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.7); margin: 0; }
 
     .stats-bar { background: var(--color-primary); }
     .stats-container { display: flex; align-items: center; justify-content: center; max-width: var(--max-width); margin: 0 auto; }
-    .stat-item { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; gap: 8px; }
-    .stat-number { font-family: var(--font-display); font-size: clamp(32px, 4vw, 48px); font-weight: 300; color: #fff; line-height: 1; }
-    .stat-label { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); }
-    .stat-divider { width: 1px; height: 60px; background: rgba(255,255,255,0.2); }
+    .stat-item { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 32px 16px; gap: 6px; }
+    .stat-number { font-family: var(--font-display); font-size: clamp(28px, 3.5vw, 42px); font-weight: 300; color: #fff; line-height: 1; }
+    .stat-label { font-family: var(--font-body); font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+    .stat-divider { width: 1px; height: 50px; background: rgba(255,255,255,0.2); }
 
-    .section-eyebrow { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--color-secondary); display: block; margin-bottom: 16px; }
+    .section-eyebrow { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--color-secondary); display: block; margin-bottom: 12px; }
     .section-eyebrow.light { color: rgba(255,255,255,0.6); }
-    .section-headline { font-family: var(--font-display); font-size: clamp(36px, 4vw, 52px); font-weight: 400; color: var(--color-primary); margin: 0; }
+    .section-headline { font-family: var(--font-display); font-size: clamp(32px, 3.5vw, 48px); font-weight: 400; color: var(--color-primary); margin: 0; }
 
     .portfolio-section { padding: var(--padding-xl) var(--padding-md); background: #fff; }
     .portfolio-container { max-width: var(--max-width); margin: 0 auto; }
-    .portfolio-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 60px; gap: 40px; }
+    .portfolio-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 48px; gap: 32px; }
 
-    .search-wrapper { display: flex; align-items: center; gap: 12px; padding: 16px 24px; background: var(--color-cream); min-width: 300px; transition: all 0.3s var(--ease); }
+    .search-wrapper { display: flex; align-items: center; gap: 10px; padding: 14px 20px; background: var(--color-cream); min-width: 280px; transition: all 0.3s var(--ease); }
     .search-wrapper:focus-within { background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
     .search-icon { color: var(--color-secondary); flex-shrink: 0; }
-    .search-input { flex: 1; font-family: var(--font-body); font-size: 14px; border: none; background: transparent; color: var(--color-primary); outline: none; }
+    .search-input { flex: 1; font-family: var(--font-body); font-size: 13px; border: none; background: transparent; color: var(--color-primary); outline: none; }
     .search-input::placeholder { color: #999; }
 
-    .property-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-    .property-card { background: #fff; opacity: 0; transform: translateY(30px); transition: all 0.6s var(--ease); }
+    .property-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .property-card { background: #fff; opacity: 0; transform: translateY(30px); transition: all 0.6s var(--ease); text-decoration: none; display: block; }
     .property-card.visible { opacity: 1; transform: translateY(0); }
-    .property-card:hover { transform: translateY(-8px); }
+    .property-card:hover { transform: translateY(-6px); }
 
     .property-image { position: relative; aspect-ratio: 16/11; overflow: hidden; background: var(--color-cream); }
     .property-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s var(--ease); }
     .property-card:hover .property-image img { transform: scale(1.08); }
 
-    .property-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 24px; opacity: 0; transition: opacity 0.4s var(--ease); }
+    .property-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; opacity: 0; transition: opacity 0.4s var(--ease); }
     .property-card:hover .property-overlay { opacity: 1; }
-    .property-type { font-family: var(--font-body); font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 8px; }
-    .property-cta { font-family: var(--font-body); font-size: 13px; font-weight: 500; letter-spacing: 1px; color: #fff; transform: translateY(10px); opacity: 0; transition: all 0.4s var(--ease) 0.1s; }
+    .property-type { font-family: var(--font-body); font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 6px; }
+    .property-cta { font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 1px; color: #fff; transform: translateY(10px); opacity: 0; transition: all 0.4s var(--ease) 0.1s; }
     .property-card:hover .property-cta { transform: translateY(0); opacity: 1; }
 
-    .property-info { padding: 28px 0 0 0; }
-    .property-location { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--color-secondary); display: block; margin-bottom: 8px; }
-    .property-name { font-family: var(--font-display); font-size: 26px; font-weight: 400; color: var(--color-primary); margin: 0 0 16px 0; line-height: 1.2; }
-    .property-meta { display: flex; align-items: center; gap: 20px; padding-top: 16px; border-top: 1px solid rgba(0,0,0,0.08); }
-    .meta-item { display: flex; align-items: baseline; gap: 6px; }
-    .meta-value { font-family: var(--font-display); font-size: 20px; font-weight: 400; color: var(--color-primary); }
-    .meta-label { font-family: var(--font-body); font-size: 12px; color: #888; }
+    .property-info { padding: 24px 0 0 0; }
+    .property-location { font-family: var(--font-body); font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--color-secondary); display: block; margin-bottom: 6px; }
+    .property-name { font-family: var(--font-display); font-size: 24px; font-weight: 400; color: var(--color-primary); margin: 0 0 14px 0; line-height: 1.2; }
+    .property-meta { display: flex; align-items: center; gap: 16px; padding-top: 14px; border-top: 1px solid rgba(0,0,0,0.08); }
+    .meta-item { display: flex; align-items: baseline; gap: 5px; }
+    .meta-value { font-family: var(--font-display); font-size: 18px; font-weight: 400; color: var(--color-primary); }
+    .meta-label { font-family: var(--font-body); font-size: 11px; color: #888; }
     .meta-divider { width: 4px; height: 4px; background: var(--color-secondary); border-radius: 50%; }
 
-    .no-results { display: none; flex-direction: column; align-items: center; justify-content: center; padding: 80px 20px; text-align: center; }
-    .no-results-icon { color: var(--color-secondary); margin-bottom: 24px; opacity: 0.5; }
-    .no-results h3 { font-family: var(--font-display); font-size: 28px; font-weight: 400; color: var(--color-primary); margin: 0 0 8px 0; }
-    .no-results p { font-family: var(--font-body); font-size: 14px; color: #888; margin: 0; }
+    .no-results { display: none; flex-direction: column; align-items: center; justify-content: center; padding: 60px 20px; text-align: center; }
+    .no-results-icon { color: var(--color-secondary); margin-bottom: 20px; opacity: 0.5; }
+    .no-results h3 { font-family: var(--font-display); font-size: 26px; font-weight: 400; color: var(--color-primary); margin: 0 0 6px 0; }
+    .no-results p { font-family: var(--font-body); font-size: 13px; color: #888; margin: 0; }
 
     .cta-section { padding: var(--padding-xl) var(--padding-md); background: var(--color-primary); text-align: center; }
     .cta-content { max-width: 600px; margin: 0 auto; }
-    .cta-headline { font-family: var(--font-display); font-size: clamp(36px, 4vw, 52px); font-weight: 400; color: #fff; margin: 0 0 20px 0; }
-    .cta-description { font-family: var(--font-body); font-size: 16px; line-height: 1.7; color: rgba(255,255,255,0.7); margin: 0 0 40px 0; }
-    .cta-button { display: inline-flex; align-items: center; gap: 12px; font-family: var(--font-body); font-size: 13px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--color-primary); background: #fff; text-decoration: none; padding: 20px 40px; transition: all 0.4s var(--ease); }
-    .cta-button:hover { background: var(--color-cream); gap: 18px; }
+    .cta-headline { font-family: var(--font-display); font-size: clamp(32px, 3.5vw, 48px); font-weight: 400; color: #fff; margin: 0 0 16px 0; }
+    .cta-description { font-family: var(--font-body); font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.7); margin: 0 0 32px 0; }
+    .cta-button { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--color-primary); background: #fff; text-decoration: none; padding: 16px 32px; transition: all 0.4s var(--ease); border-radius: 30px; }
+    .cta-button:hover { background: var(--color-cream); gap: 16px; }
 
     @media (max-width: 1024px) {
-        .portfolio-header { flex-direction: column; align-items: flex-start; gap: 30px; }
+        .portfolio-header { flex-direction: column; align-items: flex-start; gap: 24px; }
         .search-wrapper { width: 100%; min-width: auto; }
-        .property-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
-        .stat-item { padding: 30px 15px; }
+        .property-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .stat-item { padding: 24px 12px; }
     }
 
     @media (max-width: 768px) {
-        :root { --padding-xl: 80px; --padding-lg: 60px; --padding-md: 24px; }
-        .hero { height: 50vh; min-height: 400px; }
+        :root { --padding-xl: 56px; --padding-lg: 40px; --padding-md: 20px; }
+        .hero { height: 45vh; min-height: 350px; }
         .hero-eyebrow { font-size: 10px; gap: 16px; }
         .eyebrow-line { width: 40px; }
         .stats-container { flex-wrap: wrap; }
-        .stat-item { flex: 1 1 50%; padding: 24px 16px; }
+        .stat-item { flex: 1 1 50%; padding: 20px 12px; }
         .stat-divider { display: none; }
         .portfolio-section { padding: var(--padding-lg) var(--padding-md); }
-        .portfolio-header { margin-bottom: 40px; }
-        .property-grid { grid-template-columns: 1fr; gap: 32px; }
-        .property-name { font-size: 24px; }
+        .portfolio-header { margin-bottom: 32px; }
+        .property-grid { grid-template-columns: 1fr; gap: 28px; }
+        .property-name { font-size: 22px; }
         .cta-button { width: 100%; justify-content: center; }
     }
 </style>
