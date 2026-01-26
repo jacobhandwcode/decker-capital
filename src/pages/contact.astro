@@ -5,6 +5,10 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout>
 	<div class="page">
+		<!-- Custom Cursor -->
+		<div class="cursor-dot"></div>
+		<div class="cursor-ring"></div>
+
 		<!-- Hero Section -->
 		<section class="hero">
 			<div class="hero-image">
@@ -150,7 +154,7 @@ import Layout from "../layouts/Layout.astro";
 								<textarea id="message" name="message" rows="5" placeholder="Property details, asking price, timeline, or any other relevant information..."></textarea>
 							</div>
 
-							<button type="submit" class="submit-btn">
+							<button type="submit" class="submit-btn magnetic-btn">
 								<span class="btn-text">Submit Inquiry</span>
 								<span class="btn-arrow">
 									<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -184,50 +188,402 @@ import Layout from "../layouts/Layout.astro";
 	</div>
 </Layout>
 
-<script>
-	document.addEventListener('DOMContentLoaded', () => {
-		const form = document.getElementById('contactForm') as HTMLFormElement;
+<!-- GSAP & ScrollTrigger -->
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script is:inline>
+	document.addEventListener('DOMContentLoaded', function() {
+		gsap.registerPlugin(ScrollTrigger);
 		
-		if (form) {
-			const inputs = form.querySelectorAll('input, select, textarea');
-			inputs.forEach(input => {
-				input.addEventListener('focus', () => {
-					input.parentElement?.classList.add('focused');
-				});
-				input.addEventListener('blur', () => {
-					input.parentElement?.classList.remove('focused');
-				});
+		console.log('🚀 GSAP loaded, starting contact page animations...');
+
+		// ============================================
+		// TEXT SPLITTING UTILITY
+		// ============================================
+		function splitTextIntoSpans(element, className) {
+			if (!element) return [];
+			var text = element.textContent;
+			var words = text.trim().split(/\s+/);
+			element.innerHTML = words.map(function(word) {
+				return '<span class="' + className + '" style="display: inline-block;">' + word + '&nbsp;</span>';
+			}).join('');
+			return element.querySelectorAll('.' + className);
+		}
+
+		// Split hero title
+		var heroTitle = document.querySelector('.hero-title');
+		splitTextIntoSpans(heroTitle, 'title-word');
+
+		// Split contact headline
+		var contactHeadline = document.querySelector('.contact-headline');
+		splitTextIntoSpans(contactHeadline, 'headline-word');
+
+		// ============================================
+		// CUSTOM CURSOR
+		// ============================================
+		var cursorDot = document.querySelector('.cursor-dot');
+		var cursorRing = document.querySelector('.cursor-ring');
+		var mouseX = 0, mouseY = 0;
+		var ringX = 0, ringY = 0;
+
+		if (cursorDot && cursorRing && window.innerWidth > 768) {
+			document.addEventListener('mousemove', function(e) {
+				mouseX = e.clientX;
+				mouseY = e.clientY;
+				gsap.to(cursorDot, { x: mouseX, y: mouseY, duration: 0.1 });
 			});
 
-			form.addEventListener('submit', (e) => {
+			function animateCursor() {
+				ringX += (mouseX - ringX) * 0.15;
+				ringY += (mouseY - ringY) * 0.15;
+				gsap.set(cursorRing, { x: ringX, y: ringY });
+				requestAnimationFrame(animateCursor);
+			}
+			animateCursor();
+
+			var hoverElements = document.querySelectorAll('a, button, .contact-item, .form-group input, .form-group select, .form-group textarea, .map-card');
+			hoverElements.forEach(function(el) {
+				el.addEventListener('mouseenter', function() {
+					gsap.to(cursorRing, { scale: 1.5, borderColor: '#8a7f6e', duration: 0.3 });
+					gsap.to(cursorDot, { scale: 0.5, duration: 0.3 });
+				});
+				el.addEventListener('mouseleave', function() {
+					gsap.to(cursorRing, { scale: 1, borderColor: '#1a1a1a', duration: 0.3 });
+					gsap.to(cursorDot, { scale: 1, duration: 0.3 });
+				});
+			});
+		}
+
+		// ============================================
+		// MAGNETIC BUTTON EFFECT
+		// ============================================
+		var magneticBtns = document.querySelectorAll('.magnetic-btn');
+		magneticBtns.forEach(function(btn) {
+			btn.addEventListener('mousemove', function(e) {
+				var rect = btn.getBoundingClientRect();
+				var x = e.clientX - rect.left - rect.width / 2;
+				var y = e.clientY - rect.top - rect.height / 2;
+				gsap.to(btn, { x: x * 0.3, y: y * 0.3, duration: 0.3, ease: 'power2.out' });
+			});
+			btn.addEventListener('mouseleave', function() {
+				gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.3)' });
+			});
+		});
+
+		// ============================================
+		// HERO ANIMATIONS
+		// ============================================
+		var heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+		
+		gsap.set('.hero-eyebrow span:not(.eyebrow-line)', { y: 30, opacity: 0 });
+		gsap.set('.eyebrow-line', { scaleX: 0 });
+		gsap.set('.title-word', { y: 80, opacity: 0, rotationX: -40 });
+		gsap.set('.hero-subtitle', { y: 30, opacity: 0 });
+
+		heroTl
+			.to('.eyebrow-line', { scaleX: 1, duration: 0.8, stagger: 0.1 }, 0.3)
+			.to('.hero-eyebrow span:not(.eyebrow-line)', { y: 0, opacity: 1, duration: 0.6 }, 0.5)
+			.to('.title-word', { 
+				y: 0, 
+				opacity: 1, 
+				rotationX: 0,
+				duration: 1, 
+				stagger: 0.08,
+				ease: 'power4.out'
+			}, 0.6)
+			.to('.hero-subtitle', { 
+				y: 0, 
+				opacity: 1, 
+				duration: 0.8,
+				ease: 'power3.out'
+			}, 1);
+
+		// Hero parallax
+		gsap.to('.hero-image img', {
+			scrollTrigger: {
+				trigger: '.hero',
+				start: 'top top',
+				end: 'bottom top',
+				scrub: 1
+			},
+			y: 100,
+			scale: 1.2,
+			ease: 'none'
+		});
+
+		// ============================================
+		// CONTACT INFO SECTION
+		// ============================================
+		gsap.set('.contact-info .section-eyebrow', { y: 30, opacity: 0 });
+		gsap.set('.headline-word', { y: 60, opacity: 0, rotationX: -30 });
+		gsap.set('.contact-description', { y: 30, opacity: 0 });
+		gsap.set('.contact-item', { x: -40, opacity: 0 });
+		gsap.set('.contact-criteria', { 
+			y: 40, 
+			opacity: 0,
+			clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)'
+		});
+
+		var contactInfoTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.contact-section',
+				start: 'top 70%'
+			}
+		});
+
+		contactInfoTl
+			.to('.contact-info .section-eyebrow', { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' })
+			.to('.headline-word', { 
+				y: 0, 
+				opacity: 1, 
+				rotationX: 0,
+				duration: 0.8, 
+				stagger: 0.05,
+				ease: 'power4.out'
+			}, '-=0.3')
+			.to('.contact-description', { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' }, '-=0.4')
+			.to('.contact-item', { 
+				x: 0, 
+				opacity: 1, 
+				duration: 0.7, 
+				stagger: 0.12,
+				ease: 'power3.out'
+			}, '-=0.3')
+			.to('.contact-criteria', { 
+				y: 0, 
+				opacity: 1,
+				clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+				duration: 0.8,
+				ease: 'power4.out'
+			}, '-=0.3');
+
+		// Criteria list items stagger
+		gsap.set('.criteria-list li', { x: -20, opacity: 0 });
+		ScrollTrigger.create({
+			trigger: '.contact-criteria',
+			start: 'top 80%',
+			onEnter: function() {
+				gsap.to('.criteria-list li', {
+					x: 0,
+					opacity: 1,
+					duration: 0.5,
+					stagger: 0.1,
+					ease: 'power3.out',
+					delay: 0.4
+				});
+			}
+		});
+
+		// Contact item hover effects
+		document.querySelectorAll('.contact-item').forEach(function(item) {
+			item.addEventListener('mouseenter', function() {
+				gsap.to(item, { x: 10, duration: 0.3, ease: 'power2.out' });
+			});
+			item.addEventListener('mouseleave', function() {
+				gsap.to(item, { x: 0, duration: 0.3, ease: 'power2.out' });
+			});
+		});
+
+		// ============================================
+		// FORM ANIMATIONS
+		// ============================================
+		gsap.set('.contact-form-wrapper', { 
+			y: 60, 
+			opacity: 0,
+			rotationY: -5
+		});
+		gsap.set('.form-group', { y: 30, opacity: 0 });
+		gsap.set('.submit-btn', { y: 20, opacity: 0, scale: 0.95 });
+		gsap.set('.form-disclaimer', { y: 20, opacity: 0 });
+
+		var formTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.contact-form-wrapper',
+				start: 'top 75%'
+			}
+		});
+
+		formTl
+			.to('.contact-form-wrapper', { 
+				y: 0, 
+				opacity: 1,
+				rotationY: 0,
+				duration: 1,
+				ease: 'power4.out'
+			})
+			.to('.form-group', { 
+				y: 0, 
+				opacity: 1, 
+				duration: 0.6, 
+				stagger: 0.08,
+				ease: 'power3.out'
+			}, '-=0.5')
+			.to('.submit-btn', { 
+				y: 0, 
+				opacity: 1, 
+				scale: 1,
+				duration: 0.6,
+				ease: 'back.out(1.7)'
+			}, '-=0.2')
+			.to('.form-disclaimer', { 
+				y: 0, 
+				opacity: 1, 
+				duration: 0.5,
+				ease: 'power3.out'
+			}, '-=0.2');
+
+		// Form input focus animations
+		var formInputs = document.querySelectorAll('.form-group input, .form-group select, .form-group textarea');
+		formInputs.forEach(function(input) {
+			input.addEventListener('focus', function() {
+				var parent = input.parentElement;
+				parent.classList.add('focused');
+				gsap.to(parent, { 
+					scale: 1.02, 
+					duration: 0.3, 
+					ease: 'power2.out' 
+				});
+				gsap.to(input, { 
+					borderColor: '#1a1a1a', 
+					boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
+					duration: 0.3 
+				});
+			});
+			input.addEventListener('blur', function() {
+				var parent = input.parentElement;
+				parent.classList.remove('focused');
+				gsap.to(parent, { 
+					scale: 1, 
+					duration: 0.3, 
+					ease: 'power2.out' 
+				});
+				gsap.to(input, { 
+					borderColor: 'rgba(0,0,0,0.1)', 
+					boxShadow: '0 0 0 rgba(0,0,0,0)',
+					duration: 0.3 
+				});
+			});
+		});
+
+		// ============================================
+		// MAP SECTION
+		// ============================================
+		gsap.set('.map-card', { 
+			y: 60, 
+			opacity: 0,
+			scale: 0.9
+		});
+		gsap.set('.map-placeholder img', { 
+			scale: 1.1
+		});
+
+		var mapTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.map-section',
+				start: 'top 75%'
+			}
+		});
+
+		mapTl
+			.to('.map-card', { 
+				y: 0, 
+				opacity: 1,
+				scale: 1,
+				duration: 1,
+				ease: 'power4.out'
+			});
+
+		// Map parallax
+		gsap.to('.map-placeholder img', {
+			scrollTrigger: {
+				trigger: '.map-section',
+				start: 'top bottom',
+				end: 'bottom top',
+				scrub: 1
+			},
+			y: -50,
+			ease: 'none'
+		});
+
+		// Map card hover effect
+		var mapCard = document.querySelector('.map-card');
+		if (mapCard) {
+			mapCard.addEventListener('mouseenter', function() {
+				gsap.to(mapCard, { 
+					y: -10, 
+					boxShadow: '0 30px 80px rgba(0,0,0,0.25)',
+					duration: 0.4,
+					ease: 'power2.out'
+				});
+			});
+			mapCard.addEventListener('mouseleave', function() {
+				gsap.to(mapCard, { 
+					y: 0, 
+					boxShadow: '0 20px 60px rgba(0,0,0,0.15)',
+					duration: 0.4,
+					ease: 'power2.out'
+				});
+			});
+		}
+
+		// ============================================
+		// FORM SUBMISSION HANDLING
+		// ============================================
+		var form = document.getElementById('contactForm');
+		
+		if (form) {
+			form.addEventListener('submit', function(e) {
 				e.preventDefault();
-				const formData = new FormData(form);
+				var formData = new FormData(form);
 				console.log('Form submitted:', Object.fromEntries(formData));
 				
-				const btn = form.querySelector('.submit-btn') as HTMLButtonElement;
-				const btnText = btn.querySelector('.btn-text') as HTMLSpanElement;
-				const originalText = btnText.textContent;
+				var btn = form.querySelector('.submit-btn');
+				var btnText = btn.querySelector('.btn-text');
+				var btnArrow = btn.querySelector('.btn-arrow');
+				var originalText = btnText.textContent;
 				
+				// Loading animation
+				gsap.to(btnArrow, { rotation: 360, duration: 0.5, repeat: -1, ease: 'none' });
 				btn.classList.add('loading');
 				btnText.textContent = 'Sending...';
 				
-				setTimeout(() => {
+				setTimeout(function() {
+					gsap.killTweensOf(btnArrow);
+					gsap.to(btnArrow, { rotation: 0, duration: 0.3 });
+					
 					btn.classList.remove('loading');
 					btn.classList.add('success');
 					btnText.textContent = 'Sent Successfully';
 					
-					setTimeout(() => {
+					// Success animation
+					gsap.fromTo(btn, 
+						{ scale: 1 },
+						{ scale: 1.05, duration: 0.2, yoyo: true, repeat: 1, ease: 'power2.out' }
+					);
+					
+					setTimeout(function() {
 						btnText.textContent = originalText;
 						btn.classList.remove('success');
 						form.reset();
+						
+						// Reset form fields animation
+						gsap.fromTo('.form-group input, .form-group select, .form-group textarea',
+							{ backgroundColor: '#fff' },
+							{ backgroundColor: '#fff', duration: 0.3 }
+						);
 					}, 3000);
 				}, 1500);
 			});
 		}
+
+		console.log('✨ All contact page animations initialized!');
 	});
 </script>
 
 <style>
+	@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 	:root {
 		--padding-xl: 70px;
 		--padding-lg: 56px;
@@ -239,12 +595,55 @@ import Layout from "../layouts/Layout.astro";
 		--color-secondary: #8a7f6e;
 		--color-cream: #f5f2ed;
 		--color-warm: #dbd3c6;
-		--font-display: "Cormorant Garamond", serif;
+		--font-display: "Poppins", sans-serif;
 		--font-body: "Inter", sans-serif;
 		--ease: cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
-	.page { background: #fff; overflow-x: hidden; }
+	/* ============================================
+	   CUSTOM CURSOR
+	   ============================================ */
+	.cursor-dot {
+		position: fixed;
+		width: 8px;
+		height: 8px;
+		background: var(--color-primary);
+		border-radius: 50%;
+		pointer-events: none;
+		z-index: 10000;
+		transform: translate(-50%, -50%);
+		mix-blend-mode: difference;
+	}
+
+	.cursor-ring {
+		position: fixed;
+		width: 40px;
+		height: 40px;
+		border: 1px solid var(--color-primary);
+		border-radius: 50%;
+		pointer-events: none;
+		z-index: 9999;
+		transform: translate(-50%, -50%);
+		transition: border-color 0.3s ease;
+	}
+
+	@media (max-width: 768px) {
+		.cursor-dot, .cursor-ring {
+			display: none;
+		}
+	}
+
+	.page { 
+		background: #fff; 
+		overflow-x: hidden;
+		cursor: none;
+	}
+
+	@media (max-width: 768px) {
+		.page {
+			cursor: auto;
+		}
+	}
 
 	/* Hero */
 	.hero {
@@ -276,11 +675,8 @@ import Layout from "../layouts/Layout.astro";
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		transform: scale(1.05);
-		animation: heroZoom 20s ease-in-out infinite alternate;
+		will-change: transform;
 	}
-
-	@keyframes heroZoom { from { transform: scale(1.05); } to { transform: scale(1.15); } }
 
 	.hero-content {
 		position: relative;
@@ -304,7 +700,12 @@ import Layout from "../layouts/Layout.astro";
 		margin-bottom: 20px;
 	}
 
-	.eyebrow-line { width: 60px; height: 1px; background: rgba(255,255,255,1); }
+	.eyebrow-line { 
+		width: 60px; 
+		height: 1px; 
+		background: rgba(255,255,255,1);
+		transform-origin: center;
+	}
 
 	.hero-title {
 		font-family: var(--font-display);
@@ -314,6 +715,11 @@ import Layout from "../layouts/Layout.astro";
 		color: #fff;
 		letter-spacing: -1px;
 		margin: 0 0 16px 0;
+		perspective: 1000px;
+	}
+
+	.title-word {
+		transform-style: preserve-3d;
 	}
 
 	.hero-subtitle {
@@ -366,6 +772,12 @@ import Layout from "../layouts/Layout.astro";
 		line-height: 1.2;
 		color: var(--color-primary);
 		margin: 0 0 20px 0;
+		perspective: 1000px;
+	}
+
+	.headline-word {
+		display: inline-block;
+		transform-style: preserve-3d;
 	}
 
 	.contact-description {
@@ -389,6 +801,8 @@ import Layout from "../layouts/Layout.astro";
 		display: flex;
 		align-items: flex-start;
 		gap: 14px;
+		cursor: none;
+		transition: transform 0.3s var(--ease);
 	}
 
 	.contact-icon {
@@ -400,12 +814,13 @@ import Layout from "../layouts/Layout.astro";
 		background: var(--color-cream);
 		color: var(--color-primary);
 		flex-shrink: 0;
-		transition: all 0.3s var(--ease);
+		transition: all 0.4s var(--ease);
 	}
 
 	.contact-item:hover .contact-icon {
 		background: var(--color-primary);
 		color: #fff;
+		transform: scale(1.1);
 	}
 
 	.contact-item-content {
@@ -431,11 +846,14 @@ import Layout from "../layouts/Layout.astro";
 		transition: color 0.3s var(--ease);
 	}
 
-	a.contact-item-value:hover { color: var(--color-secondary); }
+	a.contact-item-value:hover { 
+		color: var(--color-secondary); 
+	}
 
 	.contact-criteria {
 		background: var(--color-cream);
 		padding: 28px;
+		overflow: hidden;
 	}
 
 	.criteria-title {
@@ -462,6 +880,11 @@ import Layout from "../layouts/Layout.astro";
 		font-family: var(--font-body);
 		font-size: 13px;
 		color: #555;
+		transition: transform 0.3s var(--ease);
+	}
+
+	.criteria-list li:hover {
+		transform: translateX(8px);
 	}
 
 	.criteria-check {
@@ -473,6 +896,7 @@ import Layout from "../layouts/Layout.astro";
 		background: var(--color-cream);
 		padding: 40px;
 		position: relative;
+		transform-style: preserve-3d;
 	}
 
 	.contact-form-wrapper::before {
@@ -484,6 +908,12 @@ import Layout from "../layouts/Layout.astro";
 		height: 100%;
 		border: 1px solid var(--color-secondary);
 		z-index: -1;
+		transition: all 0.4s var(--ease);
+	}
+
+	.contact-form-wrapper:hover::before {
+		top: -16px;
+		right: -16px;
 	}
 
 	.contact-form {
@@ -501,11 +931,12 @@ import Layout from "../layouts/Layout.astro";
 	.form-group {
 		display: flex;
 		flex-direction: column;
-		transition: transform 0.3s var(--ease);
+		transition: all 0.3s var(--ease);
+		transform-origin: center;
 	}
 
 	.form-group.focused {
-		transform: translateY(-2px);
+		z-index: 10;
 	}
 
 	.form-group label {
@@ -519,6 +950,11 @@ import Layout from "../layouts/Layout.astro";
 		display: flex;
 		align-items: center;
 		gap: 4px;
+		transition: color 0.3s var(--ease);
+	}
+
+	.form-group.focused label {
+		color: var(--color-secondary);
 	}
 
 	.required { color: var(--color-secondary); }
@@ -534,6 +970,7 @@ import Layout from "../layouts/Layout.astro";
 		color: var(--color-primary);
 		transition: all 0.3s var(--ease);
 		outline: none;
+		cursor: none;
 	}
 
 	.form-group input::placeholder,
@@ -545,11 +982,10 @@ import Layout from "../layouts/Layout.astro";
 	.form-group select:focus,
 	.form-group textarea:focus {
 		border-color: var(--color-primary);
-		box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 	}
 
 	.form-group select {
-		cursor: pointer;
+		cursor: none;
 		appearance: none;
 		background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%231a1a1a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 		background-repeat: no-repeat;
@@ -576,7 +1012,7 @@ import Layout from "../layouts/Layout.astro";
 		background: var(--color-primary);
 		border: none;
 		padding: 18px 32px;
-		cursor: pointer;
+		cursor: none;
 		transition: all 0.4s var(--ease);
 		margin-top: 8px;
 		position: relative;
@@ -590,12 +1026,15 @@ import Layout from "../layouts/Layout.astro";
 		left: -100%;
 		width: 100%;
 		height: 100%;
-		background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+		background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
 		transition: left 0.5s var(--ease);
 	}
 
 	.submit-btn:hover::before { left: 100%; }
-	.submit-btn:hover { background: #333; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+	.submit-btn:hover { 
+		background: #333; 
+		box-shadow: 0 8px 30px rgba(0,0,0,0.2); 
+	}
 	.submit-btn.loading { pointer-events: none; opacity: 0.8; }
 	.submit-btn.success { background: #2d5a3d; }
 
@@ -618,11 +1057,13 @@ import Layout from "../layouts/Layout.astro";
 		position: relative;
 		height: 400px;
 		background: var(--color-warm);
+		overflow: hidden;
 	}
 
 	.map-placeholder {
 		position: absolute;
 		inset: 0;
+		overflow: hidden;
 	}
 
 	.map-placeholder img {
@@ -631,6 +1072,7 @@ import Layout from "../layouts/Layout.astro";
 		object-fit: cover;
 		filter: grayscale(100%);
 		opacity: 0.5;
+		will-change: transform;
 	}
 
 	.map-overlay {
@@ -647,6 +1089,8 @@ import Layout from "../layouts/Layout.astro";
 		padding: 32px 40px;
 		text-align: center;
 		box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+		cursor: none;
+		transition: all 0.4s var(--ease);
 	}
 
 	.map-card-title {
@@ -672,8 +1116,27 @@ import Layout from "../layouts/Layout.astro";
 		color: var(--color-secondary);
 		text-decoration: none;
 		transition: color 0.3s var(--ease);
+		position: relative;
 	}
-	.map-card-link:hover { color: var(--color-primary); }
+
+	.map-card-link::after {
+		content: '';
+		position: absolute;
+		bottom: -2px;
+		left: 0;
+		width: 0;
+		height: 1px;
+		background: var(--color-primary);
+		transition: width 0.3s var(--ease);
+	}
+
+	.map-card-link:hover { 
+		color: var(--color-primary); 
+	}
+
+	.map-card-link:hover::after {
+		width: 100%;
+	}
 
 	/* Tablet */
 	@media (max-width: 1024px) {
@@ -692,6 +1155,11 @@ import Layout from "../layouts/Layout.astro";
 			--padding-lg: 40px;
 			--padding-md: 20px;
 		}
+
+		.page {
+			cursor: auto;
+		}
+
 		.hero { height: 45vh; min-height: 350px; }
 		.hero-eyebrow { font-size: 10px; gap: 16px; }
 		.eyebrow-line { width: 40px; }
@@ -700,15 +1168,25 @@ import Layout from "../layouts/Layout.astro";
 		.form-row { grid-template-columns: 1fr; gap: 16px; }
 		.form-group input,
 		.form-group select,
-		.form-group textarea { padding: 14px; font-size: 16px; }
-		.submit-btn { width: 100%; padding: 16px; }
+		.form-group textarea { padding: 14px; font-size: 16px; cursor: auto; }
+		.submit-btn { width: 100%; padding: 16px; cursor: pointer; }
 		.contact-criteria { padding: 20px; }
 		.map-section { height: 350px; }
 		.map-card { padding: 24px; margin: 0 20px; }
+
+		a, button, .contact-item, .map-card {
+			cursor: pointer;
+		}
 	}
 </style>
 
 <style is:global>
 	::selection { background: #1a1a1a; color: #fff; }
 	html { scroll-behavior: smooth; }
+	
+	@media (min-width: 769px) {
+		* {
+			cursor: none !important;
+		}
+	}
 </style>

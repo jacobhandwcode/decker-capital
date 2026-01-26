@@ -283,7 +283,10 @@ import Layout from "../layouts/Layout.astro";
             </div>
 
             <div class="slide-nav">
-              <button class="nav-btn prev magnetic-btn" aria-label="Previous slide">
+              <button
+                class="nav-btn prev magnetic-btn"
+                aria-label="Previous slide"
+              >
                 <svg
                   width="24"
                   height="24"
@@ -364,15 +367,20 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 
 <!-- GSAP & ScrollTrigger - Load via CDN with is:inline -->
-<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script
+  is:inline
+  src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script
+  is:inline
+  src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+></script>
 
 <script is:inline>
-  document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("DOMContentLoaded", function () {
     // Register GSAP plugins
     gsap.registerPlugin(ScrollTrigger);
-    
-    console.log('🚀 GSAP loaded, starting animations...');
+
+    console.log("🚀 GSAP loaded, starting animations...");
 
     // ============================================
     // TEXT SPLITTING UTILITY
@@ -381,34 +389,44 @@ import Layout from "../layouts/Layout.astro";
       if (!element) return [];
       var text = element.textContent;
       var words = text.trim().split(/\s+/);
-      element.innerHTML = words.map(function(word) {
-        return '<span class="' + className + '" style="display: inline-block;">' + word + '&nbsp;</span>';
-      }).join('');
-      return element.querySelectorAll('.' + className);
+      element.innerHTML = words
+        .map(function (word) {
+          return (
+            '<span class="' +
+            className +
+            '" style="display: inline-block;">' +
+            word +
+            "&nbsp;</span>"
+          );
+        })
+        .join("");
+      return element.querySelectorAll("." + className);
     }
 
     // Split hero title into words
-    var heroTitle = document.querySelector('.hero-title');
-    splitTextIntoSpans(heroTitle, 'title-word');
+    var heroTitle = document.querySelector(".hero-title");
+    splitTextIntoSpans(heroTitle, "title-word");
 
     // Split hero subtitle into words
-    var heroSubtitle = document.querySelector('.hero-subtitle');
-    splitTextIntoSpans(heroSubtitle, 'subtitle-word');
+    var heroSubtitle = document.querySelector(".hero-subtitle");
+    splitTextIntoSpans(heroSubtitle, "subtitle-word");
 
     // Split CTA headline into words
-    var ctaHeadline = document.querySelector('.cta-headline');
-    splitTextIntoSpans(ctaHeadline, 'cta-word');
+    var ctaHeadline = document.querySelector(".cta-headline");
+    splitTextIntoSpans(ctaHeadline, "cta-word");
 
     // ============================================
     // CUSTOM CURSOR
     // ============================================
-    var cursorDot = document.querySelector('.cursor-dot');
-    var cursorRing = document.querySelector('.cursor-ring');
-    var mouseX = 0, mouseY = 0;
-    var ringX = 0, ringY = 0;
+    var cursorDot = document.querySelector(".cursor-dot");
+    var cursorRing = document.querySelector(".cursor-ring");
+    var mouseX = 0,
+      mouseY = 0;
+    var ringX = 0,
+      ringY = 0;
 
     if (cursorDot && cursorRing && window.innerWidth > 768) {
-      document.addEventListener('mousemove', function(e) {
+      document.addEventListener("mousemove", function (e) {
         mouseX = e.clientX;
         mouseY = e.clientY;
         gsap.to(cursorDot, { x: mouseX, y: mouseY, duration: 0.1 });
@@ -424,14 +442,24 @@ import Layout from "../layouts/Layout.astro";
       animateCursor();
 
       // Cursor hover effects
-      var hoverElements = document.querySelectorAll('a, button, .featured-card, .value-prop-card');
-      hoverElements.forEach(function(el) {
-        el.addEventListener('mouseenter', function() {
-          gsap.to(cursorRing, { scale: 1.5, borderColor: '#8a7f6e', duration: 0.3 });
+      var hoverElements = document.querySelectorAll(
+        "a, button, .featured-card, .value-prop-card",
+      );
+      hoverElements.forEach(function (el) {
+        el.addEventListener("mouseenter", function () {
+          gsap.to(cursorRing, {
+            scale: 1.5,
+            borderColor: "#8a7f6e",
+            duration: 0.3,
+          });
           gsap.to(cursorDot, { scale: 0.5, duration: 0.3 });
         });
-        el.addEventListener('mouseleave', function() {
-          gsap.to(cursorRing, { scale: 1, borderColor: '#1a1a1a', duration: 0.3 });
+        el.addEventListener("mouseleave", function () {
+          gsap.to(cursorRing, {
+            scale: 1,
+            borderColor: "#1a1a1a",
+            duration: 0.3,
+          });
           gsap.to(cursorDot, { scale: 1, duration: 0.3 });
         });
       });
@@ -440,143 +468,165 @@ import Layout from "../layouts/Layout.astro";
     // ============================================
     // MAGNETIC BUTTON EFFECT
     // ============================================
-    var magneticBtns = document.querySelectorAll('.magnetic-btn');
-    magneticBtns.forEach(function(btn) {
-      btn.addEventListener('mousemove', function(e) {
+    var magneticBtns = document.querySelectorAll(".magnetic-btn");
+    magneticBtns.forEach(function (btn) {
+      btn.addEventListener("mousemove", function (e) {
         var rect = btn.getBoundingClientRect();
         var x = e.clientX - rect.left - rect.width / 2;
         var y = e.clientY - rect.top - rect.height / 2;
-        gsap.to(btn, { x: x * 0.3, y: y * 0.3, duration: 0.3, ease: 'power2.out' });
+        gsap.to(btn, {
+          x: x * 0.3,
+          y: y * 0.3,
+          duration: 0.3,
+          ease: "power2.out",
+        });
       });
-      btn.addEventListener('mouseleave', function() {
-        gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.3)' });
+      btn.addEventListener("mouseleave", function () {
+        gsap.to(btn, {
+          x: 0,
+          y: 0,
+          duration: 0.5,
+          ease: "elastic.out(1, 0.3)",
+        });
       });
     });
 
     // ============================================
     // HERO ANIMATIONS
     // ============================================
-    var heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-    
+    var heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
     // Initial states
-    gsap.set('.hero-eyebrow span:not(.eyebrow-line)', { y: 30, opacity: 0 });
-    gsap.set('.eyebrow-line', { scaleX: 0 });
-    gsap.set('.title-word', { y: 100, opacity: 0, rotationX: -40 });
-    gsap.set('.subtitle-word', { y: 40, opacity: 0 });
-    gsap.set('.scroll-arrow', { y: 20, opacity: 0 });
-    gsap.set('.hero-scroll-indicator', { opacity: 0 });
+    gsap.set(".hero-eyebrow span:not(.eyebrow-line)", { y: 30, opacity: 0 });
+    gsap.set(".eyebrow-line", { scaleX: 0 });
+    gsap.set(".title-word", { y: 100, opacity: 0, rotationX: -40 });
+    gsap.set(".subtitle-word", { y: 40, opacity: 0 });
+    gsap.set(".scroll-arrow", { y: 20, opacity: 0 });
+    gsap.set(".hero-scroll-indicator", { opacity: 0 });
 
     heroTl
-      .to('.eyebrow-line', { scaleX: 1, duration: 0.8, stagger: 0.1 }, 0.3)
-      .to('.hero-eyebrow span:not(.eyebrow-line)', { y: 0, opacity: 1, duration: 0.6 }, 0.5)
-      .to('.title-word', { 
-        y: 0, 
-        opacity: 1, 
-        rotationX: 0,
-        duration: 1.2, 
-        stagger: 0.08,
-        ease: 'power4.out'
-      }, 0.7)
-      .to('.subtitle-word', { 
-        y: 0, 
-        opacity: 1, 
-        duration: 0.8, 
-        stagger: 0.1,
-        ease: 'back.out(1.7)'
-      }, 1.4)
-      .to('.scroll-arrow', { y: 0, opacity: 1, duration: 0.6 }, 1.8)
-      .to('.hero-scroll-indicator', { opacity: 1, duration: 0.8 }, 2);
+      .to(".eyebrow-line", { scaleX: 1, duration: 0.8, stagger: 0.1 }, 0.3)
+      .to(
+        ".hero-eyebrow span:not(.eyebrow-line)",
+        { y: 0, opacity: 1, duration: 0.6 },
+        0.5,
+      )
+      .to(
+        ".title-word",
+        {
+          y: 0,
+          opacity: 1,
+          rotationX: 0,
+          duration: 1.2,
+          stagger: 0.08,
+          ease: "power4.out",
+        },
+        0.7,
+      )
+      .to(
+        ".subtitle-word",
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "back.out(1.7)",
+        },
+        1.4,
+      )
+      .to(".scroll-arrow", { y: 0, opacity: 1, duration: 0.6 }, 1.8)
+      .to(".hero-scroll-indicator", { opacity: 1, duration: 0.8 }, 2);
 
     // Floating scroll arrow animation
-    gsap.to('.scroll-arrow', {
+    gsap.to(".scroll-arrow", {
       y: 10,
       duration: 1.5,
       repeat: -1,
       yoyo: true,
-      ease: 'power1.inOut'
+      ease: "power1.inOut",
     });
 
     // ============================================
     // TAGLINE SECTION - SPLIT TEXT REVEAL
     // ============================================
-    gsap.set('.tagline-word', { 
-      y: 80, 
+    gsap.set(".tagline-word", {
+      y: 80,
       opacity: 0,
       rotationY: -20,
-      transformOrigin: 'left center'
+      transformOrigin: "left center",
     });
 
     ScrollTrigger.create({
-      trigger: '.tagline-section',
-      start: 'top 80%',
-      onEnter: function() {
-        gsap.to('.tagline-word', {
+      trigger: ".tagline-section",
+      start: "top 80%",
+      onEnter: function () {
+        gsap.to(".tagline-word", {
           y: 0,
           opacity: 1,
           rotationY: 0,
           duration: 1,
           stagger: 0.08,
-          ease: 'power4.out'
+          ease: "power4.out",
         });
-      }
+      },
     });
 
     // Parallax effect on tagline
-    gsap.to('.tagline', {
+    gsap.to(".tagline", {
       scrollTrigger: {
-        trigger: '.tagline-section',
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: 1
+        trigger: ".tagline-section",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1,
       },
       y: -50,
-      ease: 'none'
+      ease: "none",
     });
 
     // ============================================
     // STATS SECTION - DRAMATIC COUNTER REVEAL
     // ============================================
-    gsap.set('.stat-card', { 
-      y: 60, 
+    gsap.set(".stat-card", {
+      y: 60,
       opacity: 0,
-      scale: 0.95
+      scale: 0.95,
     });
 
     var countersStarted = false;
     ScrollTrigger.create({
-      trigger: '.stats-section',
-      start: 'top 75%',
-      onEnter: function() {
-        gsap.to('.stat-card', {
+      trigger: ".stats-section",
+      start: "top 75%",
+      onEnter: function () {
+        gsap.to(".stat-card", {
           y: 0,
           opacity: 1,
           scale: 1,
           duration: 0.8,
           stagger: 0.15,
-          ease: 'power3.out',
-          onComplete: function() {
+          ease: "power3.out",
+          onComplete: function () {
             if (!countersStarted) {
               countersStarted = true;
               startCounters();
             }
-          }
+          },
         });
-      }
+      },
     });
 
     // Counter animation with easing
     function startCounters() {
       var counters = document.querySelectorAll(".stat-number[data-count]");
-      counters.forEach(function(counter) {
+      counters.forEach(function (counter) {
         var target = parseInt(counter.getAttribute("data-count") || "0");
         var obj = { value: 0 };
         gsap.to(obj, {
           value: target,
           duration: 2.5,
-          ease: 'power2.out',
-          onUpdate: function() {
+          ease: "power2.out",
+          onUpdate: function () {
             counter.textContent = Math.floor(obj.value).toLocaleString();
-          }
+          },
         });
       });
     }
@@ -584,174 +634,204 @@ import Layout from "../layouts/Layout.astro";
     // ============================================
     // FEATURED PROPERTIES - STAGGERED REVEAL
     // ============================================
-    gsap.set('.featured-header', { y: 40, opacity: 0 });
-    gsap.set('.featured-card', { 
-      y: 80, 
-      opacity: 0
+    gsap.set(".featured-header", { y: 40, opacity: 0 });
+    gsap.set(".featured-card", {
+      y: 80,
+      opacity: 0,
     });
 
     var featuredTl = gsap.timeline({
       scrollTrigger: {
-        trigger: '.featured-section',
-        start: 'top 70%'
-      }
+        trigger: ".featured-section",
+        start: "top 70%",
+      },
     });
 
     featuredTl
-      .to('.featured-header', { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' })
-      .to('.featured-card', {
+      .to(".featured-header", {
         y: 0,
         opacity: 1,
-        duration: 1,
-        stagger: 0.2,
-        ease: 'power4.out'
-      }, '-=0.4');
+        duration: 0.8,
+        ease: "power3.out",
+      })
+      .to(
+        ".featured-card",
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.2,
+          ease: "power4.out",
+        },
+        "-=0.4",
+      );
 
     // Image reveal on hover with GSAP
-    document.querySelectorAll('.featured-card').forEach(function(card) {
-      var img = card.querySelector('.featured-image img');
-      card.addEventListener('mouseenter', function() {
-        gsap.to(img, { scale: 1.1, duration: 0.8, ease: 'power2.out' });
+    document.querySelectorAll(".featured-card").forEach(function (card) {
+      var img = card.querySelector(".featured-image img");
+      card.addEventListener("mouseenter", function () {
+        gsap.to(img, { scale: 1.1, duration: 0.8, ease: "power2.out" });
       });
-      card.addEventListener('mouseleave', function() {
-        gsap.to(img, { scale: 1, duration: 0.6, ease: 'power2.out' });
+      card.addEventListener("mouseleave", function () {
+        gsap.to(img, { scale: 1, duration: 0.6, ease: "power2.out" });
       });
     });
 
     // ============================================
     // INVESTMENT SECTION - SPLIT REVEAL
     // ============================================
-    gsap.set('.investment-text > *', { y: 50, opacity: 0 });
-    gsap.set('.investment-image-wrapper', { 
-      clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
-      scale: 1.2
+    gsap.set(".investment-text > *", { y: 50, opacity: 0 });
+    gsap.set(".investment-image-wrapper", {
+      clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)",
+      scale: 1.2,
     });
-    gsap.set('.investment-accent', { scale: 0.8, opacity: 0 });
+    gsap.set(".investment-accent", { scale: 0.8, opacity: 0 });
 
     var investmentTl = gsap.timeline({
       scrollTrigger: {
-        trigger: '.investment-section',
-        start: 'top 65%'
-      }
+        trigger: ".investment-section",
+        start: "top 65%",
+      },
     });
 
     investmentTl
-      .to('.investment-text > *', {
+      .to(".investment-text > *", {
         y: 0,
         opacity: 1,
         duration: 0.8,
         stagger: 0.12,
-        ease: 'power3.out'
+        ease: "power3.out",
       })
-      .to('.investment-image-wrapper', {
-        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-        scale: 1,
-        duration: 1.2,
-        ease: 'power4.inOut'
-      }, '-=0.6')
-      .to('.investment-accent', {
-        scale: 1,
-        opacity: 1,
-        duration: 0.8,
-        ease: 'back.out(1.7)'
-      }, '-=0.6');
+      .to(
+        ".investment-image-wrapper",
+        {
+          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+          scale: 1,
+          duration: 1.2,
+          ease: "power4.inOut",
+        },
+        "-=0.6",
+      )
+      .to(
+        ".investment-accent",
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 0.8,
+          ease: "back.out(1.7)",
+        },
+        "-=0.6",
+      );
 
     // Parallax on investment image
-    gsap.to('.investment-image-wrapper img', {
+    gsap.to(".investment-image-wrapper img", {
       scrollTrigger: {
-        trigger: '.investment-section',
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: 1
+        trigger: ".investment-section",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1,
       },
       y: -80,
-      ease: 'none'
+      ease: "none",
     });
 
     // ============================================
     // VALUE PROPS - DRAMATIC STAGGER
     // ============================================
-    gsap.set('.value-prop-card', { 
+    gsap.set(".value-prop-card", {
       y: 100,
       opacity: 0,
-      scale: 0.9
+      scale: 0.9,
     });
 
     ScrollTrigger.create({
-      trigger: '.value-props-section',
-      start: 'top 70%',
-      onEnter: function() {
-        gsap.to('.value-prop-card', {
+      trigger: ".value-props-section",
+      start: "top 70%",
+      onEnter: function () {
+        gsap.to(".value-prop-card", {
           y: 0,
           opacity: 1,
           scale: 1,
           duration: 1,
           stagger: 0.15,
-          ease: 'power4.out'
+          ease: "power4.out",
         });
-      }
+      },
     });
 
     // Value prop hover parallax
-    document.querySelectorAll('.value-prop-card').forEach(function(card) {
-      var img = card.querySelector('.value-prop-image img');
-      var content = card.querySelector('.value-prop-content');
-      
-      card.addEventListener('mousemove', function(e) {
+    document.querySelectorAll(".value-prop-card").forEach(function (card) {
+      var img = card.querySelector(".value-prop-image img");
+      var content = card.querySelector(".value-prop-content");
+
+      card.addEventListener("mousemove", function (e) {
         var rect = card.getBoundingClientRect();
         var x = (e.clientX - rect.left) / rect.width - 0.5;
         var y = (e.clientY - rect.top) / rect.height - 0.5;
-        
+
         gsap.to(img, {
           x: x * 20,
           y: y * 20,
           duration: 0.5,
-          ease: 'power2.out'
+          ease: "power2.out",
         });
         gsap.to(content, {
           x: x * -10,
           y: y * -10,
           duration: 0.5,
-          ease: 'power2.out'
+          ease: "power2.out",
         });
       });
-      
-      card.addEventListener('mouseleave', function() {
-        gsap.to(img, { x: 0, y: 0, duration: 0.6, ease: 'power2.out' });
-        gsap.to(content, { x: 0, y: 0, duration: 0.6, ease: 'power2.out' });
+
+      card.addEventListener("mouseleave", function () {
+        gsap.to(img, { x: 0, y: 0, duration: 0.6, ease: "power2.out" });
+        gsap.to(content, { x: 0, y: 0, duration: 0.6, ease: "power2.out" });
       });
     });
 
     // ============================================
     // SLIDESHOW SECTION
     // ============================================
-    gsap.set('.slideshow-header', { y: 40, opacity: 0 });
-    gsap.set('.slideshow-main', { 
-      y: 60, 
-      opacity: 0
+    gsap.set(".slideshow-header", { y: 40, opacity: 0 });
+    gsap.set(".slideshow-main", {
+      y: 60,
+      opacity: 0,
     });
 
     var slideshowTl = gsap.timeline({
       scrollTrigger: {
-        trigger: '.slideshow-section',
-        start: 'top 70%'
-      }
+        trigger: ".slideshow-section",
+        start: "top 70%",
+      },
     });
 
     slideshowTl
-      .to('.slideshow-header', { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' })
-      .to('.slideshow-main', {
+      .to(".slideshow-header", {
         y: 0,
         opacity: 1,
-        duration: 1.2,
-        ease: 'power4.out'
-      }, '-=0.4')
-      .from('.slideshow-progress', {
-        y: 20,
-        opacity: 0,
-        duration: 0.6,
-        ease: 'power3.out'
-      }, '-=0.4');
+        duration: 0.8,
+        ease: "power3.out",
+      })
+      .to(
+        ".slideshow-main",
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.2,
+          ease: "power4.out",
+        },
+        "-=0.4",
+      )
+      .from(
+        ".slideshow-progress",
+        {
+          y: 20,
+          opacity: 0,
+          duration: 0.6,
+          ease: "power3.out",
+        },
+        "-=0.4",
+      );
 
     // Slideshow Logic with GSAP transitions
     var slides = document.querySelectorAll(".slide");
@@ -776,7 +856,7 @@ import Layout from "../layouts/Layout.astro";
       gsap.to(currentContent, { y: 20, opacity: 0, duration: 0.4 });
 
       // Reset indicators
-      indicators.forEach(function(ind) {
+      indicators.forEach(function (ind) {
         ind.classList.remove("active");
         var bar = ind.querySelector(".progress-bar");
         if (bar) {
@@ -789,21 +869,28 @@ import Layout from "../layouts/Layout.astro";
       currentIndex = newIndex;
 
       // Animate in new
-      gsap.fromTo(newSlide, 
+      gsap.fromTo(
+        newSlide,
         { opacity: 0, scale: 1 },
-        { opacity: 1, scale: 1, duration: 0.8, ease: 'power2.out' }
+        { opacity: 1, scale: 1, duration: 0.8, ease: "power2.out" },
       );
-      gsap.fromTo(newContent,
+      gsap.fromTo(
+        newContent,
         { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, delay: 0.3, ease: 'power3.out' }
+        { y: 0, opacity: 1, duration: 0.6, delay: 0.3, ease: "power3.out" },
       );
 
-      slides.forEach(function(s) { s.classList.remove("active", "prev"); });
-      slideContents.forEach(function(c) { c.classList.remove("active"); });
-      
+      slides.forEach(function (s) {
+        s.classList.remove("active", "prev");
+      });
+      slideContents.forEach(function (c) {
+        c.classList.remove("active");
+      });
+
       newSlide.classList.add("active");
       newContent.classList.add("active");
-      if (indicators[currentIndex]) indicators[currentIndex].classList.add("active");
+      if (indicators[currentIndex])
+        indicators[currentIndex].classList.add("active");
     }
 
     function nextSlide() {
@@ -816,7 +903,7 @@ import Layout from "../layouts/Layout.astro";
 
     function startAutoplay() {
       stopAutoplay();
-      autoplayInterval = setInterval(function() {
+      autoplayInterval = setInterval(function () {
         if (!isPaused) nextSlide();
       }, autoplayDuration);
     }
@@ -826,20 +913,20 @@ import Layout from "../layouts/Layout.astro";
     }
 
     if (prevBtn) {
-      prevBtn.addEventListener("click", function() {
+      prevBtn.addEventListener("click", function () {
         prevSlideFunc();
         startAutoplay();
       });
     }
     if (nextBtn) {
-      nextBtn.addEventListener("click", function() {
+      nextBtn.addEventListener("click", function () {
         nextSlide();
         startAutoplay();
       });
     }
 
-    indicators.forEach(function(indicator, index) {
-      indicator.addEventListener("click", function() {
+    indicators.forEach(function (indicator, index) {
+      indicator.addEventListener("click", function () {
         if (index !== currentIndex) {
           updateSlide(index);
           startAutoplay();
@@ -849,8 +936,12 @@ import Layout from "../layouts/Layout.astro";
 
     var slideshowWrapper = document.querySelector(".slideshow-wrapper");
     if (slideshowWrapper) {
-      slideshowWrapper.addEventListener("mouseenter", function() { isPaused = true; });
-      slideshowWrapper.addEventListener("mouseleave", function() { isPaused = false; });
+      slideshowWrapper.addEventListener("mouseenter", function () {
+        isPaused = true;
+      });
+      slideshowWrapper.addEventListener("mouseleave", function () {
+        isPaused = false;
+      });
     }
 
     startAutoplay();
@@ -858,39 +949,47 @@ import Layout from "../layouts/Layout.astro";
     // ============================================
     // CTA SECTION - FINAL REVEAL
     // ============================================
-    gsap.set('.cta-word', { y: 60, opacity: 0, rotationX: -30 });
-    gsap.set('.cta-description', { y: 30, opacity: 0 });
-    gsap.set('.cta-button', { y: 30, opacity: 0, scale: 0.9 });
+    gsap.set(".cta-word", { y: 60, opacity: 0, rotationX: -30 });
+    gsap.set(".cta-description", { y: 30, opacity: 0 });
+    gsap.set(".cta-button", { y: 30, opacity: 0, scale: 0.9 });
 
     var ctaTl = gsap.timeline({
       scrollTrigger: {
-        trigger: '.cta-section',
-        start: 'top 70%'
-      }
+        trigger: ".cta-section",
+        start: "top 70%",
+      },
     });
 
     ctaTl
-      .to('.cta-word', {
+      .to(".cta-word", {
         y: 0,
         opacity: 1,
         rotationX: 0,
         duration: 1,
         stagger: 0.08,
-        ease: 'power4.out'
+        ease: "power4.out",
       })
-      .to('.cta-description', {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: 'power3.out'
-      }, '-=0.5')
-      .to('.cta-button', {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        duration: 0.8,
-        ease: 'back.out(1.7)'
-      }, '-=0.4');
+      .to(
+        ".cta-description",
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+        },
+        "-=0.5",
+      )
+      .to(
+        ".cta-button",
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          ease: "back.out(1.7)",
+        },
+        "-=0.4",
+      );
 
     // ============================================
     // SCROLL ARROW FUNCTIONALITY
@@ -898,18 +997,18 @@ import Layout from "../layouts/Layout.astro";
     var scrollArrow = document.querySelector(".scroll-arrow");
     var nextSection = document.getElementById("next-section");
     if (scrollArrow && nextSection) {
-      scrollArrow.addEventListener("click", function() {
-        nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      scrollArrow.addEventListener("click", function () {
+        nextSection.scrollIntoView({ behavior: "smooth", block: "start" });
       });
     }
 
-    console.log('✨ All GSAP animations initialized!');
+    console.log("✨ All GSAP animations initialized!");
   });
 </script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-  
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
   :root {
     --padding-xl: 70px;
     --padding-lg: 56px;
@@ -954,7 +1053,8 @@ import Layout from "../layouts/Layout.astro";
   }
 
   @media (max-width: 768px) {
-    .cursor-dot, .cursor-ring {
+    .cursor-dot,
+    .cursor-ring {
       display: none;
     }
   }
@@ -983,7 +1083,7 @@ import Layout from "../layouts/Layout.astro";
       transform: scale(1.15);
     }
   }
-  
+
   @keyframes scrollLine {
     0% {
       transform: scaleY(0);
@@ -1025,7 +1125,7 @@ import Layout from "../layouts/Layout.astro";
   }
 
   .section-eyebrow::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -4px;
     left: 0;
@@ -1140,7 +1240,7 @@ import Layout from "../layouts/Layout.astro";
     background: transparent;
     color: #fff;
     cursor: none;
-    padding: 16px;
+    padding: 8px;
     border-radius: 50%;
     transition: all 0.4s var(--ease);
     border: 1px solid rgba(255, 255, 255, 0.3);
@@ -1207,7 +1307,9 @@ import Layout from "../layouts/Layout.astro";
 
   .tagline-word {
     display: inline-block;
-    transition: transform 0.4s var(--ease), color 0.3s ease;
+    transition:
+      transform 0.4s var(--ease),
+      color 0.3s ease;
     transform-style: preserve-3d;
   }
 
@@ -1514,7 +1616,7 @@ import Layout from "../layouts/Layout.astro";
   }
 
   .investment-link::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 8px;
     left: 0;
@@ -1728,7 +1830,7 @@ import Layout from "../layouts/Layout.astro";
   }
 
   .slideshow-view-all::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 4px;
     left: 0;
@@ -1976,7 +2078,7 @@ import Layout from "../layouts/Layout.astro";
   }
 
   .cta-button::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: -100%;
@@ -2059,11 +2161,11 @@ import Layout from "../layouts/Layout.astro";
       --padding-md: 20px;
       --padding-sm: 20px;
     }
-    
+
     .page {
       cursor: auto;
     }
-    
+
     .hero {
       min-height: 600px;
     }
@@ -2128,9 +2230,12 @@ import Layout from "../layouts/Layout.astro";
       width: 100%;
       justify-content: center;
     }
-    
+
     /* Restore normal cursor on mobile */
-    a, button, .featured-card, .value-prop-card {
+    a,
+    button,
+    .featured-card,
+    .value-prop-card {
       cursor: pointer;
     }
   }
@@ -2141,11 +2246,11 @@ import Layout from "../layouts/Layout.astro";
     background: #1a1a1a;
     color: #fff;
   }
-  
+
   html {
     scroll-behavior: smooth;
   }
-  
+
   /* Hide default cursor when custom cursor is active */
   @media (min-width: 769px) {
     * {

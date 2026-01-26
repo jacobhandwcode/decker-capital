@@ -3,356 +3,1561 @@
 import Layout from "../layouts/Layout.astro";
 
 const repositioningSteps = [
-    {
-        title: "Property Assessment",
-        description: "Comprehensive evaluation of current condition, market positioning, and value-add opportunities."
-    },
-    {
-        title: "Capital Planning",
-        description: "Strategic budget allocation for improvements that deliver maximum ROI and tenant appeal."
-    },
-    {
-        title: "Execution",
-        description: "Vertically integrated implementation ensuring cost efficiency, quality control, and speed."
-    },
-    {
-        title: "Stabilization",
-        description: "Lease-up strategy and ongoing management to maximize occupancy and rental rates."
-    },
+  {
+    title: "Property Assessment",
+    description:
+      "Comprehensive evaluation of current condition, market positioning, and value-add opportunities.",
+  },
+  {
+    title: "Capital Planning",
+    description:
+      "Strategic budget allocation for improvements that deliver maximum ROI and tenant appeal.",
+  },
+  {
+    title: "Execution",
+    description:
+      "Vertically integrated implementation ensuring cost efficiency, quality control, and speed.",
+  },
+  {
+    title: "Stabilization",
+    description:
+      "Lease-up strategy and ongoing management to maximize occupancy and rental rates.",
+  },
 ];
 
 const improvements = [
-    "Exterior façade upgrades",
-    "Modern signage & wayfinding",
-    "LED lighting retrofits",
-    "Parking lot resurfacing",
-    "Landscaping enhancements",
-    "HVAC modernization",
-    "Roll-up door replacements",
-    "Office finish upgrades"
+  "Exterior façade upgrades",
+  "Modern signage & wayfinding",
+  "LED lighting retrofits",
+  "Parking lot resurfacing",
+  "Landscaping enhancements",
+  "HVAC modernization",
+  "Roll-up door replacements",
+  "Office finish upgrades",
 ];
 
 const brandPillars = [
-    {
-        title: "Uniform Identity",
-        description: "Consistent signage, color schemes, and property aesthetics across the entire portfolio."
-    },
-    {
-        title: "Tenant Experience",
-        description: "Professional management, responsive maintenance, and clear communication standards."
-    },
-    {
-        title: "Market Presence",
-        description: "Recognizable brand that instills trust in tenants, brokers, and investment partners."
-    },
+  {
+    title: "Uniform Identity",
+    description:
+      "Consistent signage, color schemes, and property aesthetics across the entire portfolio.",
+  },
+  {
+    title: "Tenant Experience",
+    description:
+      "Professional management, responsive maintenance, and clear communication standards.",
+  },
+  {
+    title: "Market Presence",
+    description:
+      "Recognizable brand that instills trust in tenants, brokers, and investment partners.",
+  },
 ];
 ---
 
 <Layout>
-    <div class="page">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-image">
-                <img src="/images/hero.png" alt="Industrial Property" />
-            </div>
-            <div class="hero-content">
-                <div class="hero-eyebrow">
-                    <span class="eyebrow-line"></span>
-                    <span>About</span>
-                    <span class="eyebrow-line"></span>
-                </div>
-                <h1 class="hero-title">Our Approach</h1>
-                <p class="hero-subtitle">Value creation through operational excellence</p>
-            </div>
-        </section>
+  <div class="page">
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
 
-        <!-- Mission Statement -->
-        <section class="mission-section">
-            <div class="mission-container">
-                <div class="mission-content">
-                    <span class="section-eyebrow">Our Mission</span>
-                    <blockquote class="mission-quote">
-                        "To be the premier operator of small-bay industrial real estate in the Southeast, delivering exceptional returns through disciplined acquisition, transformational repositioning, and institutional-quality management."
-                    </blockquote>
-                </div>
-            </div>
-        </section>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-image">
+        <img src="/images/hero.png" alt="Industrial Property" />
+      </div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <span class="eyebrow-line"></span>
+          <span>About</span>
+          <span class="eyebrow-line"></span>
+        </div>
+        <h1 class="hero-title">Our Approach</h1>
+        <p class="hero-subtitle">
+          Value creation through operational excellence
+        </p>
+      </div>
+    </section>
 
-        <!-- Repositioning Strategy -->
-        <section class="strategy-section">
-            <div class="strategy-container">
-                <div class="strategy-header">
-                    <span class="section-eyebrow">Value Creation</span>
-                    <h2 class="section-headline">Transformational Repositioning Strategy</h2>
-                    <p class="strategy-subtitle">
-                        Decker Capital implements comprehensive capital improvement and repositioning plans to modernize and elevate properties to best-in-class small-bay product.
-                    </p>
-                </div>
+    <!-- Mission Statement -->
+    <section class="mission-section">
+      <div class="mission-container">
+        <div class="mission-content">
+          <span class="section-eyebrow">Our Mission</span>
+          <blockquote class="mission-quote">
+            "To be the premier operator of small-bay industrial real estate in
+            the Southeast, delivering exceptional returns through disciplined
+            acquisition, transformational repositioning, and
+            institutional-quality management."
+          </blockquote>
+        </div>
+      </div>
+    </section>
 
-                <div class="strategy-content">
-                    <div class="process-steps">
-                        {repositioningSteps.map((step, index) => (
-                            <div class="process-step">
-                                <div class="step-number">
-                                    <span>0{index + 1}</span>
-                                </div>
-                                <div class="step-content">
-                                    <h3 class="step-title">{step.title}</h3>
-                                    <p class="step-description">{step.description}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+    <!-- Repositioning Strategy -->
+    <section class="strategy-section">
+      <div class="strategy-container">
+        <div class="strategy-header">
+          <span class="section-eyebrow">Value Creation</span>
+          <h2 class="section-headline">
+            Transformational Repositioning Strategy
+          </h2>
+          <p class="strategy-subtitle">
+            Decker Capital implements comprehensive capital improvement and
+            repositioning plans to modernize and elevate properties to
+            best-in-class small-bay product.
+          </p>
+        </div>
 
-                    <div class="improvements-panel">
-                        <div class="improvements-card">
-                            <h3 class="improvements-title">Capital Improvements</h3>
-                            <p class="improvements-intro">Our enhancements significantly improve curb appeal, tenant experience, and long-term asset value:</p>
-                            <div class="improvements-grid">
-                                {improvements.map((item) => (
-                                    <div class="improvement-item">
-                                        <span class="improvement-check">
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                <polyline points="20 6 9 17 4 12"></polyline>
-                                            </svg>
-                                        </span>
-                                        <span>{item}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
+        <div class="strategy-content">
+          <div class="process-steps">
+            {
+              repositioningSteps.map((step, index) => (
+                <div class="process-step">
+                  <div class="step-number">
+                    <span>0{index + 1}</span>
+                  </div>
+                  <div class="step-content">
+                    <h3 class="step-title">{step.title}</h3>
+                    <p class="step-description">{step.description}</p>
+                  </div>
                 </div>
-            </div>
-        </section>
+              ))
+            }
+          </div>
 
-        <!-- Vertical Integration -->
-        <section class="integration-section">
-            <div class="integration-container">
-                <div class="integration-content">
-                    <span class="section-eyebrow light">Competitive Advantage</span>
-                    <h2 class="integration-headline">Vertically Integrated Platform</h2>
-                    <p class="integration-description">
-                        Our in-house capabilities across acquisition, construction, property management, and leasing allow us to control quality, reduce costs, and accelerate timelines. This integrated approach ensures we can rapidly unlock value through targeted, high-impact enhancements.
-                    </p>
-                    <div class="integration-stats">
-                        <div class="integration-stat">
-                            <span class="stat-number">30%</span>
-                            <span class="stat-label">Lower Renovation Costs</span>
-                        </div>
-                        <div class="integration-stat">
-                            <span class="stat-number">2x</span>
-                            <span class="stat-label">Faster Execution</span>
-                        </div>
-                        <div class="integration-stat">
-                            <span class="stat-number">100%</span>
-                            <span class="stat-label">Quality Control</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="integration-visual">
-                    <div class="visual-card">
-                        <div class="visual-image">
-                            <img src="/images/property1.png" alt="Before Repositioning" />
-                            <span class="visual-label">Before</span>
-                        </div>
-                    </div>
-                    <div class="visual-card">
-                        <div class="visual-image">
-                            <img src="/images/property2.png" alt="After Repositioning" />
-                            <span class="visual-label">After</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Brand Equity -->
-        <section class="brand-section">
-            <div class="brand-container">
-                <div class="brand-header">
-                    <span class="section-eyebrow">Differentiation</span>
-                    <h2 class="section-headline">Building Brand Equity</h2>
-                    <p class="brand-subtitle">
-                        Decker Capital is strategically focused on creating a consistent, recognizable identity rooted in professionalism, reliability, and performance.
-                    </p>
-                </div>
-
-                <div class="brand-grid">
-                    {brandPillars.map((pillar, index) => (
-                        <div class="brand-card">
-                            <span class="brand-number">0{index + 1}</span>
-                            <h3 class="brand-title">{pillar.title}</h3>
-                            <p class="brand-description">{pillar.description}</p>
-                        </div>
-                    ))}
-                </div>
-
-                <div class="brand-statement">
-                    <p>
-                        By aligning marketing, property design, and tenant communication under one strong visual and strategic brand, Decker Capital differentiates itself from competitors, instills trust in stakeholders, and drives long-term value across all assets.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="cta-section">
-            <div class="cta-content">
-                <h2 class="cta-headline">Partner With Us</h2>
-                <p class="cta-description">Learn how our approach can work for your investment goals or property.</p>
-                <div class="cta-buttons">
-                    <a href="/contact" class="cta-button primary">
-                        <span>Send Us A Deal</span>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
+          <div class="improvements-panel">
+            <div class="improvements-card">
+              <h3 class="improvements-title">Capital Improvements</h3>
+              <p class="improvements-intro">
+                Our enhancements significantly improve curb appeal, tenant
+                experience, and long-term asset value:
+              </p>
+              <div class="improvements-grid">
+                {
+                  improvements.map((item) => (
+                    <div class="improvement-item">
+                      <span class="improvement-check">
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                        >
+                          <polyline points="20 6 9 17 4 12" />
                         </svg>
-                    </a>
-                    <a href="/portfolio" class="cta-button secondary">
-                        <span>View Portfolio</span>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </a>
-                </div>
+                      </span>
+                      <span>{item}</span>
+                    </div>
+                  ))
+                }
+              </div>
             </div>
-        </section>
-    </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vertical Integration -->
+    <section class="integration-section">
+      <div class="integration-container">
+        <div class="integration-content">
+          <span class="section-eyebrow light">Competitive Advantage</span>
+          <h2 class="integration-headline">Vertically Integrated Platform</h2>
+          <p class="integration-description">
+            Our in-house capabilities across acquisition, construction, property
+            management, and leasing allow us to control quality, reduce costs,
+            and accelerate timelines. This integrated approach ensures we can
+            rapidly unlock value through targeted, high-impact enhancements.
+          </p>
+          <div class="integration-stats">
+            <div class="integration-stat">
+              <span class="stat-number" data-count="30" data-suffix="%">0%</span
+              >
+              <span class="stat-label">Lower Renovation Costs</span>
+            </div>
+            <div class="integration-stat">
+              <span class="stat-number" data-count="2" data-suffix="x">0x</span>
+              <span class="stat-label">Faster Execution</span>
+            </div>
+            <div class="integration-stat">
+              <span class="stat-number" data-count="100" data-suffix="%"
+                >0%</span
+              >
+              <span class="stat-label">Quality Control</span>
+            </div>
+          </div>
+        </div>
+        <div class="integration-visual">
+          <div class="visual-card">
+            <div class="visual-image">
+              <img src="/images/property1.png" alt="Before Repositioning" />
+              <span class="visual-label">Before</span>
+            </div>
+          </div>
+          <div class="visual-card">
+            <div class="visual-image">
+              <img src="/images/property2.png" alt="After Repositioning" />
+              <span class="visual-label">After</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Brand Equity -->
+    <section class="brand-section">
+      <div class="brand-container">
+        <div class="brand-header">
+          <span class="section-eyebrow">Differentiation</span>
+          <h2 class="section-headline">Building Brand Equity</h2>
+          <p class="brand-subtitle">
+            Decker Capital is strategically focused on creating a consistent,
+            recognizable identity rooted in professionalism, reliability, and
+            performance.
+          </p>
+        </div>
+
+        <div class="brand-grid">
+          {
+            brandPillars.map((pillar, index) => (
+              <div class="brand-card">
+                <span class="brand-number">0{index + 1}</span>
+                <h3 class="brand-title">{pillar.title}</h3>
+                <p class="brand-description">{pillar.description}</p>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="brand-statement">
+          <p>
+            By aligning marketing, property design, and tenant communication
+            under one strong visual and strategic brand, Decker Capital
+            differentiates itself from competitors, instills trust in
+            stakeholders, and drives long-term value across all assets.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="cta-content">
+        <h2 class="cta-headline">Partner With Us</h2>
+        <p class="cta-description">
+          Learn how our approach can work for your investment goals or property.
+        </p>
+        <div class="cta-buttons">
+          <a href="/contact" class="cta-button primary magnetic-btn">
+            <span>Send Us A Deal</span>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </a>
+          <a href="/portfolio" class="cta-button secondary magnetic-btn">
+            <span>View Portfolio</span>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
 </Layout>
 
+<!-- GSAP & ScrollTrigger -->
+<script
+  is:inline
+  src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script
+  is:inline
+  src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+></script>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
+
+    console.log("🚀 GSAP loaded, starting about page animations...");
+
+    // ============================================
+    // TEXT SPLITTING UTILITY
+    // ============================================
+    function splitTextIntoSpans(element, className) {
+      if (!element) return [];
+      var text = element.textContent;
+      var words = text.trim().split(/\s+/);
+      element.innerHTML = words
+        .map(function (word) {
+          return (
+            '<span class="' +
+            className +
+            '" style="display: inline-block;">' +
+            word +
+            "&nbsp;</span>"
+          );
+        })
+        .join("");
+      return element.querySelectorAll("." + className);
+    }
+
+    // Split hero title
+    var heroTitle = document.querySelector(".hero-title");
+    splitTextIntoSpans(heroTitle, "title-word");
+
+    // Split CTA headline
+    var ctaHeadline = document.querySelector(".cta-headline");
+    splitTextIntoSpans(ctaHeadline, "cta-word");
+
+    // Split section headlines
+    var sectionHeadlines = document.querySelectorAll(".section-headline");
+    sectionHeadlines.forEach(function (headline, index) {
+      splitTextIntoSpans(headline, "headline-word-" + index);
+    });
+
+    // ============================================
+    // CUSTOM CURSOR
+    // ============================================
+    var cursorDot = document.querySelector(".cursor-dot");
+    var cursorRing = document.querySelector(".cursor-ring");
+    var mouseX = 0,
+      mouseY = 0;
+    var ringX = 0,
+      ringY = 0;
+
+    if (cursorDot && cursorRing && window.innerWidth > 768) {
+      document.addEventListener("mousemove", function (e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        gsap.to(cursorDot, { x: mouseX, y: mouseY, duration: 0.1 });
+      });
+
+      function animateCursor() {
+        ringX += (mouseX - ringX) * 0.15;
+        ringY += (mouseY - ringY) * 0.15;
+        gsap.set(cursorRing, { x: ringX, y: ringY });
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+
+      var hoverElements = document.querySelectorAll(
+        "a, button, .brand-card, .visual-card",
+      );
+      hoverElements.forEach(function (el) {
+        el.addEventListener("mouseenter", function () {
+          gsap.to(cursorRing, {
+            scale: 1.5,
+            borderColor: "#8a7f6e",
+            duration: 0.3,
+          });
+          gsap.to(cursorDot, { scale: 0.5, duration: 0.3 });
+        });
+        el.addEventListener("mouseleave", function () {
+          gsap.to(cursorRing, {
+            scale: 1,
+            borderColor: "#1a1a1a",
+            duration: 0.3,
+          });
+          gsap.to(cursorDot, { scale: 1, duration: 0.3 });
+        });
+      });
+    }
+
+    // ============================================
+    // MAGNETIC BUTTON EFFECT
+    // ============================================
+    var magneticBtns = document.querySelectorAll(".magnetic-btn");
+    magneticBtns.forEach(function (btn) {
+      btn.addEventListener("mousemove", function (e) {
+        var rect = btn.getBoundingClientRect();
+        var x = e.clientX - rect.left - rect.width / 2;
+        var y = e.clientY - rect.top - rect.height / 2;
+        gsap.to(btn, {
+          x: x * 0.3,
+          y: y * 0.3,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      });
+      btn.addEventListener("mouseleave", function () {
+        gsap.to(btn, {
+          x: 0,
+          y: 0,
+          duration: 0.5,
+          ease: "elastic.out(1, 0.3)",
+        });
+      });
+    });
+
+    // ============================================
+    // HERO ANIMATIONS
+    // ============================================
+    var heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+    gsap.set(".hero-eyebrow span:not(.eyebrow-line)", { y: 30, opacity: 0 });
+    gsap.set(".eyebrow-line", { scaleX: 0 });
+    gsap.set(".title-word", { y: 80, opacity: 0, rotationX: -40 });
+    gsap.set(".hero-subtitle", { y: 30, opacity: 0 });
+
+    heroTl
+      .to(".eyebrow-line", { scaleX: 1, duration: 0.8, stagger: 0.1 }, 0.3)
+      .to(
+        ".hero-eyebrow span:not(.eyebrow-line)",
+        { y: 0, opacity: 1, duration: 0.6 },
+        0.5,
+      )
+      .to(
+        ".title-word",
+        {
+          y: 0,
+          opacity: 1,
+          rotationX: 0,
+          duration: 1,
+          stagger: 0.08,
+          ease: "power4.out",
+        },
+        0.6,
+      )
+      .to(
+        ".hero-subtitle",
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+        },
+        1,
+      );
+
+    // ============================================
+    // MISSION SECTION
+    // ============================================
+    gsap.set(".mission-content .section-eyebrow", { y: 30, opacity: 0 });
+    gsap.set(".mission-quote", { y: 50, opacity: 0 });
+
+    var missionTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".mission-section",
+        start: "top 70%",
+      },
+    });
+
+    missionTl
+      .to(".mission-content .section-eyebrow", {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: "power3.out",
+      })
+      .to(
+        ".mission-quote",
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power4.out",
+        },
+        "-=0.3",
+      );
+
+    // ============================================
+    // STRATEGY SECTION
+    // ============================================
+    gsap.set(".strategy-header .section-eyebrow", { y: 30, opacity: 0 });
+    gsap.set(".headline-word-0", { y: 60, opacity: 0, rotationX: -30 });
+    gsap.set(".strategy-subtitle", { y: 30, opacity: 0 });
+    gsap.set(".process-step", { x: -60, opacity: 0 });
+    gsap.set(".improvements-card", {
+      y: 60,
+      opacity: 0,
+      clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)",
+    });
+
+    var strategyTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".strategy-section",
+        start: "top 65%",
+      },
+    });
+
+    strategyTl
+      .to(".strategy-header .section-eyebrow", {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: "power3.out",
+      })
+      .to(
+        ".headline-word-0",
+        {
+          y: 0,
+          opacity: 1,
+          rotationX: 0,
+          duration: 0.8,
+          stagger: 0.05,
+          ease: "power4.out",
+        },
+        "-=0.3",
+      )
+      .to(
+        ".strategy-subtitle",
+        { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" },
+        "-=0.4",
+      )
+      .to(
+        ".process-step",
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.12,
+          ease: "power3.out",
+        },
+        "-=0.2",
+      )
+      .to(
+        ".improvements-card",
+        {
+          y: 0,
+          opacity: 1,
+          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+          duration: 1,
+          ease: "power4.out",
+        },
+        "-=0.6",
+      );
+
+    // Improvement items stagger
+    gsap.set(".improvement-item", { x: -20, opacity: 0 });
+    ScrollTrigger.create({
+      trigger: ".improvements-card",
+      start: "top 70%",
+      onEnter: function () {
+        gsap.to(".improvement-item", {
+          x: 0,
+          opacity: 1,
+          duration: 0.5,
+          stagger: 0.08,
+          ease: "power3.out",
+          delay: 0.5,
+        });
+      },
+    });
+
+    // ============================================
+    // INTEGRATION SECTION
+    // ============================================
+    gsap.set(".integration-content .section-eyebrow", { y: 30, opacity: 0 });
+    gsap.set(".integration-headline", { y: 50, opacity: 0 });
+    gsap.set(".integration-description", { y: 40, opacity: 0 });
+    gsap.set(".integration-stat", { y: 40, opacity: 0, scale: 0.9 });
+    gsap.set(".visual-card", {
+      y: 60,
+      opacity: 0,
+      scale: 0.95,
+    });
+
+    var integrationTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".integration-section",
+        start: "top 65%",
+      },
+    });
+
+    integrationTl
+      .to(".integration-content .section-eyebrow", {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: "power3.out",
+      })
+      .to(
+        ".integration-headline",
+        { y: 0, opacity: 1, duration: 0.8, ease: "power4.out" },
+        "-=0.3",
+      )
+      .to(
+        ".integration-description",
+        { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" },
+        "-=0.4",
+      )
+      .to(
+        ".integration-stat",
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: "back.out(1.7)",
+          onComplete: function () {
+            startIntegrationCounters();
+          },
+        },
+        "-=0.3",
+      )
+      .to(
+        ".visual-card",
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "power4.out",
+        },
+        "-=0.4",
+      );
+
+    // Counter animation for integration stats
+    var integrationCountersStarted = false;
+    function startIntegrationCounters() {
+      if (integrationCountersStarted) return;
+      integrationCountersStarted = true;
+
+      var statNumbers = document.querySelectorAll(
+        ".integration-stat .stat-number",
+      );
+      statNumbers.forEach(function (stat) {
+        var target = parseInt(stat.getAttribute("data-count") || "0");
+        var suffix = stat.getAttribute("data-suffix") || "";
+        var obj = { value: 0 };
+        gsap.to(obj, {
+          value: target,
+          duration: 2,
+          ease: "power2.out",
+          onUpdate: function () {
+            stat.textContent = Math.floor(obj.value) + suffix;
+          },
+        });
+      });
+    }
+
+    // Visual card hover effects
+    document.querySelectorAll(".visual-card").forEach(function (card) {
+      var img = card.querySelector("img");
+      card.addEventListener("mouseenter", function () {
+        gsap.to(img, { scale: 1.1, duration: 0.6, ease: "power2.out" });
+      });
+      card.addEventListener("mouseleave", function () {
+        gsap.to(img, { scale: 1, duration: 0.5, ease: "power2.out" });
+      });
+    });
+
+    // ============================================
+    // BRAND SECTION
+    // ============================================
+    gsap.set(".brand-header .section-eyebrow", { y: 30, opacity: 0 });
+    gsap.set(".headline-word-1", { y: 60, opacity: 0, rotationX: -30 });
+    gsap.set(".brand-subtitle", { y: 30, opacity: 0 });
+    gsap.set(".brand-card", { y: 80, opacity: 0, scale: 0.95 });
+    gsap.set(".brand-statement", { y: 40, opacity: 0 });
+
+    var brandTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".brand-section",
+        start: "top 65%",
+      },
+    });
+
+    brandTl
+      .to(".brand-header .section-eyebrow", {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: "power3.out",
+      })
+      .to(
+        ".headline-word-1",
+        {
+          y: 0,
+          opacity: 1,
+          rotationX: 0,
+          duration: 0.8,
+          stagger: 0.05,
+          ease: "power4.out",
+        },
+        "-=0.3",
+      )
+      .to(
+        ".brand-subtitle",
+        { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" },
+        "-=0.4",
+      )
+      .to(
+        ".brand-card",
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power4.out",
+        },
+        "-=0.2",
+      )
+      .to(
+        ".brand-statement",
+        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+        "-=0.3",
+      );
+
+    // Brand card hover parallax
+    document.querySelectorAll(".brand-card").forEach(function (card) {
+      card.addEventListener("mousemove", function (e) {
+        var rect = card.getBoundingClientRect();
+        var x = (e.clientX - rect.left) / rect.width - 0.5;
+        var y = (e.clientY - rect.top) / rect.height - 0.5;
+
+        gsap.to(card, {
+          rotationY: x * 8,
+          rotationX: -y * 8,
+          duration: 0.4,
+          ease: "power2.out",
+          transformPerspective: 1000,
+        });
+      });
+
+      card.addEventListener("mouseleave", function () {
+        gsap.to(card, {
+          rotationY: 0,
+          rotationX: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        });
+      });
+    });
+
+    // ============================================
+    // CTA SECTION
+    // ============================================
+    gsap.set(".cta-word", { y: 60, opacity: 0, rotationX: -30 });
+    gsap.set(".cta-description", { y: 30, opacity: 0 });
+    gsap.set(".cta-button", { y: 30, opacity: 0, scale: 0.9 });
+
+    var ctaTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".cta-section",
+        start: "top 70%",
+      },
+    });
+
+    ctaTl
+      .to(".cta-word", {
+        y: 0,
+        opacity: 1,
+        rotationX: 0,
+        duration: 1,
+        stagger: 0.08,
+        ease: "power4.out",
+      })
+      .to(
+        ".cta-description",
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+        },
+        "-=0.5",
+      )
+      .to(
+        ".cta-button",
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "back.out(1.7)",
+        },
+        "-=0.4",
+      );
+
+    // ============================================
+    // PARALLAX EFFECTS
+    // ============================================
+    gsap.to(".hero-image img", {
+      scrollTrigger: {
+        trigger: ".hero",
+        start: "top top",
+        end: "bottom top",
+        scrub: 1,
+      },
+      y: 100,
+      scale: 1.2,
+      ease: "none",
+    });
+
+    // Mission section parallax
+    gsap.to(".mission-quote", {
+      scrollTrigger: {
+        trigger: ".mission-section",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1,
+      },
+      y: -30,
+      ease: "none",
+    });
+
+    console.log("✨ All about page animations initialized!");
+  });
+</script>
+
 <style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+  :root {
+    --padding-xl: 70px;
+    --padding-lg: 56px;
+    --padding-md: 48px;
+    --padding-sm: 32px;
+    --padding-xs: 20px;
+    --max-width: 1440px;
+    --color-primary: #1a1a1a;
+    --color-secondary: #8a7f6e;
+    --color-cream: #f5f2ed;
+    --color-warm: #dbd3c6;
+    --font-display: "Poppins", sans-serif;
+    --font-body: "Inter", sans-serif;
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ============================================
+       CUSTOM CURSOR
+       ============================================ */
+  .cursor-dot {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+  }
+
+  .cursor-ring {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--color-primary);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: border-color 0.3s ease;
+  }
+
+  @media (max-width: 768px) {
+    .cursor-dot,
+    .cursor-ring {
+      display: none;
+    }
+  }
+
+  .page {
+    background: #fff;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  @media (max-width: 768px) {
+    .page {
+      cursor: auto;
+    }
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-image {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .hero-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0.4) 50%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+    z-index: 2;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    will-change: transform;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    padding: 0 var(--padding-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 1);
+    margin-bottom: 20px;
+  }
+
+  .eyebrow-line {
+    width: 60px;
+    height: 1px;
+    background: rgba(255, 255, 255, 1);
+    transform-origin: center;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 400;
+    line-height: 1.1;
+    color: #fff;
+    letter-spacing: -1px;
+    margin: 0 0 16px 0;
+    perspective: 1000px;
+  }
+
+  .title-word {
+    transform-style: preserve-3d;
+  }
+
+  .hero-subtitle {
+    font-family: var(--font-body);
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+  }
+
+  .section-eyebrow {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .section-eyebrow.light {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .section-headline {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 3.5vw, 48px);
+    font-weight: 400;
+    color: var(--color-primary);
+    margin: 0;
+    perspective: 1000px;
+  }
+
+  /* Mission */
+  .mission-section {
+    padding: var(--padding-xl) var(--padding-md);
+    background: var(--color-primary);
+  }
+
+  .mission-container {
+    max-width: 850px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .mission-content .section-eyebrow {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .mission-quote {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 2.5vw, 32px);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.5;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  /* Strategy */
+  .strategy-section {
+    padding: var(--padding-xl) var(--padding-md);
+    background: #fff;
+  }
+
+  .strategy-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .strategy-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .strategy-subtitle {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: #666;
+    margin: 16px auto 0;
+    max-width: 680px;
+    line-height: 1.6;
+  }
+
+  .strategy-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .process-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .process-step {
+    display: flex;
+    gap: 20px;
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    transition: transform 0.4s var(--ease);
+  }
+
+  .process-step:hover {
+    transform: translateX(10px);
+  }
+
+  .process-step:last-child {
+    border-bottom: none;
+  }
+
+  .step-number {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-cream);
+    flex-shrink: 0;
+    transition: all 0.4s var(--ease);
+  }
+
+  .process-step:hover .step-number {
+    background: var(--color-primary);
+  }
+
+  .process-step:hover .step-number span {
+    color: #fff;
+  }
+
+  .step-number span {
+    font-family: var(--font-display);
+    font-size: 16px;
+    color: var(--color-secondary);
+    transition: color 0.4s var(--ease);
+  }
+
+  .step-content {
+    flex: 1;
+  }
+
+  .step-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--color-primary);
+    margin: 0 0 6px 0;
+  }
+
+  .step-description {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.6;
+    color: #666;
+    margin: 0;
+  }
+
+  .improvements-card {
+    background: var(--color-cream);
+    padding: 32px;
+    overflow: hidden;
+  }
+
+  .improvements-title {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--color-primary);
+    margin: 0 0 10px 0;
+  }
+
+  .improvements-intro {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: #666;
+    margin: 0 0 20px 0;
+    line-height: 1.5;
+  }
+
+  .improvements-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .improvement-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--color-primary);
+    transition: transform 0.3s var(--ease);
+  }
+
+  .improvement-item:hover {
+    transform: translateX(5px);
+  }
+
+  .improvement-check {
+    color: var(--color-secondary);
+    display: flex;
+  }
+
+  /* Integration */
+  .integration-section {
+    padding: var(--padding-xl) var(--padding-md);
+    background: var(--color-primary);
+    overflow: hidden;
+  }
+
+  .integration-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    align-items: center;
+  }
+
+  .integration-headline {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 400;
+    line-height: 1.2;
+    color: #fff;
+    margin: 0 0 20px 0;
+  }
+
+  .integration-description {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0 0 32px 0;
+  }
+
+  .integration-stats {
+    display: flex;
+    gap: 32px;
+  }
+
+  .integration-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 300;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.5px;
+  }
+
+  .integration-visual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .visual-card {
+    position: relative;
+    cursor: none;
+    overflow: hidden;
+  }
+
+  .visual-image {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+  }
+
+  .visual-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease);
+  }
+
+  .visual-label {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 6px 12px;
+    transition: all 0.4s var(--ease);
+  }
+
+  .visual-card:hover .visual-label {
+    background: var(--color-secondary);
+  }
+
+  /* Brand */
+  .brand-section {
+    padding: var(--padding-xl) var(--padding-md);
+    background: var(--color-cream);
+  }
+
+  .brand-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .brand-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .brand-subtitle {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: #666;
+    margin: 16px auto 0;
+    max-width: 580px;
+    line-height: 1.6;
+  }
+
+  .brand-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .brand-card {
+    background: #fff;
+    padding: 32px;
+    transition: all 0.4s var(--ease);
+    cursor: none;
+    transform-style: preserve-3d;
+  }
+
+  .brand-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+  }
+
+  .brand-number {
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--color-secondary);
+    display: block;
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+    opacity: 0.6;
+  }
+
+  .brand-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--color-primary);
+    margin: 0 0 12px 0;
+  }
+
+  .brand-description {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.6;
+    color: #555;
+    margin: 0;
+  }
+
+  .brand-statement {
+    max-width: 780px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 32px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .brand-statement p {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.7;
+    color: #555;
+    margin: 0;
+    font-style: italic;
+  }
+
+  /* CTA */
+  .cta-section {
+    padding: var(--padding-xl) var(--padding-md);
+    background: var(--color-warm);
+    text-align: center;
+  }
+
+  .cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta-headline {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 3.5vw, 48px);
+    font-weight: 400;
+    color: var(--color-primary);
+    margin: 0 0 16px 0;
+    perspective: 1000px;
+  }
+
+  .cta-word {
+    display: inline-block;
+    transform-style: preserve-3d;
+  }
+
+  .cta-description {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.7;
+    color: #555;
+    margin: 0 0 32px 0;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 16px 32px;
+    transition: all 0.4s var(--ease);
+    cursor: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  .cta-button:hover::before {
+    left: 100%;
+  }
+
+  .cta-button.primary {
+    color: #fff;
+    background: var(--color-primary);
+    border-radius: 30px;
+  }
+
+  .cta-button.primary:hover {
+    background: #333;
+    gap: 16px;
+  }
+
+  .cta-button.secondary {
+    color: var(--color-primary);
+    background: transparent;
+    border: 1px solid var(--color-primary);
+    border-radius: 30px;
+  }
+
+  .cta-button.secondary:hover {
+    background: var(--color-primary);
+    color: #fff;
+    gap: 16px;
+  }
+
+  .cta-button svg {
+    transition: transform 0.3s var(--ease);
+  }
+
+  .cta-button:hover svg {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 1024px) {
+    .strategy-content {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .integration-container {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .integration-visual {
+      order: -1;
+    }
+    .brand-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 768px) {
     :root {
-        --padding-xl: 70px;
-        --padding-lg: 56px;
-        --padding-md: 48px;
-        --padding-sm: 32px;
-        --padding-xs: 20px;
-        --max-width: 1440px;
-        --color-primary: #1a1a1a;
-        --color-secondary: #8a7f6e;
-        --color-cream: #f5f2ed;
-        --color-warm: #dbd3c6;
-        --font-display: "Cormorant Garamond", serif;
-        --font-body: "Inter", sans-serif;
-        --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --padding-xl: 56px;
+      --padding-lg: 40px;
+      --padding-md: 20px;
     }
 
-    .page { background: #fff; overflow-x: hidden; }
-
-    /* Hero */
-    .hero { position: relative; width: 100%; height: 50vh; min-height: 400px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-    .hero-image { position: absolute; inset: 0; z-index: 1; }
-    .hero-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.6) 100%); z-index: 2; }
-    .hero-image img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.05); animation: heroZoom 20s ease-in-out infinite alternate; }
-    @keyframes heroZoom { from { transform: scale(1.05); } to { transform: scale(1.15); } }
-
-    .hero-content { position: relative; z-index: 3; text-align: center; padding: 0 var(--padding-md); display: flex; flex-direction: column; align-items: center; }
-    .hero-eyebrow { display: flex; align-items: center; gap: 20px; font-family: var(--font-body); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,1); margin-bottom: 20px; }
-    .eyebrow-line { width: 60px; height: 1px; background: rgba(255,255,255,1); }
-    .hero-title { font-family: var(--font-display); font-size: clamp(36px, 5vw, 64px); font-weight: 400; line-height: 1.1; color: #fff; letter-spacing: -1px; margin: 0 0 16px 0; }
-    .hero-subtitle { font-family: var(--font-body); font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.7); margin: 0; }
-
-    .section-eyebrow { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--color-secondary); display: block; margin-bottom: 12px; }
-    .section-eyebrow.light { color: rgba(255,255,255,0.6); }
-    .section-headline { font-family: var(--font-display); font-size: clamp(32px, 3.5vw, 48px); font-weight: 400; color: var(--color-primary); margin: 0; }
-
-    /* Mission */
-    .mission-section { padding: var(--padding-xl) var(--padding-md); background: var(--color-primary); }
-    .mission-container { max-width: 850px; margin: 0 auto; text-align: center; }
-    .mission-content .section-eyebrow { color: rgba(255,255,255,0.5); }
-    .mission-quote { font-family: var(--font-display); font-size: clamp(22px, 2.5vw, 32px); font-weight: 400; font-style: italic; line-height: 1.5; color: #fff; margin: 0; padding: 0; border: none; }
-
-    /* Strategy */
-    .strategy-section { padding: var(--padding-xl) var(--padding-md); background: #fff; }
-    .strategy-container { max-width: var(--max-width); margin: 0 auto; }
-    .strategy-header { text-align: center; margin-bottom: 48px; }
-    .strategy-subtitle { font-family: var(--font-body); font-size: 15px; color: #666; margin: 16px auto 0; max-width: 680px; line-height: 1.6; }
-
-    .strategy-content { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
-
-    .process-steps { display: flex; flex-direction: column; gap: 0; }
-    .process-step { display: flex; gap: 20px; padding: 24px 0; border-bottom: 1px solid rgba(0,0,0,0.08); }
-    .process-step:last-child { border-bottom: none; }
-    .step-number { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: var(--color-cream); flex-shrink: 0; }
-    .step-number span { font-family: var(--font-display); font-size: 16px; color: var(--color-secondary); }
-    .step-content { flex: 1; }
-    .step-title { font-family: var(--font-display); font-size: 22px; font-weight: 400; color: var(--color-primary); margin: 0 0 6px 0; }
-    .step-description { font-family: var(--font-body); font-size: 13px; line-height: 1.6; color: #666; margin: 0; }
-
-    .improvements-card { background: var(--color-cream); padding: 32px; }
-    .improvements-title { font-family: var(--font-display); font-size: 26px; font-weight: 400; color: var(--color-primary); margin: 0 0 10px 0; }
-    .improvements-intro { font-family: var(--font-body); font-size: 13px; color: #666; margin: 0 0 20px 0; line-height: 1.5; }
-    .improvements-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .improvement-item { display: flex; align-items: center; gap: 10px; font-family: var(--font-body); font-size: 13px; color: var(--color-primary); }
-    .improvement-check { color: var(--color-secondary); display: flex; }
-
-    /* Integration */
-    .integration-section { padding: var(--padding-xl) var(--padding-md); background: var(--color-primary); }
-    .integration-container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: var(--max-width); margin: 0 auto; align-items: center; }
-    .integration-headline { font-family: var(--font-display); font-size: clamp(28px, 3vw, 40px); font-weight: 400; line-height: 1.2; color: #fff; margin: 0 0 20px 0; }
-    .integration-description { font-family: var(--font-body); font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.75); margin: 0 0 32px 0; }
-
-    .integration-stats { display: flex; gap: 32px; }
-    .integration-stat { display: flex; flex-direction: column; gap: 4px; }
-    .stat-number { font-family: var(--font-display); font-size: 32px; font-weight: 300; color: #fff; line-height: 1; }
-    .stat-label { font-family: var(--font-body); font-size: 11px; color: rgba(255,255,255,0.6); letter-spacing: 0.5px; }
-
-    .integration-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .visual-card { position: relative; }
-    .visual-image { position: relative; aspect-ratio: 4/3; overflow: hidden; }
-    .visual-image img { width: 100%; height: 100%; object-fit: cover; }
-    .visual-label { position: absolute; bottom: 12px; left: 12px; font-family: var(--font-body); font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: #fff; background: rgba(0,0,0,0.6); padding: 6px 12px; }
-
-    /* Brand */
-    .brand-section { padding: var(--padding-xl) var(--padding-md); background: var(--color-cream); }
-    .brand-container { max-width: var(--max-width); margin: 0 auto; }
-    .brand-header { text-align: center; margin-bottom: 48px; }
-    .brand-subtitle { font-family: var(--font-body); font-size: 15px; color: #666; margin: 16px auto 0; max-width: 580px; line-height: 1.6; }
-
-    .brand-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 48px; }
-    .brand-card { background: #fff; padding: 32px; transition: all 0.4s var(--ease); }
-    .brand-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.1); }
-    .brand-number { font-family: var(--font-display); font-size: 13px; color: var(--color-secondary); display: block; margin-bottom: 16px; letter-spacing: 2px; opacity: 0.6; }
-    .brand-title { font-family: var(--font-display); font-size: 24px; font-weight: 400; color: var(--color-primary); margin: 0 0 12px 0; }
-    .brand-description { font-family: var(--font-body); font-size: 13px; line-height: 1.6; color: #555; margin: 0; }
-
-    .brand-statement { max-width: 780px; margin: 0 auto; text-align: center; padding-top: 32px; border-top: 1px solid rgba(0,0,0,0.1); }
-    .brand-statement p { font-family: var(--font-body); font-size: 15px; line-height: 1.7; color: #555; margin: 0; font-style: italic; }
-
-    /* CTA */
-    .cta-section { padding: var(--padding-xl) var(--padding-md); background: var(--color-warm); text-align: center; }
-    .cta-content { max-width: 600px; margin: 0 auto; }
-    .cta-headline { font-family: var(--font-display); font-size: clamp(32px, 3.5vw, 48px); font-weight: 400; color: var(--color-primary); margin: 0 0 16px 0; }
-    .cta-description { font-family: var(--font-body); font-size: 15px; line-height: 1.7; color: #555; margin: 0 0 32px 0; }
-
-    .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-    .cta-button { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; padding: 16px 32px; transition: all 0.4s var(--ease); }
-    .cta-button.primary { color: #fff; background: var(--color-primary); border-radius: 30px; }
-    .cta-button.primary:hover { background: #333; gap: 16px; }
-    .cta-button.secondary { color: var(--color-primary); background: transparent; border: 1px solid var(--color-primary); border-radius: 30px; }
-    .cta-button.secondary:hover { background: var(--color-primary); color: #fff; gap: 16px; }
-
-    @media (max-width: 1024px) {
-        .strategy-content { grid-template-columns: 1fr; gap: 32px; }
-        .integration-container { grid-template-columns: 1fr; gap: 48px; }
-        .integration-visual { order: -1; }
-        .brand-grid { grid-template-columns: 1fr; gap: 20px; }
+    .page {
+      cursor: auto;
     }
 
-    @media (max-width: 768px) {
-        :root { --padding-xl: 56px; --padding-lg: 40px; --padding-md: 20px; }
-        .hero { height: 45vh; min-height: 350px; }
-        .hero-eyebrow { font-size: 10px; gap: 16px; }
-        .eyebrow-line { width: 40px; }
-        .improvements-grid { grid-template-columns: 1fr; }
-        .integration-stats { flex-direction: column; gap: 20px; }
-        .integration-visual { grid-template-columns: 1fr; }
-        .cta-buttons { flex-direction: column; }
-        .cta-button { width: 100%; justify-content: center; }
+    .hero {
+      height: 45vh;
+      min-height: 350px;
     }
+    .hero-eyebrow {
+      font-size: 10px;
+      gap: 16px;
+    }
+    .eyebrow-line {
+      width: 40px;
+    }
+    .improvements-grid {
+      grid-template-columns: 1fr;
+    }
+    .integration-stats {
+      flex-direction: column;
+      gap: 20px;
+    }
+    .integration-visual {
+      grid-template-columns: 1fr;
+    }
+    .cta-buttons {
+      flex-direction: column;
+    }
+    .cta-button {
+      width: 100%;
+      justify-content: center;
+    }
+
+    a,
+    button,
+    .brand-card,
+    .visual-card {
+      cursor: pointer;
+    }
+  }
 </style>
 
 <style is:global>
-    ::selection { background: #1a1a1a; color: #fff; }
-    html { scroll-behavior: smooth; }
+  ::selection {
+    background: #1a1a1a;
+    color: #fff;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (min-width: 769px) {
+    * {
+      cursor: none !important;
+    }
+  }
 </style>

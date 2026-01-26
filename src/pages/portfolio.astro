@@ -3,331 +3,1349 @@
 import Layout from "../layouts/Layout.astro";
 
 const properties = [
-    {
-        name: "Westfield Industrial Park",
-        slug: "westfield-industrial-park",
-        location: "Phoenix, AZ",
-        address: "4521 Commerce Way",
-        buildings: 5,
-        squareFeet: "125,000",
-        image: "/images/property1.png",
-        type: "Multi-Tenant Industrial"
-    },
-    {
-        name: "Metro Distribution Center",
-        slug: "metro-distribution-center",
-        location: "Dallas, TX",
-        address: "8900 Logistics Blvd",
-        buildings: 3,
-        squareFeet: "89,000",
-        image: "/images/property2.png",
-        type: "Distribution"
-    },
-    {
-        name: "Summit Business Complex",
-        slug: "summit-business-complex",
-        location: "Atlanta, GA",
-        address: "2100 Enterprise Dr",
-        buildings: 8,
-        squareFeet: "210,000",
-        image: "/images/hero.png",
-        type: "Flex Space"
-    },
-    {
-        name: "Gateway Industrial",
-        slug: "gateway-industrial",
-        location: "Tampa, FL",
-        address: "750 Gateway Parkway",
-        buildings: 4,
-        squareFeet: "156,000",
-        image: "/images/property1.png",
-        type: "Warehouse"
-    },
-    {
-        name: "Crossroads Flex Center",
-        slug: "crossroads-flex-center",
-        location: "Charlotte, NC",
-        address: "3300 Crossroads Ave",
-        buildings: 6,
-        squareFeet: "98,000",
-        image: "/images/property2.png",
-        type: "Flex Space"
-    },
-    {
-        name: "Riverside Commerce Park",
-        slug: "riverside-commerce-park",
-        location: "Nashville, TN",
-        address: "1200 River Road",
-        buildings: 7,
-        squareFeet: "175,000",
-        image: "/images/hero.png",
-        type: "Multi-Tenant Industrial"
-    },
+  {
+    name: "Westfield Industrial Park",
+    slug: "westfield-industrial-park",
+    location: "Phoenix, AZ",
+    address: "4521 Commerce Way",
+    buildings: 5,
+    squareFeet: "125,000",
+    image: "/images/property1.png",
+    type: "Multi-Tenant Industrial",
+  },
+  {
+    name: "Metro Distribution Center",
+    slug: "metro-distribution-center",
+    location: "Dallas, TX",
+    address: "8900 Logistics Blvd",
+    buildings: 3,
+    squareFeet: "89,000",
+    image: "/images/property2.png",
+    type: "Distribution",
+  },
+  {
+    name: "Summit Business Complex",
+    slug: "summit-business-complex",
+    location: "Atlanta, GA",
+    address: "2100 Enterprise Dr",
+    buildings: 8,
+    squareFeet: "210,000",
+    image: "/images/hero.png",
+    type: "Flex Space",
+  },
+  {
+    name: "Gateway Industrial",
+    slug: "gateway-industrial",
+    location: "Tampa, FL",
+    address: "750 Gateway Parkway",
+    buildings: 4,
+    squareFeet: "156,000",
+    image: "/images/property1.png",
+    type: "Warehouse",
+  },
+  {
+    name: "Crossroads Flex Center",
+    slug: "crossroads-flex-center",
+    location: "Charlotte, NC",
+    address: "3300 Crossroads Ave",
+    buildings: 6,
+    squareFeet: "98,000",
+    image: "/images/property2.png",
+    type: "Flex Space",
+  },
+  {
+    name: "Riverside Commerce Park",
+    slug: "riverside-commerce-park",
+    location: "Nashville, TN",
+    address: "1200 River Road",
+    buildings: 7,
+    squareFeet: "175,000",
+    image: "/images/hero.png",
+    type: "Multi-Tenant Industrial",
+  },
 ];
 
 const stats = [
-    { number: "6", label: "Properties" },
-    { number: "853,000", label: "Total SF" },
-    { number: "33", label: "Buildings" },
-    { number: "6", label: "Markets" },
+  { number: "6", label: "Properties" },
+  { number: "853000", label: "Total SF", display: "853,000" },
+  { number: "33", label: "Buildings" },
+  { number: "6", label: "Markets" },
 ];
 ---
 
 <Layout>
-    <div class="page">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-image">
-                <img src="/images/hero.png" alt="Industrial Property" />
-            </div>
-            <div class="hero-content">
-                <div class="hero-eyebrow">
-                    <span class="eyebrow-line"></span>
-                    <span>Portfolio</span>
-                    <span class="eyebrow-line"></span>
+  <div class="page">
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-image">
+        <img src="/images/hero.png" alt="Industrial Property" />
+      </div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <span class="eyebrow-line"></span>
+          <span>Portfolio</span>
+          <span class="eyebrow-line"></span>
+        </div>
+        <h1 class="hero-title">Our Properties</h1>
+        <p class="hero-subtitle">Strategic acquisitions across the Southeast</p>
+      </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar">
+      <div class="stats-container">
+        {
+          stats.map((stat, index) => (
+            <>
+              <div class="stat-item">
+                <span
+                  class="stat-number"
+                  data-count={stat.number}
+                  data-display={stat.display || stat.number}
+                >
+                  0
+                </span>
+                <span class="stat-label">{stat.label}</span>
+              </div>
+              {index < stats.length - 1 && <div class="stat-divider" />}
+            </>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio-section">
+      <div class="portfolio-container">
+        <div class="portfolio-header">
+          <div class="portfolio-header-left">
+            <span class="section-eyebrow">Portfolio</span>
+            <h2 class="section-headline">Current Holdings</h2>
+          </div>
+          <div class="search-wrapper">
+            <svg
+              class="search-icon"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="M21 21l-4.35-4.35"></path>
+            </svg>
+            <input
+              type="text"
+              class="search-input"
+              placeholder="Search properties..."
+              id="propertySearch"
+            />
+          </div>
+        </div>
+
+        <div class="property-grid" id="propertyGrid">
+          {
+            properties.map((property, index) => (
+              <a
+                href={`/portfolio/${property.slug}`}
+                class="property-card"
+                data-name={property.name.toLowerCase()}
+                data-address={property.address.toLowerCase()}
+                data-location={property.location.toLowerCase()}
+                data-index={index}
+              >
+                <div class="property-image">
+                  <img src={property.image} alt={property.name} />
+                  <div class="property-overlay">
+                    <span class="property-type">{property.type}</span>
+                    <span class="property-cta">View Details →</span>
+                  </div>
                 </div>
-                <h1 class="hero-title">Our Properties</h1>
-                <p class="hero-subtitle">Strategic acquisitions across the Southeast</p>
-            </div>
-        </section>
-
-        <!-- Stats Bar -->
-        <section class="stats-bar">
-            <div class="stats-container">
-                {stats.map((stat, index) => (
-                    <>
-                        <div class="stat-item">
-                            <span class="stat-number">{stat.number}</span>
-                            <span class="stat-label">{stat.label}</span>
-                        </div>
-                        {index < stats.length - 1 && <div class="stat-divider"></div>}
-                    </>
-                ))}
-            </div>
-        </section>
-
-        <!-- Portfolio Section -->
-        <section class="portfolio-section">
-            <div class="portfolio-container">
-                <div class="portfolio-header">
-                    <div class="portfolio-header-left">
-                        <span class="section-eyebrow">Portfolio</span>
-                        <h2 class="section-headline">Current Holdings</h2>
+                <div class="property-info">
+                  <span class="property-location">{property.location}</span>
+                  <h3 class="property-name">{property.name}</h3>
+                  <div class="property-meta">
+                    <div class="meta-item">
+                      <span class="meta-value">{property.squareFeet}</span>
+                      <span class="meta-label">SF</span>
                     </div>
-                    <div class="search-wrapper">
-                        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <path d="M21 21l-4.35-4.35"></path>
-                        </svg>
-                        <input type="text" class="search-input" placeholder="Search properties..." id="propertySearch" />
+                    <div class="meta-divider" />
+                    <div class="meta-item">
+                      <span class="meta-value">{property.buildings}</span>
+                      <span class="meta-label">Buildings</span>
                     </div>
+                  </div>
                 </div>
+              </a>
+            ))
+          }
+        </div>
 
-                <div class="property-grid" id="propertyGrid">
-                    {properties.map((property, index) => (
-                        <a href={`/portfolio/${property.slug}`} class="property-card" data-name={property.name.toLowerCase()} data-address={property.address.toLowerCase()} data-location={property.location.toLowerCase()} style={`animation-delay: ${index * 0.1}s`}>
-                            <div class="property-image">
-                                <img src={property.image} alt={property.name} />
-                                <div class="property-overlay">
-                                    <span class="property-type">{property.type}</span>
-                                    <span class="property-cta">View Details</span>
-                                </div>
-                            </div>
-                            <div class="property-info">
-                                <span class="property-location">{property.location}</span>
-                                <h3 class="property-name">{property.name}</h3>
-                                <div class="property-meta">
-                                    <div class="meta-item">
-                                        <span class="meta-value">{property.squareFeet}</span>
-                                        <span class="meta-label">SF</span>
-                                    </div>
-                                    <div class="meta-divider"></div>
-                                    <div class="meta-item">
-                                        <span class="meta-value">{property.buildings}</span>
-                                        <span class="meta-label">Buildings</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    ))}
-                </div>
+        <div class="no-results" id="noResults">
+          <div class="no-results-icon">
+            <svg
+              width="48"
+              height="48"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="M21 21l-4.35-4.35"></path>
+            </svg>
+          </div>
+          <h3>No Properties Found</h3>
+          <p>Try adjusting your search terms</p>
+        </div>
+      </div>
+    </section>
 
-                <div class="no-results" id="noResults">
-                    <div class="no-results-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <path d="M21 21l-4.35-4.35"></path>
-                        </svg>
-                    </div>
-                    <h3>No Properties Found</h3>
-                    <p>Try adjusting your search terms</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="cta-section">
-            <div class="cta-content">
-                <span class="section-eyebrow light">Acquisitions</span>
-                <h2 class="cta-headline">Have a Property That Fits?</h2>
-                <p class="cta-description">We're actively seeking small-bay industrial properties in the Southeast.</p>
-                <a href="/contact" class="cta-button">
-                    <span>Send Us A Deal</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                </a>
-            </div>
-        </section>
-    </div>
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="cta-content">
+        <span class="section-eyebrow light">Acquisitions</span>
+        <h2 class="cta-headline">Have a Property That Fits?</h2>
+        <p class="cta-description">
+          We're actively seeking small-bay industrial properties in the
+          Southeast.
+        </p>
+        <a href="/contact" class="cta-button magnetic-btn">
+          <span>Send Us A Deal</span>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
+    </section>
+  </div>
 </Layout>
 
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const searchInput = document.getElementById("propertySearch") as HTMLInputElement;
-        const propertyCards = document.querySelectorAll(".property-card");
-        const noResults = document.getElementById("noResults");
+<!-- GSAP & ScrollTrigger -->
+<script
+  is:inline
+  src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script
+  is:inline
+  src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+></script>
 
-        if (searchInput && noResults) {
-            searchInput.addEventListener("input", () => {
-                const searchTerm = searchInput.value.toLowerCase().trim();
-                let visibleCount = 0;
-                propertyCards.forEach((card) => {
-                    const name = card.getAttribute("data-name") || "";
-                    const address = card.getAttribute("data-address") || "";
-                    const location = card.getAttribute("data-location") || "";
-                    if (name.includes(searchTerm) || address.includes(searchTerm) || location.includes(searchTerm)) {
-                        (card as HTMLElement).style.display = "block";
-                        visibleCount++;
-                    } else {
-                        (card as HTMLElement).style.display = "none";
-                    }
-                });
-                noResults.style.display = visibleCount === 0 ? "flex" : "none";
-            });
-        }
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
-        }, { threshold: 0.1 });
-        propertyCards.forEach(card => observer.observe(card));
+    console.log("🚀 GSAP loaded, starting portfolio page animations...");
+
+    // ============================================
+    // TEXT SPLITTING UTILITY
+    // ============================================
+    function splitTextIntoSpans(element, className) {
+      if (!element) return [];
+      var text = element.textContent;
+      var words = text.trim().split(/\s+/);
+      element.innerHTML = words
+        .map(function (word) {
+          return (
+            '<span class="' +
+            className +
+            '" style="display: inline-block;">' +
+            word +
+            "&nbsp;</span>"
+          );
+        })
+        .join("");
+      return element.querySelectorAll("." + className);
+    }
+
+    // Split hero title
+    var heroTitle = document.querySelector(".hero-title");
+    splitTextIntoSpans(heroTitle, "title-word");
+
+    // Split section headline
+    var sectionHeadline = document.querySelector(".section-headline");
+    splitTextIntoSpans(sectionHeadline, "headline-word");
+
+    // Split CTA headline
+    var ctaHeadline = document.querySelector(".cta-headline");
+    splitTextIntoSpans(ctaHeadline, "cta-word");
+
+    // ============================================
+    // CUSTOM CURSOR
+    // ============================================
+    var cursorDot = document.querySelector(".cursor-dot");
+    var cursorRing = document.querySelector(".cursor-ring");
+    var mouseX = 0,
+      mouseY = 0;
+    var ringX = 0,
+      ringY = 0;
+
+    if (cursorDot && cursorRing && window.innerWidth > 768) {
+      document.addEventListener("mousemove", function (e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        gsap.to(cursorDot, { x: mouseX, y: mouseY, duration: 0.1 });
+      });
+
+      function animateCursor() {
+        ringX += (mouseX - ringX) * 0.15;
+        ringY += (mouseY - ringY) * 0.15;
+        gsap.set(cursorRing, { x: ringX, y: ringY });
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+
+      var hoverElements = document.querySelectorAll(
+        "a, button, .property-card, .search-input",
+      );
+      hoverElements.forEach(function (el) {
+        el.addEventListener("mouseenter", function () {
+          gsap.to(cursorRing, {
+            scale: 1.5,
+            borderColor: "#8a7f6e",
+            duration: 0.3,
+          });
+          gsap.to(cursorDot, { scale: 0.5, duration: 0.3 });
+        });
+        el.addEventListener("mouseleave", function () {
+          gsap.to(cursorRing, {
+            scale: 1,
+            borderColor: "#1a1a1a",
+            duration: 0.3,
+          });
+          gsap.to(cursorDot, { scale: 1, duration: 0.3 });
+        });
+      });
+    }
+
+    // ============================================
+    // MAGNETIC BUTTON EFFECT
+    // ============================================
+    var magneticBtns = document.querySelectorAll(".magnetic-btn");
+    magneticBtns.forEach(function (btn) {
+      btn.addEventListener("mousemove", function (e) {
+        var rect = btn.getBoundingClientRect();
+        var x = e.clientX - rect.left - rect.width / 2;
+        var y = e.clientY - rect.top - rect.height / 2;
+        gsap.to(btn, {
+          x: x * 0.3,
+          y: y * 0.3,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      });
+      btn.addEventListener("mouseleave", function () {
+        gsap.to(btn, {
+          x: 0,
+          y: 0,
+          duration: 0.5,
+          ease: "elastic.out(1, 0.3)",
+        });
+      });
     });
+
+    // ============================================
+    // HERO ANIMATIONS
+    // ============================================
+    var heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+    gsap.set(".hero-eyebrow span:not(.eyebrow-line)", { y: 30, opacity: 0 });
+    gsap.set(".eyebrow-line", { scaleX: 0 });
+    gsap.set(".title-word", { y: 80, opacity: 0, rotationX: -40 });
+    gsap.set(".hero-subtitle", { y: 30, opacity: 0 });
+
+    heroTl
+      .to(".eyebrow-line", { scaleX: 1, duration: 0.8, stagger: 0.1 }, 0.3)
+      .to(
+        ".hero-eyebrow span:not(.eyebrow-line)",
+        { y: 0, opacity: 1, duration: 0.6 },
+        0.5,
+      )
+      .to(
+        ".title-word",
+        {
+          y: 0,
+          opacity: 1,
+          rotationX: 0,
+          duration: 1,
+          stagger: 0.08,
+          ease: "power4.out",
+        },
+        0.6,
+      )
+      .to(
+        ".hero-subtitle",
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+        },
+        1,
+      );
+
+    // Hero parallax
+    gsap.to(".hero-image img", {
+      scrollTrigger: {
+        trigger: ".hero",
+        start: "top top",
+        end: "bottom top",
+        scrub: 1,
+      },
+      y: 100,
+      scale: 1.2,
+      ease: "none",
+    });
+
+    // ============================================
+    // STATS BAR ANIMATIONS
+    // ============================================
+    gsap.set(".stat-item", { y: 30, opacity: 0 });
+    gsap.set(".stat-divider", { scaleY: 0 });
+
+    var statsAnimated = false;
+    ScrollTrigger.create({
+      trigger: ".stats-bar",
+      start: "top 85%",
+      onEnter: function () {
+        if (statsAnimated) return;
+        statsAnimated = true;
+
+        gsap.to(".stat-item", {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power3.out",
+          onComplete: function () {
+            animateStatCounters();
+          },
+        });
+
+        gsap.to(".stat-divider", {
+          scaleY: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power3.out",
+          delay: 0.2,
+        });
+      },
+    });
+
+    function animateStatCounters() {
+      var statNumbers = document.querySelectorAll(".stat-number");
+      statNumbers.forEach(function (stat) {
+        var target = parseInt(stat.getAttribute("data-count") || "0");
+        var display = stat.getAttribute("data-display") || target.toString();
+        var obj = { value: 0 };
+
+        gsap.to(obj, {
+          value: target,
+          duration: 2,
+          ease: "power2.out",
+          onUpdate: function () {
+            // Format with commas for large numbers
+            if (target > 1000) {
+              stat.textContent = Math.floor(obj.value).toLocaleString();
+            } else {
+              stat.textContent = Math.floor(obj.value);
+            }
+          },
+          onComplete: function () {
+            stat.textContent = display;
+          },
+        });
+      });
+    }
+
+    // ============================================
+    // PORTFOLIO HEADER ANIMATIONS
+    // ============================================
+    gsap.set(".portfolio-header-left .section-eyebrow", { y: 30, opacity: 0 });
+    gsap.set(".headline-word", { y: 60, opacity: 0, rotationX: -30 });
+    gsap.set(".search-wrapper", { y: 30, opacity: 0, scale: 0.95 });
+
+    var portfolioHeaderTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".portfolio-section",
+        start: "top 75%",
+      },
+    });
+
+    portfolioHeaderTl
+      .to(".portfolio-header-left .section-eyebrow", {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: "power3.out",
+      })
+      .to(
+        ".headline-word",
+        {
+          y: 0,
+          opacity: 1,
+          rotationX: 0,
+          duration: 0.8,
+          stagger: 0.05,
+          ease: "power4.out",
+        },
+        "-=0.3",
+      )
+      .to(
+        ".search-wrapper",
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.6,
+          ease: "back.out(1.7)",
+        },
+        "-=0.4",
+      );
+
+    // Search input focus animation
+    var searchWrapper = document.querySelector(".search-wrapper");
+    var searchInput = document.getElementById("propertySearch");
+
+    if (searchInput && searchWrapper) {
+      searchInput.addEventListener("focus", function () {
+        gsap.to(searchWrapper, {
+          scale: 1.02,
+          boxShadow: "0 8px 30px rgba(0,0,0,0.12)",
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      });
+      searchInput.addEventListener("blur", function () {
+        gsap.to(searchWrapper, {
+          scale: 1,
+          boxShadow: "0 0 0 rgba(0,0,0,0)",
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      });
+    }
+
+    // ============================================
+    // PROPERTY CARDS ANIMATIONS
+    // ============================================
+    var propertyCards = document.querySelectorAll(".property-card");
+
+    propertyCards.forEach(function (card, index) {
+      gsap.set(card, {
+        y: 80,
+        opacity: 0,
+        scale: 0.95,
+      });
+
+      ScrollTrigger.create({
+        trigger: card,
+        start: "top 85%",
+        onEnter: function () {
+          gsap.to(card, {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            delay: (index % 3) * 0.1, // Stagger within each row
+            ease: "power4.out",
+          });
+        },
+      });
+    });
+
+    // Property card hover effects
+    propertyCards.forEach(function (card) {
+      var img = card.querySelector(".property-image img");
+      var overlay = card.querySelector(".property-overlay");
+      var info = card.querySelector(".property-info");
+
+      card.addEventListener("mouseenter", function () {
+        gsap.to(card, { y: -10, duration: 0.4, ease: "power2.out" });
+        gsap.to(img, { scale: 1.1, duration: 0.6, ease: "power2.out" });
+      });
+
+      card.addEventListener("mouseleave", function () {
+        gsap.to(card, { y: 0, duration: 0.4, ease: "power2.out" });
+        gsap.to(img, { scale: 1, duration: 0.6, ease: "power2.out" });
+      });
+
+      // Parallax effect on card hover
+      card.addEventListener("mousemove", function (e) {
+        var rect = card.getBoundingClientRect();
+        var x = (e.clientX - rect.left) / rect.width - 0.5;
+        var y = (e.clientY - rect.top) / rect.height - 0.5;
+
+        gsap.to(img, {
+          x: x * 10,
+          y: y * 10,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      });
+
+      card.addEventListener("mouseleave", function () {
+        gsap.to(img, { x: 0, y: 0, duration: 0.5, ease: "power2.out" });
+      });
+    });
+
+    // ============================================
+    // SEARCH FUNCTIONALITY WITH ANIMATIONS
+    // ============================================
+    var propertyGrid = document.getElementById("propertyGrid");
+    var noResults = document.getElementById("noResults");
+
+    if (searchInput && noResults) {
+      searchInput.addEventListener("input", function () {
+        var searchTerm = searchInput.value.toLowerCase().trim();
+        var visibleCount = 0;
+
+        propertyCards.forEach(function (card) {
+          var name = card.getAttribute("data-name") || "";
+          var address = card.getAttribute("data-address") || "";
+          var location = card.getAttribute("data-location") || "";
+
+          if (
+            name.includes(searchTerm) ||
+            address.includes(searchTerm) ||
+            location.includes(searchTerm)
+          ) {
+            gsap.to(card, {
+              opacity: 1,
+              scale: 1,
+              duration: 0.4,
+              ease: "power2.out",
+              display: "block",
+            });
+            visibleCount++;
+          } else {
+            gsap.to(card, {
+              opacity: 0,
+              scale: 0.95,
+              duration: 0.3,
+              ease: "power2.out",
+              onComplete: function () {
+                card.style.display = "none";
+              },
+            });
+          }
+        });
+
+        if (visibleCount === 0) {
+          gsap.to(noResults, {
+            display: "flex",
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+          });
+        } else {
+          gsap.to(noResults, {
+            opacity: 0,
+            y: 20,
+            duration: 0.3,
+            onComplete: function () {
+              noResults.style.display = "none";
+            },
+          });
+        }
+      });
+    }
+
+    // ============================================
+    // CTA SECTION ANIMATIONS
+    // ============================================
+    gsap.set(".cta-section .section-eyebrow", { y: 30, opacity: 0 });
+    gsap.set(".cta-word", { y: 60, opacity: 0, rotationX: -30 });
+    gsap.set(".cta-description", { y: 30, opacity: 0 });
+    gsap.set(".cta-button", { y: 30, opacity: 0, scale: 0.9 });
+
+    var ctaTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".cta-section",
+        start: "top 70%",
+      },
+    });
+
+    ctaTl
+      .to(".cta-section .section-eyebrow", {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: "power3.out",
+      })
+      .to(
+        ".cta-word",
+        {
+          y: 0,
+          opacity: 1,
+          rotationX: 0,
+          duration: 1,
+          stagger: 0.08,
+          ease: "power4.out",
+        },
+        "-=0.3",
+      )
+      .to(
+        ".cta-description",
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+        },
+        "-=0.5",
+      )
+      .to(
+        ".cta-button",
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          ease: "back.out(1.7)",
+        },
+        "-=0.4",
+      );
+
+    console.log("✨ All portfolio page animations initialized!");
+  });
 </script>
 
 <style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+  :root {
+    --padding-xl: 70px;
+    --padding-lg: 56px;
+    --padding-md: 48px;
+    --padding-sm: 32px;
+    --padding-xs: 20px;
+    --max-width: 1440px;
+    --color-primary: #1a1a1a;
+    --color-secondary: #8a7f6e;
+    --color-cream: #f5f2ed;
+    --color-warm: #dbd3c6;
+    --font-display: "Poppins", sans-serif;
+    --font-body: "Inter", sans-serif;
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ============================================
+       CUSTOM CURSOR
+       ============================================ */
+  .cursor-dot {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+  }
+
+  .cursor-ring {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--color-primary);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: border-color 0.3s ease;
+  }
+
+  @media (max-width: 768px) {
+    .cursor-dot,
+    .cursor-ring {
+      display: none;
+    }
+  }
+
+  .page {
+    background: #fff;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  @media (max-width: 768px) {
+    .page {
+      cursor: auto;
+    }
+  }
+
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-image {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .hero-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0.4) 50%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+    z-index: 2;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    will-change: transform;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    padding: 0 var(--padding-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 1);
+    margin-bottom: 20px;
+  }
+
+  .eyebrow-line {
+    width: 60px;
+    height: 1px;
+    background: rgba(255, 255, 255, 1);
+    transform-origin: center;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 400;
+    line-height: 1.1;
+    color: #fff;
+    letter-spacing: -1px;
+    margin: 0 0 16px 0;
+    perspective: 1000px;
+  }
+
+  .title-word {
+    transform-style: preserve-3d;
+  }
+
+  .hero-subtitle {
+    font-family: var(--font-body);
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+  }
+
+  .stats-bar {
+    background: var(--color-primary);
+  }
+
+  .stats-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .stat-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px;
+    gap: 6px;
+  }
+
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 300;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    transform-origin: center;
+  }
+
+  .section-eyebrow {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .section-eyebrow.light {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .section-headline {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 3.5vw, 48px);
+    font-weight: 400;
+    color: var(--color-primary);
+    margin: 0;
+    perspective: 1000px;
+  }
+
+  .portfolio-section {
+    padding: var(--padding-xl) var(--padding-md);
+    background: #fff;
+  }
+
+  .portfolio-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .portfolio-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 48px;
+    gap: 32px;
+  }
+
+  .search-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    background: var(--color-cream);
+    min-width: 280px;
+    transition: all 0.3s var(--ease);
+  }
+
+  .search-wrapper:focus-within {
+    background: #fff;
+  }
+
+  .search-icon {
+    color: var(--color-secondary);
+    flex-shrink: 0;
+  }
+
+  .search-input {
+    flex: 1;
+    font-family: var(--font-body);
+    font-size: 13px;
+    border: none;
+    background: transparent;
+    color: var(--color-primary);
+    outline: none;
+    cursor: none;
+  }
+
+  .search-input::placeholder {
+    color: #999;
+  }
+
+  .property-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .property-card {
+    background: #fff;
+    text-decoration: none;
+    display: block;
+    cursor: none;
+    overflow: hidden;
+  }
+
+  .property-image {
+    position: relative;
+    aspect-ratio: 16/11;
+    overflow: hidden;
+    background: var(--color-cream);
+  }
+
+  .property-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease);
+    will-change: transform;
+  }
+
+  .property-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0) 60%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.4s var(--ease);
+  }
+
+  .property-card:hover .property-overlay {
+    opacity: 1;
+  }
+
+  .property-type {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 6px;
+  }
+
+  .property-cta {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: #fff;
+    transform: translateY(10px);
+    opacity: 0;
+    transition: all 0.4s var(--ease) 0.1s;
+  }
+
+  .property-card:hover .property-cta {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .property-info {
+    padding: 24px 0 0 0;
+  }
+
+  .property-location {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .property-name {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--color-primary);
+    margin: 0 0 14px 0;
+    line-height: 1.2;
+    transition: color 0.3s var(--ease);
+  }
+
+  .property-card:hover .property-name {
+    color: var(--color-secondary);
+  }
+
+  .property-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+  }
+
+  .meta-value {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--color-primary);
+  }
+
+  .meta-label {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: #888;
+  }
+
+  .meta-divider {
+    width: 4px;
+    height: 4px;
+    background: var(--color-secondary);
+    border-radius: 50%;
+  }
+
+  .no-results {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+    opacity: 0;
+  }
+
+  .no-results-icon {
+    color: var(--color-secondary);
+    margin-bottom: 20px;
+    opacity: 0.5;
+  }
+
+  .no-results h3 {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--color-primary);
+    margin: 0 0 6px 0;
+  }
+
+  .no-results p {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: #888;
+    margin: 0;
+  }
+
+  .cta-section {
+    padding: var(--padding-xl) var(--padding-md);
+    background: var(--color-primary);
+    text-align: center;
+  }
+
+  .cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta-headline {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 3.5vw, 48px);
+    font-weight: 400;
+    color: #fff;
+    margin: 0 0 16px 0;
+    perspective: 1000px;
+  }
+
+  .cta-word {
+    display: inline-block;
+    transform-style: preserve-3d;
+  }
+
+  .cta-description {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 32px 0;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    background: #fff;
+    text-decoration: none;
+    padding: 16px 32px;
+    transition: all 0.4s var(--ease);
+    border-radius: 30px;
+    cursor: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    transition: left 0.5s var(--ease);
+  }
+
+  .cta-button:hover::before {
+    left: 100%;
+  }
+
+  .cta-button:hover {
+    background: var(--color-cream);
+    gap: 16px;
+  }
+
+  .cta-button svg {
+    transition: transform 0.3s var(--ease);
+  }
+
+  .cta-button:hover svg {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 1024px) {
+    .portfolio-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+    .search-wrapper {
+      width: 100%;
+      min-width: auto;
+    }
+    .property-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .stat-item {
+      padding: 24px 12px;
+    }
+  }
+
+  @media (max-width: 768px) {
     :root {
-        --padding-xl: 70px;
-        --padding-lg: 56px;
-        --padding-md: 48px;
-        --padding-sm: 32px;
-        --padding-xs: 20px;
-        --max-width: 1440px;
-        --color-primary: #1a1a1a;
-        --color-secondary: #8a7f6e;
-        --color-cream: #f5f2ed;
-        --color-warm: #dbd3c6;
-        --font-display: "Cormorant Garamond", serif;
-        --font-body: "Inter", sans-serif;
-        --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --padding-xl: 56px;
+      --padding-lg: 40px;
+      --padding-md: 20px;
     }
 
-    .page { background: #fff; overflow-x: hidden; }
-
-    .hero { position: relative; width: 100%; height: 50vh; min-height: 400px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-    .hero-image { position: absolute; inset: 0; z-index: 1; }
-    .hero-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.6) 100%); z-index: 2; }
-    .hero-image img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.05); animation: heroZoom 20s ease-in-out infinite alternate; }
-    @keyframes heroZoom { from { transform: scale(1.05); } to { transform: scale(1.15); } }
-
-    .hero-content { position: relative; z-index: 3; text-align: center; padding: 0 var(--padding-md); display: flex; flex-direction: column; align-items: center; }
-    .hero-eyebrow { display: flex; align-items: center; gap: 20px; font-family: var(--font-body); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,1); margin-bottom: 20px; }
-    .eyebrow-line { width: 60px; height: 1px; background: rgba(255,255,255,1); }
-    .hero-title { font-family: var(--font-display); font-size: clamp(36px, 5vw, 64px); font-weight: 400; line-height: 1.1; color: #fff; letter-spacing: -1px; margin: 0 0 16px 0; }
-    .hero-subtitle { font-family: var(--font-body); font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.7); margin: 0; }
-
-    .stats-bar { background: var(--color-primary); }
-    .stats-container { display: flex; align-items: center; justify-content: center; max-width: var(--max-width); margin: 0 auto; }
-    .stat-item { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 32px 16px; gap: 6px; }
-    .stat-number { font-family: var(--font-display); font-size: clamp(28px, 3.5vw, 42px); font-weight: 300; color: #fff; line-height: 1; }
-    .stat-label { font-family: var(--font-body); font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); }
-    .stat-divider { width: 1px; height: 50px; background: rgba(255,255,255,0.2); }
-
-    .section-eyebrow { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--color-secondary); display: block; margin-bottom: 12px; }
-    .section-eyebrow.light { color: rgba(255,255,255,0.6); }
-    .section-headline { font-family: var(--font-display); font-size: clamp(32px, 3.5vw, 48px); font-weight: 400; color: var(--color-primary); margin: 0; }
-
-    .portfolio-section { padding: var(--padding-xl) var(--padding-md); background: #fff; }
-    .portfolio-container { max-width: var(--max-width); margin: 0 auto; }
-    .portfolio-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 48px; gap: 32px; }
-
-    .search-wrapper { display: flex; align-items: center; gap: 10px; padding: 14px 20px; background: var(--color-cream); min-width: 280px; transition: all 0.3s var(--ease); }
-    .search-wrapper:focus-within { background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-    .search-icon { color: var(--color-secondary); flex-shrink: 0; }
-    .search-input { flex: 1; font-family: var(--font-body); font-size: 13px; border: none; background: transparent; color: var(--color-primary); outline: none; }
-    .search-input::placeholder { color: #999; }
-
-    .property-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .property-card { background: #fff; opacity: 0; transform: translateY(30px); transition: all 0.6s var(--ease); text-decoration: none; display: block; }
-    .property-card.visible { opacity: 1; transform: translateY(0); }
-    .property-card:hover { transform: translateY(-6px); }
-
-    .property-image { position: relative; aspect-ratio: 16/11; overflow: hidden; background: var(--color-cream); }
-    .property-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s var(--ease); }
-    .property-card:hover .property-image img { transform: scale(1.08); }
-
-    .property-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; opacity: 0; transition: opacity 0.4s var(--ease); }
-    .property-card:hover .property-overlay { opacity: 1; }
-    .property-type { font-family: var(--font-body); font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 6px; }
-    .property-cta { font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 1px; color: #fff; transform: translateY(10px); opacity: 0; transition: all 0.4s var(--ease) 0.1s; }
-    .property-card:hover .property-cta { transform: translateY(0); opacity: 1; }
-
-    .property-info { padding: 24px 0 0 0; }
-    .property-location { font-family: var(--font-body); font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--color-secondary); display: block; margin-bottom: 6px; }
-    .property-name { font-family: var(--font-display); font-size: 24px; font-weight: 400; color: var(--color-primary); margin: 0 0 14px 0; line-height: 1.2; }
-    .property-meta { display: flex; align-items: center; gap: 16px; padding-top: 14px; border-top: 1px solid rgba(0,0,0,0.08); }
-    .meta-item { display: flex; align-items: baseline; gap: 5px; }
-    .meta-value { font-family: var(--font-display); font-size: 18px; font-weight: 400; color: var(--color-primary); }
-    .meta-label { font-family: var(--font-body); font-size: 11px; color: #888; }
-    .meta-divider { width: 4px; height: 4px; background: var(--color-secondary); border-radius: 50%; }
-
-    .no-results { display: none; flex-direction: column; align-items: center; justify-content: center; padding: 60px 20px; text-align: center; }
-    .no-results-icon { color: var(--color-secondary); margin-bottom: 20px; opacity: 0.5; }
-    .no-results h3 { font-family: var(--font-display); font-size: 26px; font-weight: 400; color: var(--color-primary); margin: 0 0 6px 0; }
-    .no-results p { font-family: var(--font-body); font-size: 13px; color: #888; margin: 0; }
-
-    .cta-section { padding: var(--padding-xl) var(--padding-md); background: var(--color-primary); text-align: center; }
-    .cta-content { max-width: 600px; margin: 0 auto; }
-    .cta-headline { font-family: var(--font-display); font-size: clamp(32px, 3.5vw, 48px); font-weight: 400; color: #fff; margin: 0 0 16px 0; }
-    .cta-description { font-family: var(--font-body); font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.7); margin: 0 0 32px 0; }
-    .cta-button { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--color-primary); background: #fff; text-decoration: none; padding: 16px 32px; transition: all 0.4s var(--ease); border-radius: 30px; }
-    .cta-button:hover { background: var(--color-cream); gap: 16px; }
-
-    @media (max-width: 1024px) {
-        .portfolio-header { flex-direction: column; align-items: flex-start; gap: 24px; }
-        .search-wrapper { width: 100%; min-width: auto; }
-        .property-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-        .stat-item { padding: 24px 12px; }
+    .page {
+      cursor: auto;
     }
 
-    @media (max-width: 768px) {
-        :root { --padding-xl: 56px; --padding-lg: 40px; --padding-md: 20px; }
-        .hero { height: 45vh; min-height: 350px; }
-        .hero-eyebrow { font-size: 10px; gap: 16px; }
-        .eyebrow-line { width: 40px; }
-        .stats-container { flex-wrap: wrap; }
-        .stat-item { flex: 1 1 50%; padding: 20px 12px; }
-        .stat-divider { display: none; }
-        .portfolio-section { padding: var(--padding-lg) var(--padding-md); }
-        .portfolio-header { margin-bottom: 32px; }
-        .property-grid { grid-template-columns: 1fr; gap: 28px; }
-        .property-name { font-size: 22px; }
-        .cta-button { width: 100%; justify-content: center; }
+    .hero {
+      height: 45vh;
+      min-height: 350px;
     }
+    .hero-eyebrow {
+      font-size: 10px;
+      gap: 16px;
+    }
+    .eyebrow-line {
+      width: 40px;
+    }
+    .stats-container {
+      flex-wrap: wrap;
+    }
+    .stat-item {
+      flex: 1 1 50%;
+      padding: 20px 12px;
+    }
+    .stat-divider {
+      display: none;
+    }
+    .portfolio-section {
+      padding: var(--padding-lg) var(--padding-md);
+    }
+    .portfolio-header {
+      margin-bottom: 32px;
+    }
+    .property-grid {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .property-name {
+      font-size: 22px;
+    }
+    .cta-button {
+      width: 100%;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .search-input {
+      cursor: auto;
+    }
+
+    a,
+    button,
+    .property-card {
+      cursor: pointer;
+    }
+  }
 </style>
 
 <style is:global>
-    ::selection { background: #1a1a1a; color: #fff; }
-    html { scroll-behavior: smooth; }
+  ::selection {
+    background: #1a1a1a;
+    color: #fff;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (min-width: 769px) {
+    * {
+      cursor: none !important;
+    }
+  }
 </style>
