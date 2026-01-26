@@ -5,6 +5,10 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout>
   <div class="page">
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
     <!-- Hero Section -->
     <section class="hero">
       <div class="hero-image">
@@ -147,7 +151,7 @@ import Layout from "../layouts/Layout.astro";
             favoring sustainable supply, making these assets increasingly
             attractive to sophisticated investors.
           </p>
-          <a href="/about" class="investment-link">
+          <a href="/about" class="investment-link magnetic-btn">
             <span>Learn Our Approach</span>
             <svg
               width="20"
@@ -223,7 +227,7 @@ import Layout from "../layouts/Layout.astro";
             <span class="section-eyebrow">Portfolio</span>
             <h2 class="slideshow-title">Our Properties</h2>
           </div>
-          <a href="/portfolio" class="slideshow-view-all">
+          <a href="/portfolio" class="slideshow-view-all magnetic-btn">
             <span>View All Properties</span>
             <svg
               width="18"
@@ -279,7 +283,7 @@ import Layout from "../layouts/Layout.astro";
             </div>
 
             <div class="slide-nav">
-              <button class="nav-btn prev" aria-label="Previous slide">
+              <button class="nav-btn prev magnetic-btn" aria-label="Previous slide">
                 <svg
                   width="24"
                   height="24"
@@ -291,7 +295,7 @@ import Layout from "../layouts/Layout.astro";
                   <path d="M19 12H5M12 19l-7-7 7-7"></path>
                 </svg>
               </button>
-              <button class="nav-btn next" aria-label="Next slide">
+              <button class="nav-btn next magnetic-btn" aria-label="Next slide">
                 <svg
                   width="24"
                   height="24"
@@ -341,7 +345,7 @@ import Layout from "../layouts/Layout.astro";
           We're always looking for our next acquisition. Get in touch with our
           team today.
         </p>
-        <a href="/contact" class="cta-button">
+        <a href="/contact" class="cta-button magnetic-btn">
           <span>Send Us A Deal</span>
           <svg
             width="20"
@@ -359,66 +363,422 @@ import Layout from "../layouts/Layout.astro";
   </div>
 </Layout>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const scrollArrow = document.querySelector(".scroll-arrow");
-    const nextSection = document.getElementById("next-section");
-    if (scrollArrow && nextSection) {
-      scrollArrow.addEventListener("click", () => {
-        nextSection.scrollIntoView({ behavior: "smooth", block: "start" });
+<!-- GSAP & ScrollTrigger - Load via CDN with is:inline -->
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Register GSAP plugins
+    gsap.registerPlugin(ScrollTrigger);
+    
+    console.log('🚀 GSAP loaded, starting animations...');
+
+    // ============================================
+    // TEXT SPLITTING UTILITY
+    // ============================================
+    function splitTextIntoSpans(element, className) {
+      if (!element) return [];
+      var text = element.textContent;
+      var words = text.trim().split(/\s+/);
+      element.innerHTML = words.map(function(word) {
+        return '<span class="' + className + '" style="display: inline-block;">' + word + '&nbsp;</span>';
+      }).join('');
+      return element.querySelectorAll('.' + className);
+    }
+
+    // Split hero title into words
+    var heroTitle = document.querySelector('.hero-title');
+    splitTextIntoSpans(heroTitle, 'title-word');
+
+    // Split hero subtitle into words
+    var heroSubtitle = document.querySelector('.hero-subtitle');
+    splitTextIntoSpans(heroSubtitle, 'subtitle-word');
+
+    // Split CTA headline into words
+    var ctaHeadline = document.querySelector('.cta-headline');
+    splitTextIntoSpans(ctaHeadline, 'cta-word');
+
+    // ============================================
+    // CUSTOM CURSOR
+    // ============================================
+    var cursorDot = document.querySelector('.cursor-dot');
+    var cursorRing = document.querySelector('.cursor-ring');
+    var mouseX = 0, mouseY = 0;
+    var ringX = 0, ringY = 0;
+
+    if (cursorDot && cursorRing && window.innerWidth > 768) {
+      document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        gsap.to(cursorDot, { x: mouseX, y: mouseY, duration: 0.1 });
+      });
+
+      // Smooth ring follow
+      function animateCursor() {
+        ringX += (mouseX - ringX) * 0.15;
+        ringY += (mouseY - ringY) * 0.15;
+        gsap.set(cursorRing, { x: ringX, y: ringY });
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+
+      // Cursor hover effects
+      var hoverElements = document.querySelectorAll('a, button, .featured-card, .value-prop-card');
+      hoverElements.forEach(function(el) {
+        el.addEventListener('mouseenter', function() {
+          gsap.to(cursorRing, { scale: 1.5, borderColor: '#8a7f6e', duration: 0.3 });
+          gsap.to(cursorDot, { scale: 0.5, duration: 0.3 });
+        });
+        el.addEventListener('mouseleave', function() {
+          gsap.to(cursorRing, { scale: 1, borderColor: '#1a1a1a', duration: 0.3 });
+          gsap.to(cursorDot, { scale: 1, duration: 0.3 });
+        });
       });
     }
 
-    // Counter animation
-    const counters = document.querySelectorAll(".stat-number[data-count]");
-    const counterObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const target = entry.target as HTMLElement;
-            const count = parseInt(target.getAttribute("data-count") || "0");
-            animateCounter(target, count);
-            counterObserver.unobserve(target);
+    // ============================================
+    // MAGNETIC BUTTON EFFECT
+    // ============================================
+    var magneticBtns = document.querySelectorAll('.magnetic-btn');
+    magneticBtns.forEach(function(btn) {
+      btn.addEventListener('mousemove', function(e) {
+        var rect = btn.getBoundingClientRect();
+        var x = e.clientX - rect.left - rect.width / 2;
+        var y = e.clientY - rect.top - rect.height / 2;
+        gsap.to(btn, { x: x * 0.3, y: y * 0.3, duration: 0.3, ease: 'power2.out' });
+      });
+      btn.addEventListener('mouseleave', function() {
+        gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.3)' });
+      });
+    });
+
+    // ============================================
+    // HERO ANIMATIONS
+    // ============================================
+    var heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    
+    // Initial states
+    gsap.set('.hero-eyebrow span:not(.eyebrow-line)', { y: 30, opacity: 0 });
+    gsap.set('.eyebrow-line', { scaleX: 0 });
+    gsap.set('.title-word', { y: 100, opacity: 0, rotationX: -40 });
+    gsap.set('.subtitle-word', { y: 40, opacity: 0 });
+    gsap.set('.scroll-arrow', { y: 20, opacity: 0 });
+    gsap.set('.hero-scroll-indicator', { opacity: 0 });
+
+    heroTl
+      .to('.eyebrow-line', { scaleX: 1, duration: 0.8, stagger: 0.1 }, 0.3)
+      .to('.hero-eyebrow span:not(.eyebrow-line)', { y: 0, opacity: 1, duration: 0.6 }, 0.5)
+      .to('.title-word', { 
+        y: 0, 
+        opacity: 1, 
+        rotationX: 0,
+        duration: 1.2, 
+        stagger: 0.08,
+        ease: 'power4.out'
+      }, 0.7)
+      .to('.subtitle-word', { 
+        y: 0, 
+        opacity: 1, 
+        duration: 0.8, 
+        stagger: 0.1,
+        ease: 'back.out(1.7)'
+      }, 1.4)
+      .to('.scroll-arrow', { y: 0, opacity: 1, duration: 0.6 }, 1.8)
+      .to('.hero-scroll-indicator', { opacity: 1, duration: 0.8 }, 2);
+
+    // Floating scroll arrow animation
+    gsap.to('.scroll-arrow', {
+      y: 10,
+      duration: 1.5,
+      repeat: -1,
+      yoyo: true,
+      ease: 'power1.inOut'
+    });
+
+    // ============================================
+    // TAGLINE SECTION - SPLIT TEXT REVEAL
+    // ============================================
+    gsap.set('.tagline-word', { 
+      y: 80, 
+      opacity: 0,
+      rotationY: -20,
+      transformOrigin: 'left center'
+    });
+
+    ScrollTrigger.create({
+      trigger: '.tagline-section',
+      start: 'top 80%',
+      onEnter: function() {
+        gsap.to('.tagline-word', {
+          y: 0,
+          opacity: 1,
+          rotationY: 0,
+          duration: 1,
+          stagger: 0.08,
+          ease: 'power4.out'
+        });
+      }
+    });
+
+    // Parallax effect on tagline
+    gsap.to('.tagline', {
+      scrollTrigger: {
+        trigger: '.tagline-section',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1
+      },
+      y: -50,
+      ease: 'none'
+    });
+
+    // ============================================
+    // STATS SECTION - DRAMATIC COUNTER REVEAL
+    // ============================================
+    gsap.set('.stat-card', { 
+      y: 60, 
+      opacity: 0,
+      scale: 0.95
+    });
+
+    var countersStarted = false;
+    ScrollTrigger.create({
+      trigger: '.stats-section',
+      start: 'top 75%',
+      onEnter: function() {
+        gsap.to('.stat-card', {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: 'power3.out',
+          onComplete: function() {
+            if (!countersStarted) {
+              countersStarted = true;
+              startCounters();
+            }
           }
         });
-      },
-      { threshold: 0.5 },
-    );
-    counters.forEach((counter) => counterObserver.observe(counter));
-
-    function animateCounter(element: HTMLElement, target: number) {
-      const duration = 2000;
-      const startTime = performance.now();
-      function update(currentTime: number) {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const easeProgress = 1 - Math.pow(1 - progress, 3);
-        element.textContent = Math.floor(
-          target * easeProgress,
-        ).toLocaleString();
-        if (progress < 1) requestAnimationFrame(update);
       }
-      requestAnimationFrame(update);
+    });
+
+    // Counter animation with easing
+    function startCounters() {
+      var counters = document.querySelectorAll(".stat-number[data-count]");
+      counters.forEach(function(counter) {
+        var target = parseInt(counter.getAttribute("data-count") || "0");
+        var obj = { value: 0 };
+        gsap.to(obj, {
+          value: target,
+          duration: 2.5,
+          ease: 'power2.out',
+          onUpdate: function() {
+            counter.textContent = Math.floor(obj.value).toLocaleString();
+          }
+        });
+      });
     }
 
-    // Slideshow
-    const slides = document.querySelectorAll(".slide");
-    const slideContents = document.querySelectorAll(".slide-content");
-    const indicators = document.querySelectorAll(".progress-indicator");
-    const prevBtn = document.querySelector(".nav-btn.prev");
-    const nextBtn = document.querySelector(".nav-btn.next");
+    // ============================================
+    // FEATURED PROPERTIES - STAGGERED REVEAL
+    // ============================================
+    gsap.set('.featured-header', { y: 40, opacity: 0 });
+    gsap.set('.featured-card', { 
+      y: 80, 
+      opacity: 0
+    });
 
-    let currentIndex = 0;
-    let autoplayInterval: ReturnType<typeof setInterval>;
-    const autoplayDuration = 5000;
-    let isPaused = false;
+    var featuredTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.featured-section',
+        start: 'top 70%'
+      }
+    });
 
-    function updateSlide(newIndex: number) {
-      slides.forEach((slide) => slide.classList.remove("active", "prev"));
-      slideContents.forEach((content) => content.classList.remove("active"));
-      indicators.forEach((ind) => {
+    featuredTl
+      .to('.featured-header', { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' })
+      .to('.featured-card', {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.2,
+        ease: 'power4.out'
+      }, '-=0.4');
+
+    // Image reveal on hover with GSAP
+    document.querySelectorAll('.featured-card').forEach(function(card) {
+      var img = card.querySelector('.featured-image img');
+      card.addEventListener('mouseenter', function() {
+        gsap.to(img, { scale: 1.1, duration: 0.8, ease: 'power2.out' });
+      });
+      card.addEventListener('mouseleave', function() {
+        gsap.to(img, { scale: 1, duration: 0.6, ease: 'power2.out' });
+      });
+    });
+
+    // ============================================
+    // INVESTMENT SECTION - SPLIT REVEAL
+    // ============================================
+    gsap.set('.investment-text > *', { y: 50, opacity: 0 });
+    gsap.set('.investment-image-wrapper', { 
+      clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
+      scale: 1.2
+    });
+    gsap.set('.investment-accent', { scale: 0.8, opacity: 0 });
+
+    var investmentTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.investment-section',
+        start: 'top 65%'
+      }
+    });
+
+    investmentTl
+      .to('.investment-text > *', {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: 'power3.out'
+      })
+      .to('.investment-image-wrapper', {
+        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+        scale: 1,
+        duration: 1.2,
+        ease: 'power4.inOut'
+      }, '-=0.6')
+      .to('.investment-accent', {
+        scale: 1,
+        opacity: 1,
+        duration: 0.8,
+        ease: 'back.out(1.7)'
+      }, '-=0.6');
+
+    // Parallax on investment image
+    gsap.to('.investment-image-wrapper img', {
+      scrollTrigger: {
+        trigger: '.investment-section',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1
+      },
+      y: -80,
+      ease: 'none'
+    });
+
+    // ============================================
+    // VALUE PROPS - DRAMATIC STAGGER
+    // ============================================
+    gsap.set('.value-prop-card', { 
+      y: 100,
+      opacity: 0,
+      scale: 0.9
+    });
+
+    ScrollTrigger.create({
+      trigger: '.value-props-section',
+      start: 'top 70%',
+      onEnter: function() {
+        gsap.to('.value-prop-card', {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 1,
+          stagger: 0.15,
+          ease: 'power4.out'
+        });
+      }
+    });
+
+    // Value prop hover parallax
+    document.querySelectorAll('.value-prop-card').forEach(function(card) {
+      var img = card.querySelector('.value-prop-image img');
+      var content = card.querySelector('.value-prop-content');
+      
+      card.addEventListener('mousemove', function(e) {
+        var rect = card.getBoundingClientRect();
+        var x = (e.clientX - rect.left) / rect.width - 0.5;
+        var y = (e.clientY - rect.top) / rect.height - 0.5;
+        
+        gsap.to(img, {
+          x: x * 20,
+          y: y * 20,
+          duration: 0.5,
+          ease: 'power2.out'
+        });
+        gsap.to(content, {
+          x: x * -10,
+          y: y * -10,
+          duration: 0.5,
+          ease: 'power2.out'
+        });
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        gsap.to(img, { x: 0, y: 0, duration: 0.6, ease: 'power2.out' });
+        gsap.to(content, { x: 0, y: 0, duration: 0.6, ease: 'power2.out' });
+      });
+    });
+
+    // ============================================
+    // SLIDESHOW SECTION
+    // ============================================
+    gsap.set('.slideshow-header', { y: 40, opacity: 0 });
+    gsap.set('.slideshow-main', { 
+      y: 60, 
+      opacity: 0
+    });
+
+    var slideshowTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.slideshow-section',
+        start: 'top 70%'
+      }
+    });
+
+    slideshowTl
+      .to('.slideshow-header', { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' })
+      .to('.slideshow-main', {
+        y: 0,
+        opacity: 1,
+        duration: 1.2,
+        ease: 'power4.out'
+      }, '-=0.4')
+      .from('.slideshow-progress', {
+        y: 20,
+        opacity: 0,
+        duration: 0.6,
+        ease: 'power3.out'
+      }, '-=0.4');
+
+    // Slideshow Logic with GSAP transitions
+    var slides = document.querySelectorAll(".slide");
+    var slideContents = document.querySelectorAll(".slide-content");
+    var indicators = document.querySelectorAll(".progress-indicator");
+    var prevBtn = document.querySelector(".nav-btn.prev");
+    var nextBtn = document.querySelector(".nav-btn.next");
+
+    var currentIndex = 0;
+    var autoplayInterval;
+    var autoplayDuration = 5000;
+    var isPaused = false;
+
+    function updateSlide(newIndex) {
+      var currentSlide = slides[currentIndex];
+      var currentContent = slideContents[currentIndex];
+      var newSlide = slides[newIndex];
+      var newContent = slideContents[newIndex];
+
+      // Animate out current
+      gsap.to(currentSlide, { opacity: 0, scale: 1.05, duration: 0.8 });
+      gsap.to(currentContent, { y: 20, opacity: 0, duration: 0.4 });
+
+      // Reset indicators
+      indicators.forEach(function(ind) {
         ind.classList.remove("active");
-        const bar = ind.querySelector(".progress-bar") as HTMLElement;
+        var bar = ind.querySelector(".progress-bar");
         if (bar) {
           bar.style.animation = "none";
           bar.offsetHeight;
@@ -426,24 +786,37 @@ import Layout from "../layouts/Layout.astro";
         }
       });
 
-      slides[currentIndex]?.classList.add("prev");
       currentIndex = newIndex;
-      slides[currentIndex]?.classList.add("active");
-      slideContents[currentIndex]?.classList.add("active");
-      indicators[currentIndex]?.classList.add("active");
+
+      // Animate in new
+      gsap.fromTo(newSlide, 
+        { opacity: 0, scale: 1 },
+        { opacity: 1, scale: 1, duration: 0.8, ease: 'power2.out' }
+      );
+      gsap.fromTo(newContent,
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, delay: 0.3, ease: 'power3.out' }
+      );
+
+      slides.forEach(function(s) { s.classList.remove("active", "prev"); });
+      slideContents.forEach(function(c) { c.classList.remove("active"); });
+      
+      newSlide.classList.add("active");
+      newContent.classList.add("active");
+      if (indicators[currentIndex]) indicators[currentIndex].classList.add("active");
     }
 
     function nextSlide() {
       updateSlide((currentIndex + 1) % slides.length);
     }
 
-    function prevSlide() {
+    function prevSlideFunc() {
       updateSlide((currentIndex - 1 + slides.length) % slides.length);
     }
 
     function startAutoplay() {
       stopAutoplay();
-      autoplayInterval = setInterval(() => {
+      autoplayInterval = setInterval(function() {
         if (!isPaused) nextSlide();
       }, autoplayDuration);
     }
@@ -452,17 +825,21 @@ import Layout from "../layouts/Layout.astro";
       if (autoplayInterval) clearInterval(autoplayInterval);
     }
 
-    prevBtn?.addEventListener("click", () => {
-      prevSlide();
-      startAutoplay();
-    });
-    nextBtn?.addEventListener("click", () => {
-      nextSlide();
-      startAutoplay();
-    });
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function() {
+        prevSlideFunc();
+        startAutoplay();
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function() {
+        nextSlide();
+        startAutoplay();
+      });
+    }
 
-    indicators.forEach((indicator, index) => {
-      indicator.addEventListener("click", () => {
+    indicators.forEach(function(indicator, index) {
+      indicator.addEventListener("click", function() {
         if (index !== currentIndex) {
           updateSlide(index);
           startAutoplay();
@@ -470,16 +847,69 @@ import Layout from "../layouts/Layout.astro";
       });
     });
 
-    const slideshowWrapper = document.querySelector(".slideshow-wrapper");
-    slideshowWrapper?.addEventListener("mouseenter", () => (isPaused = true));
-    slideshowWrapper?.addEventListener("mouseleave", () => (isPaused = false));
+    var slideshowWrapper = document.querySelector(".slideshow-wrapper");
+    if (slideshowWrapper) {
+      slideshowWrapper.addEventListener("mouseenter", function() { isPaused = true; });
+      slideshowWrapper.addEventListener("mouseleave", function() { isPaused = false; });
+    }
 
     startAutoplay();
+
+    // ============================================
+    // CTA SECTION - FINAL REVEAL
+    // ============================================
+    gsap.set('.cta-word', { y: 60, opacity: 0, rotationX: -30 });
+    gsap.set('.cta-description', { y: 30, opacity: 0 });
+    gsap.set('.cta-button', { y: 30, opacity: 0, scale: 0.9 });
+
+    var ctaTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.cta-section',
+        start: 'top 70%'
+      }
+    });
+
+    ctaTl
+      .to('.cta-word', {
+        y: 0,
+        opacity: 1,
+        rotationX: 0,
+        duration: 1,
+        stagger: 0.08,
+        ease: 'power4.out'
+      })
+      .to('.cta-description', {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: 'power3.out'
+      }, '-=0.5')
+      .to('.cta-button', {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.8,
+        ease: 'back.out(1.7)'
+      }, '-=0.4');
+
+    // ============================================
+    // SCROLL ARROW FUNCTIONALITY
+    // ============================================
+    var scrollArrow = document.querySelector(".scroll-arrow");
+    var nextSection = document.getElementById("next-section");
+    if (scrollArrow && nextSection) {
+      scrollArrow.addEventListener("click", function() {
+        nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    console.log('✨ All GSAP animations initialized!');
   });
 </script>
 
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+  
   :root {
     --padding-xl: 70px;
     --padding-lg: 56px;
@@ -496,9 +926,52 @@ import Layout from "../layouts/Layout.astro";
     --ease: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
+  /* ============================================
+     CUSTOM CURSOR
+     ============================================ */
+  .cursor-dot {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+  }
+
+  .cursor-ring {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--color-primary);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: border-color 0.3s ease;
+  }
+
+  @media (max-width: 768px) {
+    .cursor-dot, .cursor-ring {
+      display: none;
+    }
+  }
+
+  /* ============================================
+     PAGE STYLES
+     ============================================ */
   .page {
     background: #fff;
     overflow-x: hidden;
+    cursor: none;
+  }
+
+  @media (max-width: 768px) {
+    .page {
+      cursor: auto;
+    }
   }
 
   /* Animations */
@@ -510,6 +983,7 @@ import Layout from "../layouts/Layout.astro";
       transform: scale(1.15);
     }
   }
+  
   @keyframes scrollLine {
     0% {
       transform: scaleY(0);
@@ -529,6 +1003,15 @@ import Layout from "../layouts/Layout.astro";
     }
   }
 
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
   .section-eyebrow {
     font-family: var(--font-body);
     font-size: 11px;
@@ -538,6 +1021,18 @@ import Layout from "../layouts/Layout.astro";
     color: var(--color-secondary);
     display: block;
     margin-bottom: 12px;
+    position: relative;
+  }
+
+  .section-eyebrow::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 30px;
+    height: 1px;
+    background: var(--color-secondary);
+    transition: width 0.6s var(--ease);
   }
 
   /* Hero */
@@ -571,6 +1066,7 @@ import Layout from "../layouts/Layout.astro";
     z-index: 2;
   }
 
+  .hero-image video,
   .hero-image img {
     width: 100%;
     height: 100%;
@@ -605,6 +1101,7 @@ import Layout from "../layouts/Layout.astro";
     width: 60px;
     height: 1px;
     background: rgba(255, 255, 255, 1);
+    transform-origin: center;
   }
 
   .hero-title {
@@ -615,6 +1112,11 @@ import Layout from "../layouts/Layout.astro";
     color: #fff;
     letter-spacing: -1px;
     margin: 0 0 24px 0;
+    perspective: 1000px;
+  }
+
+  .title-word {
+    transform-style: preserve-3d;
   }
 
   .subtitle-arrow {
@@ -630,19 +1132,24 @@ import Layout from "../layouts/Layout.astro";
     color: rgba(255, 255, 255, 0.8);
   }
 
+  .subtitle-word {
+    display: inline-block;
+  }
+
   .scroll-arrow {
     background: transparent;
     color: #fff;
-    cursor: pointer;
+    cursor: none;
     padding: 16px;
     border-radius: 50%;
     transition: all 0.4s var(--ease);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    margin-top: 20px;
   }
 
   .scroll-arrow:hover {
     background: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.5);
-    transform: translateY(4px);
   }
 
   .hero-scroll-indicator {
@@ -677,7 +1184,9 @@ import Layout from "../layouts/Layout.astro";
   .tagline-section {
     padding: var(--padding-lg) var(--padding-md);
     background: #fff;
+    overflow: hidden;
   }
+
   .tagline-wrapper {
     max-width: var(--max-width);
     margin: 0 auto;
@@ -693,18 +1202,26 @@ import Layout from "../layouts/Layout.astro";
     display: flex;
     flex-wrap: wrap;
     gap: 0 18px;
+    perspective: 1000px;
   }
 
   .tagline-word {
     display: inline-block;
-    transition: transform 0.4s var(--ease);
+    transition: transform 0.4s var(--ease), color 0.3s ease;
+    transform-style: preserve-3d;
   }
+
   .tagline-word.accent {
     font-style: italic;
     color: var(--color-secondary);
   }
+
   .tagline:hover .tagline-word {
     transform: translateY(-2px);
+  }
+
+  .tagline-word:hover {
+    color: var(--color-secondary);
   }
 
   /* Stats - Half-Box Design */
@@ -731,7 +1248,6 @@ import Layout from "../layouts/Layout.astro";
     padding: 32px 40px 40px 40px;
   }
 
-  /* Top border - partial width */
   .stat-frame::before {
     content: "";
     position: absolute;
@@ -740,9 +1256,13 @@ import Layout from "../layouts/Layout.astro";
     width: 70%;
     height: 2px;
     background: var(--color-primary);
+    transition: width 0.6s var(--ease);
   }
 
-  /* Left + Bottom + Right partial borders */
+  .stat-card:hover .stat-frame::before {
+    width: 100%;
+  }
+
   .stat-frame::after {
     content: "";
     position: absolute;
@@ -756,7 +1276,6 @@ import Layout from "../layouts/Layout.astro";
     pointer-events: none;
   }
 
-  /* Right side top cutoff overlay */
   .stat-inner {
     position: relative;
   }
@@ -768,8 +1287,13 @@ import Layout from "../layouts/Layout.astro";
     right: -40px;
     width: 2px;
     height: 40%;
-    background: #dbd3c6;
+    background: var(--color-warm);
     z-index: 1;
+    transition: height 0.6s var(--ease);
+  }
+
+  .stat-card:hover .stat-inner::before {
+    height: 0%;
   }
 
   .stat-number-wrapper {
@@ -777,6 +1301,7 @@ import Layout from "../layouts/Layout.astro";
     align-items: baseline;
     gap: 2px;
   }
+
   .stat-prefix,
   .stat-suffix {
     font-family: var(--font-display);
@@ -784,11 +1309,13 @@ import Layout from "../layouts/Layout.astro";
     font-weight: 300;
     color: var(--color-primary);
   }
+
   .stat-prefix {
     position: relative;
     top: -12px;
     font-size: 22px;
   }
+
   .stat-number {
     font-family: var(--font-display);
     font-size: clamp(48px, 5vw, 72px);
@@ -797,6 +1324,7 @@ import Layout from "../layouts/Layout.astro";
     line-height: 1;
     letter-spacing: -2px;
   }
+
   .stat-label {
     font-family: var(--font-body);
     font-size: 11px;
@@ -812,10 +1340,12 @@ import Layout from "../layouts/Layout.astro";
     padding: var(--padding-xl) var(--padding-md);
     background: #fff;
   }
+
   .featured-header {
     max-width: var(--max-width);
     margin: 0 auto 40px;
   }
+
   .section-headline {
     font-family: var(--font-display);
     font-size: clamp(36px, 4vw, 52px);
@@ -831,9 +1361,11 @@ import Layout from "../layouts/Layout.astro";
     max-width: var(--max-width);
     margin: 0 auto;
   }
+
   .featured-card {
     position: relative;
-    cursor: pointer;
+    cursor: none;
+    overflow: hidden;
   }
 
   .featured-image {
@@ -841,14 +1373,13 @@ import Layout from "../layouts/Layout.astro";
     aspect-ratio: 16/10;
     overflow: hidden;
   }
+
   .featured-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.8s var(--ease);
-  }
-  .featured-card:hover .featured-image img {
-    transform: scale(1.05);
+    will-change: transform;
   }
 
   .featured-overlay {
@@ -860,6 +1391,7 @@ import Layout from "../layouts/Layout.astro";
     justify-content: center;
     transition: background 0.4s var(--ease);
   }
+
   .featured-card:hover .featured-overlay {
     background: rgba(0, 0, 0, 0.4);
   }
@@ -874,17 +1406,19 @@ import Layout from "../layouts/Layout.astro";
     padding: 16px 32px;
     border: 1px solid #fff;
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(10px) scale(0.95);
     transition: all 0.4s var(--ease);
   }
+
   .featured-card:hover .featured-cta {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 
   .featured-info {
     padding: 20px 0;
   }
+
   .featured-location {
     font-family: var(--font-body);
     font-size: 11px;
@@ -895,13 +1429,20 @@ import Layout from "../layouts/Layout.astro";
     display: block;
     margin-bottom: 6px;
   }
+
   .featured-name {
     font-family: var(--font-display);
     font-size: 28px;
     font-weight: 400;
     color: var(--color-primary);
     margin: 0 0 10px 0;
+    transition: color 0.3s ease;
   }
+
+  .featured-card:hover .featured-name {
+    color: var(--color-secondary);
+  }
+
   .featured-meta {
     display: flex;
     align-items: center;
@@ -910,6 +1451,7 @@ import Layout from "../layouts/Layout.astro";
     font-size: 13px;
     color: #666;
   }
+
   .meta-divider {
     width: 4px;
     height: 4px;
@@ -921,7 +1463,9 @@ import Layout from "../layouts/Layout.astro";
   .investment-section {
     padding: var(--padding-xl) var(--padding-md);
     background: var(--color-cream);
+    overflow: hidden;
   }
+
   .investment-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -930,9 +1474,11 @@ import Layout from "../layouts/Layout.astro";
     margin: 0 auto;
     align-items: center;
   }
+
   .investment-text {
     max-width: 520px;
   }
+
   .investment-headline {
     font-family: var(--font-display);
     font-size: clamp(32px, 3.5vw, 48px);
@@ -941,6 +1487,7 @@ import Layout from "../layouts/Layout.astro";
     color: var(--color-primary);
     margin: 0 0 24px 0;
   }
+
   .investment-description {
     font-family: var(--font-body);
     font-size: 16px;
@@ -961,14 +1508,30 @@ import Layout from "../layouts/Layout.astro";
     color: var(--color-primary);
     text-decoration: none;
     margin-top: 16px;
-    transition: gap 0.3s var(--ease);
+    padding: 12px 0;
+    position: relative;
+    cursor: none;
   }
-  .investment-link:hover {
-    gap: 18px;
+
+  .investment-link::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--color-primary);
+    transition: width 0.4s var(--ease);
   }
+
+  .investment-link:hover::after {
+    width: 100%;
+  }
+
   .investment-link svg {
     transition: transform 0.3s var(--ease);
   }
+
   .investment-link:hover svg {
     transform: translateX(4px);
   }
@@ -976,19 +1539,19 @@ import Layout from "../layouts/Layout.astro";
   .investment-visual {
     position: relative;
   }
+
   .investment-image-wrapper {
     position: relative;
     z-index: 2;
     overflow: hidden;
   }
+
   .investment-image-wrapper img {
     width: 100%;
     display: block;
-    transition: transform 0.8s var(--ease);
+    will-change: transform;
   }
-  .investment-visual:hover .investment-image-wrapper img {
-    transform: scale(1.03);
-  }
+
   .investment-accent {
     position: absolute;
     top: -16px;
@@ -997,12 +1560,19 @@ import Layout from "../layouts/Layout.astro";
     height: 100%;
     border: 1px solid var(--color-secondary);
     z-index: 1;
+    transition: transform 0.6s var(--ease);
+  }
+
+  .investment-visual:hover .investment-accent {
+    transform: translate(8px, 8px);
   }
 
   /* Value Props */
   .value-props-section {
     background: #fff;
+    overflow: hidden;
   }
+
   .value-props-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1013,7 +1583,7 @@ import Layout from "../layouts/Layout.astro";
     position: relative;
     aspect-ratio: 3/4;
     overflow: hidden;
-    cursor: pointer;
+    cursor: none;
     display: flex;
     align-items: flex-end;
     text-decoration: none;
@@ -1024,12 +1594,15 @@ import Layout from "../layouts/Layout.astro";
     inset: 0;
     z-index: 1;
   }
+
   .value-prop-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.8s var(--ease);
+    will-change: transform;
   }
+
   .value-prop-card:hover .value-prop-image img {
     transform: scale(1.1);
   }
@@ -1046,6 +1619,7 @@ import Layout from "../layouts/Layout.astro";
     z-index: 2;
     transition: background 0.4s var(--ease);
   }
+
   .value-prop-card:hover .value-prop-overlay {
     background: linear-gradient(
       to top,
@@ -1060,15 +1634,9 @@ import Layout from "../layouts/Layout.astro";
     z-index: 3;
     padding: 40px 32px;
     width: 100%;
+    will-change: transform;
   }
-  .value-prop-number {
-    font-family: var(--font-display);
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.5);
-    display: block;
-    margin-bottom: 12px;
-    letter-spacing: 2px;
-  }
+
   .value-prop-title {
     font-family: var(--font-display);
     font-size: clamp(28px, 2.5vw, 36px);
@@ -1076,7 +1644,13 @@ import Layout from "../layouts/Layout.astro";
     line-height: 1.2;
     color: #fff;
     margin: 0 0 10px 0;
+    transition: transform 0.4s var(--ease);
   }
+
+  .value-prop-card:hover .value-prop-title {
+    transform: translateY(-5px);
+  }
+
   .value-prop-text {
     font-family: var(--font-body);
     font-size: 14px;
@@ -1087,6 +1661,7 @@ import Layout from "../layouts/Layout.astro";
     transform: translateY(10px);
     transition: all 0.4s var(--ease);
   }
+
   .value-prop-card:hover .value-prop-text {
     opacity: 1;
     transform: translateY(0);
@@ -1103,6 +1678,7 @@ import Layout from "../layouts/Layout.astro";
     transform: translateY(10px);
     transition: all 0.4s var(--ease) 0.1s;
   }
+
   .value-prop-card:hover .value-prop-cta {
     opacity: 1;
     transform: translateY(0);
@@ -1112,7 +1688,9 @@ import Layout from "../layouts/Layout.astro";
   .slideshow-section {
     padding: var(--padding-xl) var(--padding-md);
     background: var(--color-warm);
+    overflow: hidden;
   }
+
   .slideshow-container {
     max-width: var(--max-width);
     margin: 0 auto;
@@ -1144,15 +1722,30 @@ import Layout from "../layouts/Layout.astro";
     text-transform: uppercase;
     color: var(--color-primary);
     text-decoration: none;
-    transition: gap 0.3s var(--ease);
+    cursor: none;
+    padding: 8px 0;
+    position: relative;
   }
-  .slideshow-view-all:hover {
-    gap: 16px;
+
+  .slideshow-view-all::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--color-primary);
+    transition: width 0.4s var(--ease);
+  }
+
+  .slideshow-view-all:hover::after {
+    width: 100%;
   }
 
   .slideshow-wrapper {
     position: relative;
   }
+
   .slideshow-main {
     position: relative;
   }
@@ -1170,15 +1763,14 @@ import Layout from "../layouts/Layout.astro";
     inset: 0;
     opacity: 0;
     visibility: hidden;
-    transition:
-      opacity 1s var(--ease),
-      visibility 1s var(--ease);
   }
+
   .slide.active {
     opacity: 1;
     visibility: visible;
     z-index: 2;
   }
+
   .slide.prev {
     z-index: 1;
   }
@@ -1190,6 +1782,7 @@ import Layout from "../layouts/Layout.astro";
     transform: scale(1);
     transition: transform 8s linear;
   }
+
   .slide.active img {
     transform: scale(1.08);
   }
@@ -1221,14 +1814,11 @@ import Layout from "../layouts/Layout.astro";
     position: absolute;
     bottom: 40px;
     left: 40px;
-    transition:
-      opacity 0.6s var(--ease),
-      transform 0.6s var(--ease);
   }
+
   .slide-content.active {
     opacity: 1;
     transform: translateY(0);
-    transition-delay: 0.3s;
   }
 
   .slide-number {
@@ -1271,13 +1861,14 @@ import Layout from "../layouts/Layout.astro";
     height: 52px;
     border: 1px solid rgba(255, 255, 255, 0.3);
     background: transparent;
-    cursor: pointer;
+    cursor: none;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
     transition: all 0.3s var(--ease);
   }
+
   .nav-btn:hover {
     background: #fff;
     color: var(--color-primary);
@@ -1297,10 +1888,12 @@ import Layout from "../layouts/Layout.astro";
     background: rgba(0, 0, 0, 0.15);
     border: none;
     padding: 0;
-    cursor: pointer;
+    cursor: none;
     position: relative;
     overflow: hidden;
+    transition: background 0.3s ease;
   }
+
   .progress-indicator:hover {
     background: rgba(0, 0, 0, 0.25);
   }
@@ -1313,6 +1906,7 @@ import Layout from "../layouts/Layout.astro";
     width: 0;
     background: var(--color-primary);
   }
+
   .progress-indicator.active .progress-bar {
     animation: progressFill 5s linear forwards;
   }
@@ -1331,18 +1925,28 @@ import Layout from "../layouts/Layout.astro";
     padding: var(--padding-xl) var(--padding-md);
     background: var(--color-primary);
     text-align: center;
+    overflow: hidden;
   }
+
   .cta-content {
     max-width: 600px;
     margin: 0 auto;
   }
+
   .cta-headline {
     font-family: var(--font-display);
     font-size: clamp(36px, 4vw, 52px);
     font-weight: 400;
     color: #fff;
     margin: 0 0 16px 0;
+    perspective: 1000px;
   }
+
+  .cta-word {
+    display: inline-block;
+    transform-style: preserve-3d;
+  }
+
   .cta-description {
     font-family: var(--font-body);
     font-size: 16px;
@@ -1364,16 +1968,42 @@ import Layout from "../layouts/Layout.astro";
     background: #fff;
     text-decoration: none;
     padding: 18px 36px;
+    border-radius: 30px;
+    cursor: none;
     transition: all 0.4s var(--ease);
-	border-radius: 30px;
+    position: relative;
+    overflow: hidden;
   }
+
+  .cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  .cta-button:hover::before {
+    left: 100%;
+  }
+
   .cta-button:hover {
     background: var(--color-cream);
-    gap: 18px;
+    transform: scale(1.02);
   }
+
   .cta-button svg {
     transition: transform 0.3s var(--ease);
   }
+
   .cta-button:hover svg {
     transform: translateX(4px);
   }
@@ -1429,6 +2059,11 @@ import Layout from "../layouts/Layout.astro";
       --padding-md: 20px;
       --padding-sm: 20px;
     }
+    
+    .page {
+      cursor: auto;
+    }
+    
     .hero {
       min-height: 600px;
     }
@@ -1442,6 +2077,8 @@ import Layout from "../layouts/Layout.astro";
     .hero-subtitle {
       font-size: 12px;
       letter-spacing: 3px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
     .tagline {
       gap: 0 12px;
@@ -1491,6 +2128,11 @@ import Layout from "../layouts/Layout.astro";
       width: 100%;
       justify-content: center;
     }
+    
+    /* Restore normal cursor on mobile */
+    a, button, .featured-card, .value-prop-card {
+      cursor: pointer;
+    }
   }
 </style>
 
@@ -1499,7 +2141,15 @@ import Layout from "../layouts/Layout.astro";
     background: #1a1a1a;
     color: #fff;
   }
+  
   html {
     scroll-behavior: smooth;
+  }
+  
+  /* Hide default cursor when custom cursor is active */
+  @media (min-width: 769px) {
+    * {
+      cursor: none !important;
+    }
   }
 </style>
