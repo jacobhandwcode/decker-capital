@@ -1,5 +1,6 @@
 ---
 // index.astro
+import StatsSection from "../components/StatsSection.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
@@ -50,45 +51,7 @@ import Layout from "../layouts/Layout.astro";
       </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="stats-section">
-      <div class="stats-container">
-        <div class="stat-card">
-          <div class="stat-frame">
-            <div class="stat-inner">
-              <div class="stat-number-wrapper">
-                <span class="stat-number" data-count="3000000">0</span>
-                <span class="stat-suffix">SF+</span>
-              </div>
-              <div class="stat-label">Under Management</div>
-            </div>
-          </div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-frame">
-            <div class="stat-inner">
-              <div class="stat-number-wrapper">
-                <span class="stat-prefix">$</span>
-                <span class="stat-number" data-count="200">0</span>
-                <span class="stat-suffix">M</span>
-              </div>
-              <div class="stat-label">Equity Deployed</div>
-            </div>
-          </div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-frame">
-            <div class="stat-inner">
-              <div class="stat-number-wrapper">
-                <span class="stat-number" data-count="15">0</span>
-                <span class="stat-suffix">+</span>
-              </div>
-              <div class="stat-label">Years of Expertise</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <StatsSection />
 
     <!-- Featured Properties -->
     <section class="featured-section">
@@ -579,7 +542,7 @@ import Layout from "../layouts/Layout.astro";
         end: "bottom top",
         scrub: 1,
       },
-      y: -50,
+      y: 0,
       ease: "none",
     });
 
@@ -1006,8 +969,18 @@ import Layout from "../layouts/Layout.astro";
   });
 </script>
 
+
 <style>
-  @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bodoni+Moda:ital,opsz@0,6..96;1,6..96&family=Faustina:ital,wght@0,300;1,300&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@font-face {
+  font-family: "didot";
+  src: url("/didot-headline.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 
   :root {
     --padding-xl: 70px;
@@ -1020,7 +993,7 @@ import Layout from "../layouts/Layout.astro";
     --color-secondary: #8a7f6e;
     --color-cream: #f5f2ed;
     --color-warm: #dbd3c6;
-    --font-display: "Poppins", sans-serif;
+    --font-display: "didot";
     --font-body: "Inter", sans-serif;
     --ease: cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -1282,7 +1255,7 @@ import Layout from "../layouts/Layout.astro";
 
   /* Tagline */
   .tagline-section {
-    padding: var(--padding-lg) var(--padding-md);
+    padding: 30px;
     background: #fff;
     overflow: hidden;
   }
@@ -1326,120 +1299,69 @@ import Layout from "../layouts/Layout.astro";
     color: var(--color-secondary);
   }
 
-  /* Stats - Half-Box Design */
-  .stats-section {
-    background: var(--color-warm);
-    padding: var(--padding-lg) var(--padding-md);
-  }
+.stats-section {
+  background: var(--color-primary);
+  padding: var(--padding-xl) var(--padding-md);
+  position: relative;
+}
 
-  .stats-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    max-width: var(--max-width);
-    margin: 0 auto;
-  }
+.stats-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  gap: 20px;
+}
 
-  .stat-card {
-    display: flex;
-    justify-content: center;
-  }
+.stat-card {
+  flex: 1;
+  padding: 40px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+}
 
-  .stat-frame {
-    position: relative;
-    padding: 32px 40px 40px 40px;
-  }
+.stat-card:nth-child(1) { transform: translateY(-40px); }
+.stat-card:nth-child(2) { transform: translateY(0); }
+.stat-card:nth-child(3) { transform: translateY(-20px); }
 
-  .stat-frame::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 70%;
-    height: 2px;
-    background: var(--color-primary);
-    transition: width 0.6s var(--ease);
-  }
+.stat-card::after {
+  content: attr(data-index);
+  position: absolute;
+  top: 20px;
+  right: 0;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 2px;
+}
 
-  .stat-card:hover .stat-frame::before {
-    width: 100%;
-  }
+.stat-number {
+  font-family: var(--font-display);
+  font-size: clamp(64px, 8vw, 120px);
+  color: #fff;
+  line-height: 0.9;
+  letter-spacing: -4px;
+}
 
-  .stat-frame::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-left: 2px solid var(--color-primary);
-    border-bottom: 2px solid var(--color-primary);
-    border-right: 2px solid var(--color-primary);
-    pointer-events: none;
-  }
+.stat-suffix {
+  font-size: 0.4em;
+  color: var(--color-secondary);
+  vertical-align: super;
+}
 
-  .stat-inner {
-    position: relative;
-  }
-
-  .stat-inner::before {
-    content: "";
-    position: absolute;
-    top: -32px;
-    right: -40px;
-    width: 2px;
-    height: 40%;
-    background: var(--color-warm);
-    z-index: 1;
-    transition: height 0.6s var(--ease);
-  }
-
-  .stat-card:hover .stat-inner::before {
-    height: 0%;
-  }
-
-  .stat-number-wrapper {
-    display: flex;
-    align-items: baseline;
-    gap: 2px;
-  }
-
-  .stat-prefix,
-  .stat-suffix {
-    font-family: var(--font-display);
-    font-size: 28px;
-    font-weight: 300;
-    color: var(--color-primary);
-  }
-
-  .stat-prefix {
-    position: relative;
-    top: -12px;
-    font-size: 22px;
-  }
-
-  .stat-number {
-    font-family: var(--font-display);
-    font-size: clamp(48px, 5vw, 72px);
-    font-weight: 300;
-    color: var(--color-primary);
-    line-height: 1;
-    letter-spacing: -2px;
-  }
-
-  .stat-label {
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    color: var(--color-primary);
-    text-transform: uppercase;
-    margin-top: 16px;
-  }
+.stat-label {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-top: 16px;
+}
 
   /* Featured */
   .featured-section {
-    padding: var(--padding-xl) var(--padding-md);
+    padding: 30px;
     background: #fff;
   }
 
@@ -1518,7 +1440,7 @@ import Layout from "../layouts/Layout.astro";
   }
 
   .featured-info {
-    padding: 20px 0;
+    padding: 20px 0 0 0;
   }
 
   .featured-location {
@@ -1563,7 +1485,7 @@ import Layout from "../layouts/Layout.astro";
 
   /* Investment */
   .investment-section {
-    padding: var(--padding-xl) var(--padding-md);
+    padding: 30px;
     background: var(--color-cream);
     overflow: hidden;
   }
@@ -1788,7 +1710,7 @@ import Layout from "../layouts/Layout.astro";
 
   /* Slideshow */
   .slideshow-section {
-    padding: var(--padding-xl) var(--padding-md);
+    padding: 30px;
     background: var(--color-warm);
     overflow: hidden;
   }
@@ -1855,7 +1777,7 @@ import Layout from "../layouts/Layout.astro";
   .slide-container {
     position: relative;
     width: 100%;
-    aspect-ratio: 16/9;
+    aspect-ratio: 18/9;
     overflow: hidden;
     background: var(--color-primary);
   }
@@ -2024,7 +1946,7 @@ import Layout from "../layouts/Layout.astro";
 
   /* CTA */
   .cta-section {
-    padding: var(--padding-xl) var(--padding-md);
+    padding: 30px;
     background: var(--color-primary);
     text-align: center;
     overflow: hidden;

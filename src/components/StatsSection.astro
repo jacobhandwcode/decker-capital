@@ -1,0 +1,743 @@
+---
+// StatsSection.astro
+// Premium stats section component for Decker Capital
+// Drop this into your components folder and import where needed
+---
+
+<section class="stats-section">
+    <!-- Background Effects -->
+    <div class="stats-bg"></div>
+    <div class="grid-lines">
+        <div class="v-line"></div>
+        <div class="v-line"></div>
+    </div>
+
+    <!-- Section Header -->
+    <div class="stats-header">
+        <div class="stats-eyebrow">
+            <span class="eyebrow-line"></span>
+            <span>By The Numbers</span>
+        </div>
+        <h2 class="stats-headline">Performance That <em>Speaks</em></h2>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stats-container">
+        <!-- Stat 1 -->
+        <article class="stat-card">
+            <div class="stat-corner"></div>
+            <span class="stat-index">01</span>
+
+            <div class="stat-number-container">
+                <span class="stat-ghost">3M</span>
+                <div class="stat-number-row">
+                    <span class="stat-number" data-count="3000000">0</span>
+                    <span class="stat-suffix">SF+</span>
+                </div>
+            </div>
+
+            <div class="stat-label">Under Management</div>
+            <p class="stat-description">
+                Industrial real estate actively managed across strategic markets
+                nationwide.
+            </p>
+
+            <svg class="stat-ring" viewBox="0 0 60 60">
+                <circle class="ring-bg" cx="30" cy="30" r="25"></circle>
+                <circle class="ring-progress" cx="30" cy="30" r="25"></circle>
+            </svg>
+
+            <div class="stat-underline"></div>
+        </article>
+
+        <!-- Stat 2 -->
+        <article class="stat-card">
+            <div class="stat-corner"></div>
+            <span class="stat-index">02</span>
+
+            <div class="stat-number-container">
+                <span class="stat-ghost">$200</span>
+                <div class="stat-number-row">
+                    <span class="stat-prefix">$</span>
+                    <span class="stat-number" data-count="200">0</span>
+                    <span class="stat-suffix">M</span>
+                </div>
+            </div>
+
+            <div class="stat-label">Equity Deployed</div>
+            <p class="stat-description">
+                Capital strategically invested in high-yield industrial assets.
+            </p>
+
+            <svg class="stat-ring" viewBox="0 0 60 60">
+                <circle class="ring-bg" cx="30" cy="30" r="25"></circle>
+                <circle class="ring-progress" cx="30" cy="30" r="25"></circle>
+            </svg>
+
+            <div class="stat-underline"></div>
+        </article>
+
+        <!-- Stat 3 -->
+        <article class="stat-card">
+            <div class="stat-corner"></div>
+            <span class="stat-index">03</span>
+
+            <div class="stat-number-container">
+                <span class="stat-ghost">15+</span>
+                <div class="stat-number-row">
+                    <span class="stat-number" data-count="15">0</span>
+                    <span class="stat-suffix">+</span>
+                </div>
+            </div>
+
+            <div class="stat-label">Years of Expertise</div>
+            <p class="stat-description">
+                Deep industry experience driving consistent, exceptional
+                results.
+            </p>
+
+            <svg class="stat-ring" viewBox="0 0 60 60">
+                <circle class="ring-bg" cx="30" cy="30" r="25"></circle>
+                <circle class="ring-progress" cx="30" cy="30" r="25"></circle>
+            </svg>
+
+            <div class="stat-underline"></div>
+        </article>
+    </div>
+</section>
+
+<script is:inline>
+    // Stats Section Animations
+    // Requires GSAP & ScrollTrigger to be loaded (you already have these)
+    (function () {
+        function initStatsSection() {
+            if (
+                typeof gsap === "undefined" ||
+                typeof ScrollTrigger === "undefined"
+            ) {
+                setTimeout(initStatsSection, 100);
+                return;
+            }
+
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Initial States
+            gsap.set(".stats-header", { y: 30, opacity: 0 });
+            gsap.set(".stats-section .eyebrow-line", { scaleX: 0 });
+            gsap.set(".stat-card", { y: 40, opacity: 0 });
+
+            // Counter Animation Function
+            function animateCounter(counter) {
+                const target = parseInt(
+                    counter.getAttribute("data-count") || "0",
+                );
+
+                // Format based on value size
+                let format;
+                if (target >= 1000000) {
+                    // Show as "3" for 3M
+                    format = (val) =>
+                        (val / 1000000)
+                            .toFixed(val >= 1000000 ? 0 : 1)
+                            .replace(/\.0$/, "");
+                } else if (target >= 1000) {
+                    format = (val) => Math.floor(val).toLocaleString();
+                } else {
+                    format = (val) => Math.floor(val);
+                }
+
+                const obj = { value: 0 };
+                gsap.to(obj, {
+                    value: target,
+                    duration: 2.5,
+                    ease: "power2.out",
+                    onUpdate: function () {
+                        counter.textContent = format(obj.value);
+                    },
+                });
+            }
+
+            // Scroll-Triggered Animations
+            const statsTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".stats-section",
+                    start: "top 80%",
+                    once: true,
+                },
+            });
+
+            statsTl
+                .to(".stats-header", {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: "power3.out",
+                })
+                .to(
+                    ".stats-section .eyebrow-line",
+                    {
+                        scaleX: 1,
+                        duration: 0.6,
+                        ease: "power2.out",
+                    },
+                    "-=0.5",
+                )
+                .to(
+                    ".stat-card",
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.8,
+                        stagger: 0.12,
+                        ease: "power3.out",
+                        onStart: function () {
+                            // Start counters with stagger
+                            const counters = document.querySelectorAll(
+                                ".stat-number[data-count]",
+                            );
+                            counters.forEach((counter, index) => {
+                                setTimeout(() => {
+                                    animateCounter(counter);
+                                }, index * 150);
+                            });
+                        },
+                    },
+                    "-=0.3",
+                );
+
+            // Parallax on Ghost Numbers
+            document.querySelectorAll(".stat-card").forEach((card) => {
+                const ghost = card.querySelector(".stat-ghost");
+                if (!ghost) return;
+
+                card.addEventListener("mousemove", (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / rect.width - 0.5;
+                    const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+                    gsap.to(ghost, {
+                        x: x * 30,
+                        y: y * 20,
+                        duration: 0.5,
+                        ease: "power2.out",
+                    });
+                });
+
+                card.addEventListener("mouseleave", () => {
+                    gsap.to(ghost, {
+                        x: 0,
+                        y: 0,
+                        duration: 0.8,
+                        ease: "power2.out",
+                    });
+                });
+            });
+
+            // Magnetic Effect on Numbers
+            document
+                .querySelectorAll(".stat-number-container")
+                .forEach((container) => {
+                    const number = container.querySelector(".stat-number");
+                    if (!number) return;
+
+                    container.addEventListener("mousemove", (e) => {
+                        const rect = container.getBoundingClientRect();
+                        const x = (e.clientX - rect.left) / rect.width - 0.5;
+                        const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+                        gsap.to(number, {
+                            x: x * 8,
+                            y: y * 5,
+                            duration: 0.3,
+                            ease: "power2.out",
+                        });
+                    });
+
+                    container.addEventListener("mouseleave", () => {
+                        gsap.to(number, {
+                            x: 0,
+                            y: 0,
+                            duration: 0.5,
+                            ease: "elastic.out(1, 0.5)",
+                        });
+                    });
+                });
+        }
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", initStatsSection);
+        } else {
+            initStatsSection();
+        }
+    })();
+</script>
+
+<style>
+    /* ============================================
+     STATS SECTION - PREMIUM EDITORIAL STYLE
+     ============================================ */
+    .stats-section {
+        position: relative;
+        padding: 34px 38px;
+        background: var(--color-primary, #0a0a0a);
+        overflow: hidden;
+    }
+
+    /* Ambient Background */
+    .stats-bg {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    .stats-bg::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -25%;
+        width: 150%;
+        height: 200%;
+        background: radial-gradient(
+            ellipse at 30% 20%,
+            rgba(139, 115, 85, 0.15) 0%,
+            transparent 50%
+        );
+        animation: statsAmbientFloat 20s ease-in-out infinite;
+    }
+
+    .stats-bg::after {
+        content: "";
+        position: absolute;
+        bottom: -30%;
+        right: -20%;
+        width: 100%;
+        height: 150%;
+        background: radial-gradient(
+            ellipse at 70% 80%,
+            rgba(201, 162, 39, 0.08) 0%,
+            transparent 45%
+        );
+        animation: statsAmbientFloat 25s ease-in-out infinite reverse;
+    }
+
+    @keyframes statsAmbientFloat {
+        0%,
+        100% {
+            transform: translate(0, 0) scale(1);
+        }
+        33% {
+            transform: translate(30px, -20px) scale(1.05);
+        }
+        66% {
+            transform: translate(-20px, 30px) scale(0.95);
+        }
+    }
+
+    /* Grid Lines Overlay */
+    .grid-lines {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.03;
+    }
+
+    .grid-lines::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 1px;
+        height: 100%;
+        background: #fff;
+    }
+
+    .v-line {
+        position: absolute;
+        top: 0;
+        width: 1px;
+        height: 100%;
+        background: linear-gradient(
+            to bottom,
+            transparent,
+            rgba(255, 255, 255, 0.5),
+            transparent
+        );
+    }
+
+    .v-line:nth-child(1) {
+        left: 25%;
+    }
+    .v-line:nth-child(2) {
+        left: 75%;
+    }
+
+    /* Section Header */
+    .stats-header {
+        max-width: 1400px;
+        margin: 0 auto 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    .stats-eyebrow {
+        font-family: var(--font-body, "Inter", sans-serif);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--color-secondary, #8a7f6e);
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .stats-section .eyebrow-line {
+        width: 40px;
+        height: 1px;
+        background: var(--color-secondary, #8a7f6e);
+        transform-origin: left;
+    }
+
+    .stats-headline {
+        font-family: var(--font-display, "Georgia", serif);
+        font-size: clamp(32px, 4vw, 48px);
+        font-weight: 400;
+        color: #fff;
+        letter-spacing: -0.5px;
+        margin: 0;
+    }
+
+    .stats-headline em {
+        font-style: italic;
+        color: var(--color-secondary, #8a7f6e);
+    }
+
+    /* Stats Container */
+    .stats-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        max-width: 1400px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Individual Stat Card */
+    .stat-card {
+        position: relative;
+        padding: 36px 32px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        overflow: hidden;
+        cursor: default;
+        transition: background 0.6s var(--ease, cubic-bezier(0.4, 0, 0.2, 1));
+    }
+
+    .stat-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            135deg,
+            rgba(139, 115, 85, 0.1) 0%,
+            transparent 50%,
+            rgba(201, 162, 39, 0.05) 100%
+        );
+        opacity: 0;
+        transition: opacity 0.6s var(--ease, cubic-bezier(0.4, 0, 0.2, 1));
+    }
+
+    .stat-card:hover::before {
+        opacity: 1;
+    }
+
+    .stat-card:hover {
+        background: rgba(255, 255, 255, 0.04);
+    }
+
+    /* Decorative Corner */
+    .stat-corner {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        opacity: 0.15;
+        transition: all 0.5s var(--ease, cubic-bezier(0.4, 0, 0.2, 1));
+    }
+
+    .stat-corner::before,
+    .stat-corner::after {
+        content: "";
+        position: absolute;
+        background: var(--color-secondary, #8a7f6e);
+    }
+
+    .stat-corner::before {
+        top: 0;
+        right: 0;
+        width: 1px;
+        height: 100%;
+    }
+
+    .stat-corner::after {
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 1px;
+    }
+
+    .stat-card:hover .stat-corner {
+        opacity: 0.4;
+        transform: scale(1.2);
+    }
+
+    /* Stat Index Number */
+    .stat-index {
+        font-family: var(--font-display, "Georgia", serif);
+        font-size: 12px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.2);
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+        position: relative;
+        display: inline-block;
+    }
+
+    .stat-index::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 20px;
+        height: 1px;
+        background: var(--color-secondary, #8a7f6e);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.5s var(--ease, cubic-bezier(0.4, 0, 0.2, 1));
+    }
+
+    .stat-card:hover .stat-index::after {
+        transform: scaleX(1);
+    }
+
+    /* Main Number Display */
+    .stat-number-container {
+        position: relative;
+        margin-bottom: 16px;
+    }
+
+    .stat-number-row {
+        display: flex;
+        align-items: baseline;
+        gap: 4px;
+    }
+
+    .stat-prefix {
+        font-family: var(--font-display, "Georgia", serif);
+        font-size: clamp(28px, 3vw, 36px);
+        font-weight: 400;
+        color: var(--color-secondary, #8a7f6e);
+        line-height: 1;
+        transform: translateY(-20px);
+    }
+
+    .stat-number {
+        font-family: var(--font-display, "Georgia", serif);
+        font-size: clamp(56px, 6vw, 80px);
+        font-weight: 400;
+        color: #fff;
+        line-height: 0.9;
+        letter-spacing: -3px;
+        position: relative;
+        background: linear-gradient(
+            180deg,
+            #ffffff 0%,
+            rgba(255, 255, 255, 0.7) 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
+
+    .stat-suffix {
+        font-family: var(--font-display, "Georgia", serif);
+        font-size: clamp(24px, 2.5vw, 32px);
+        font-weight: 400;
+        font-style: italic;
+        color: var(--color-secondary, #8a7f6e);
+        margin-left: 8px;
+        transform: translateY(-8px);
+        display: inline-block;
+    }
+
+    /* Ghost Number Effect */
+    .stat-ghost {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        font-family: var(--font-display, "Georgia", serif);
+        font-size: clamp(90px, 10vw, 130px);
+        font-weight: 400;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.03);
+        line-height: 1;
+        letter-spacing: -4px;
+        pointer-events: none;
+        z-index: -1;
+        transition: all 0.8s var(--ease, cubic-bezier(0.4, 0, 0.2, 1));
+    }
+
+    .stat-card:hover .stat-ghost {
+        -webkit-text-stroke-color: rgba(139, 115, 85, 0.08);
+        transform: translateY(-50%) scale(1.05);
+    }
+
+    /* Label & Description */
+    .stat-label {
+        font-family: var(--font-body, "Inter", sans-serif);
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 8px;
+    }
+
+    .stat-description {
+        font-family: var(--font-body, "Inter", sans-serif);
+        font-size: 14px;
+        font-weight: 300;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.4);
+        max-width: 280px;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.5s var(--ease, cubic-bezier(0.4, 0, 0.2, 1)) 0.1s;
+    }
+
+    .stat-card:hover .stat-description {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Animated Underline */
+    .stat-underline {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(
+            90deg,
+            var(--color-secondary, #8a7f6e) 0%,
+            #c9a227 50%,
+            var(--color-secondary, #8a7f6e) 100%
+        );
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.8s var(--ease, cubic-bezier(0.4, 0, 0.2, 1));
+    }
+
+    .stat-card:hover .stat-underline {
+        transform: scaleX(1);
+    }
+
+    /* Progress Ring */
+    .stat-ring {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        opacity: 0;
+        transform: scale(0.8) rotate(-90deg);
+        transition: all 0.6s var(--ease, cubic-bezier(0.4, 0, 0.2, 1));
+    }
+
+    .stat-card:hover .stat-ring {
+        opacity: 1;
+        transform: scale(1) rotate(-90deg);
+    }
+
+    .stat-ring circle {
+        fill: none;
+        stroke-width: 1;
+    }
+
+    .stat-ring .ring-bg {
+        stroke: rgba(255, 255, 255, 0.1);
+    }
+
+    .stat-ring .ring-progress {
+        stroke: var(--color-secondary, #8a7f6e);
+        stroke-dasharray: 157;
+        stroke-dashoffset: 157;
+        stroke-linecap: round;
+        transition: stroke-dashoffset 1.2s
+            var(--ease, cubic-bezier(0.4, 0, 0.2, 1)) 0.2s;
+    }
+
+    .stat-card:hover .ring-progress {
+        stroke-dashoffset: 0;
+    }
+
+    /* Responsive - Tablet */
+    @media (max-width: 1024px) {
+        .stats-section {
+            padding: 48px 32px;
+        }
+
+        .stats-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .stats-container {
+            grid-template-columns: 1fr;
+            gap: 1px;
+        }
+
+        .stat-card {
+            padding: 32px 24px;
+        }
+
+        .stat-ghost {
+            display: none;
+        }
+    }
+
+    /* Responsive - Mobile */
+    @media (max-width: 768px) {
+        .stats-section {
+            padding: 40px 20px;
+        }
+
+        .stat-card {
+            padding: 28px 20px;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            letter-spacing: -2px;
+        }
+
+        .stat-ring {
+            display: none;
+        }
+
+        .stat-description {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
